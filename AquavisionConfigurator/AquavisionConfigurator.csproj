@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{591CF806-9852-4907-AAD3-D0D99C2C5C8E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AquavisionConfigurator</RootNamespace>
+    <AssemblyName>AquavisionConfigurator</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44339</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.1\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Aquavision.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Aquavision.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Aquavision.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Aquavision.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Aquavision.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Aquavision.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>Aquavision.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>Aquavision.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerDesign.cs">
+      <DependentUpon>Aquavision.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerDesignSpec.cs">
+      <DependentUpon>Aquavision.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Image.cs">
+      <DependentUpon>Aquavision.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>Aquavision.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductOption.cs">
+      <DependentUpon>Aquavision.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductOptionGroup.cs">
+      <DependentUpon>Aquavision.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductType.cs">
+      <DependentUpon>Aquavision.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="aquavision\checkout.html" />
+    <Content Include="aquavision\css\animate.css" />
+    <Content Include="aquavision\css\bootstrap.min.css" />
+    <Content Include="aquavision\css\classy-nav.min.css" />
+    <Content Include="aquavision\css\core-style.css" />
+    <Content Include="aquavision\css\font-awesome.min.css" />
+    <Content Include="aquavision\css\jquery-ui.min.css" />
+    <Content Include="aquavision\css\magnific-popup.css" />
+    <Content Include="aquavision\css\nice-select.css" />
+    <Content Include="aquavision\css\owl.carousel.css" />
+    <Content Include="aquavision\fonts\fontawesome-webfont.svg" />
+    <Content Include="aquavision\img\bg-img\1.jpg" />
+    <Content Include="aquavision\img\bg-img\2.jpg" />
+    <Content Include="aquavision\img\bg-img\3.jpg" />
+    <Content Include="aquavision\img\bg-img\4.jpg" />
+    <Content Include="aquavision\img\bg-img\5.jpg" />
+    <Content Include="aquavision\img\bg-img\6.jpg" />
+    <Content Include="aquavision\img\bg-img\7.jpg" />
+    <Content Include="aquavision\img\bg-img\8.jpg" />
+    <Content Include="aquavision\img\bg-img\9.jpg" />
+    <Content Include="aquavision\img\bg-img\cart1.jpg" />
+    <Content Include="aquavision\img\bg-img\cart2.jpg" />
+    <Content Include="aquavision\img\bg-img\cart3.jpg" />
+    <Content Include="aquavision\img\core-img\cart.png" />
+    <Content Include="aquavision\img\core-img\favicon.ico" />
+    <Content Include="aquavision\img\core-img\favorites.png" />
+    <Content Include="aquavision\img\core-img\logo.png" />
+    <Content Include="aquavision\img\core-img\logo2.png" />
+    <Content Include="aquavision\img\core-img\paypal.png" />
+    <Content Include="aquavision\img\core-img\search.png" />
+    <Content Include="aquavision\img\product-img\aquavision-classic-Genesis.jpg" />
+    <Content Include="aquavision\img\product-img\aquavision3.jpg" />
+    <Content Include="aquavision\img\product-img\AquavisionLogo.png" />
+    <Content Include="aquavision\img\product-img\black-glass.jpg" />
+    <Content Include="aquavision\img\product-img\custom-glass.jpg" />
+    <Content Include="aquavision\img\product-img\CustomGlassStrip.png" />
+    <Content Include="aquavision\img\product-img\Frameless.jpg" />
+    <Content Include="aquavision\img\product-img\freestanding.jpg" />
+    <Content Include="aquavision\img\product-img\Habitech-marble.png" />
+    <Content Include="aquavision\img\product-img\HomeImage1.jpg" />
+    <Content Include="aquavision\img\product-img\HomeImage2.jpg" />
+    <Content Include="aquavision\img\product-img\HomeImage3.jpg" />
+    <Content Include="aquavision\img\product-img\HomeImage4.jpg" />
+    <Content Include="aquavision\img\product-img\img-back.png" />
+    <Content Include="aquavision\img\product-img\img-black2.png" />
+    <Content Include="aquavision\img\product-img\img-blue.png" />
+    <Content Include="aquavision\img\product-img\img-frame.png" />
+    <Content Include="aquavision\img\product-img\img-green.png" />
+    <Content Include="aquavision\img\product-img\img-yellow.png" />
+    <Content Include="aquavision\img\product-img\Living-room-hover.jpg" />
+    <Content Include="aquavision\img\product-img\Living-room.jpg" />
+    <Content Include="aquavision\img\product-img\livingbg.jpg" />
+    <Content Include="aquavision\img\product-img\maintv.jpg" />
+    <Content Include="aquavision\img\product-img\mirrorvision-glass.jpg" />
+    <Content Include="aquavision\img\product-img\MirrorVisionpuls-glass.jpg" />
+    <Content Include="aquavision\img\product-img\pairspeaker.jpg" />
+    <Content Include="aquavision\img\product-img\pro-big-1.jpg" />
+    <Content Include="aquavision\img\product-img\pro-big-2.jpg" />
+    <Content Include="aquavision\img\product-img\pro-big-3.jpg" />
+    <Content Include="aquavision\img\product-img\pro-big-4.jpg" />
+    <Content Include="aquavision\img\product-img\product1.jpg" />
+    <Content Include="aquavision\img\product-img\product2.jpg" />
+    <Content Include="aquavision\img\product-img\product3.jpg" />
+    <Content Include="aquavision\img\product-img\product4.jpg" />
+    <Content Include="aquavision\img\product-img\product5.jpg" />
+    <Content Include="aquavision\img\product-img\product6.jpg" />
+    <Content Include="aquavision\img\product-img\stereo-speakers.jpg" />
+    <Content Include="aquavision\img\product-img\White-glass.jpg" />
+    <Content Include="aquavision\index.html" />
+    <Content Include="aquavision\indexcss\animate.min.css" />
+    <Content Include="aquavision\indexcss\bootstrap-grid.css" />
+    <Content Include="aquavision\indexcss\bootstrap-grid.min.css" />
+    <Content Include="aquavision\indexcss\bootstrap-reboot.css" />
+    <Content Include="aquavision\indexcss\bootstrap-reboot.min.css" />
+    <Content Include="aquavision\indexcss\bootstrap.css" />
+    <Content Include="aquavision\indexcss\bootstrap.min.css" />
+    <Content Include="aquavision\indexcss\default-skin.css" />
+    <Content Include="aquavision\indexcss\font-awesome.min.css" />
+    <Content Include="aquavision\indexcss\icomoon.css" />
+    <Content Include="aquavision\indexcss\jquery-ui.css" />
+    <Content Include="aquavision\indexcss\jquery.fancybox.min.css" />
+    <Content Include="aquavision\indexcss\jquery.mCustomScrollbar.min.css" />
+    <Content Include="aquavision\indexcss\meanmenu.css" />
+    <Content Include="aquavision\indexcss\nice-select.css" />
+    <Content Include="aquavision\indexcss\normalize.css" />
+    <Content Include="aquavision\indexcss\owl.carousel.min.css" />
+    <Content Include="aquavision\indexcss\responsive.css" />
+    <Content Include="aquavision\indexcss\slick.css" />
+    <Content Include="aquavision\indexcss\style.css" />
+    <Content Include="aquavision\indeximages\banner-bg.png" />
+    <Content Include="aquavision\indeximages\banner-bg1.png" />
+    <Content Include="aquavision\indeximages\bg-1.png" />
+    <Content Include="aquavision\indeximages\contact-bg.png" />
+    <Content Include="aquavision\indeximages\fb-icon.png" />
+    <Content Include="aquavision\indeximages\footer-logo.png" />
+    <Content Include="aquavision\indeximages\header-bg.png" />
+    <Content Include="aquavision\indeximages\icon-1.png" />
+    <Content Include="aquavision\indeximages\icon-2.png" />
+    <Content Include="aquavision\indeximages\icon-3.png" />
+    <Content Include="aquavision\indeximages\icon-4.png" />
+    <Content Include="aquavision\indeximages\img-1.png" />
+    <Content Include="aquavision\indeximages\img-2.png" />
+    <Content Include="aquavision\indeximages\img-3.png" />
+    <Content Include="aquavision\indeximages\img-4.png" />
+    <Content Include="aquavision\indeximages\img-5.png" />
+    <Content Include="aquavision\indeximages\img-6.png" />
+    <Content Include="aquavision\indeximages\img-7.png" />
+    <Content Include="aquavision\indeximages\img-8.png" />
+    <Content Include="aquavision\indeximages\img-9.png" />
+    <Content Include="aquavision\indeximages\instagram-icon.png" />
+    <Content Include="aquavision\indeximages\left-arrow.png" />
+    <Content Include="aquavision\indeximages\linkedin-icon.png" />
+    <Content Include="aquavision\indeximages\Living-room-hover.jpg" />
+    <Content Include="aquavision\indeximages\Living-room.jpg" />
+    <Content Include="aquavision\indeximages\logo.png" />
+    <Content Include="aquavision\indeximages\quote-icon.png" />
+    <Content Include="aquavision\indeximages\right-arrow.png" />
+    <Content Include="aquavision\indeximages\search-icon.png" />
+    <Content Include="aquavision\indeximages\twitter-icon.png" />
+    <Content Include="aquavision\indexjs\bootstrap.bundle.js" />
+    <Content Include="aquavision\indexjs\bootstrap.bundle.min.js" />
+    <Content Include="aquavision\indexjs\bootstrap.js" />
+    <Content Include="aquavision\indexjs\bootstrap.min.js" />
+    <Content Include="aquavision\indexjs\custom.js" />
+    <Content Include="aquavision\indexjs\jquery-3.0.0.min.js" />
+    <Content Include="aquavision\indexjs\jquery.mCustomScrollbar.concat.min.js" />
+    <Content Include="aquavision\indexjs\jquery.min.js" />
+    <Content Include="aquavision\indexjs\jquery.validate.js" />
+    <Content Include="aquavision\indexjs\modernizer.js" />
+    <Content Include="aquavision\indexjs\plugin.js" />
+    <Content Include="aquavision\indexjs\popper.min.js" />
+    <Content Include="aquavision\indexjs\slider-setting.js" />
+    <Content Include="aquavision\js\active.js" />
+    <Content Include="aquavision\js\bootstrap.min.js" />
+    <Content Include="aquavision\js\CanvasStack-2v01.js" />
+    <Content Include="aquavision\js\classy-nav.min.js" />
+    <Content Include="aquavision\js\custom.js" />
+    <Content Include="aquavision\js\jquery\jquery-2.2.4.min.js" />
+    <Content Include="aquavision\js\map-active.js" />
+    <Content Include="aquavision\js\plugins.js" />
+    <Content Include="aquavision\js\popper.min.js" />
+    <Content Include="aquavision\product-details.html" />
+    <Content Include="aquavision\shop.html" />
+    <Content Include="aquavision\summary.html" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Models\Aquavision.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Aquavision.edmx</DependentUpon>
+      <LastGenOutput>Aquavision.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Aquavision.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Aquavision.edmx</DependentUpon>
+      <LastGenOutput>Aquavision.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\Aquavision.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Aquavision.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Aquavision.edmx.diagram">
+      <DependentUpon>Aquavision.edmx</DependentUpon>
+    </Content>
+    <Content Include="aquavision\.sass-cache\23fb10bb6531a16595cc9a8cbcaeb8f40f41ec84\style.scssc" />
+    <Content Include="aquavision\.sass-cache\23fb10bb6531a16595cc9a8cbcaeb8f40f41ec84\_mixin.scssc" />
+    <Content Include="aquavision\.sass-cache\23fb10bb6531a16595cc9a8cbcaeb8f40f41ec84\_responsive.scssc" />
+    <Content Include="aquavision\.sass-cache\23fb10bb6531a16595cc9a8cbcaeb8f40f41ec84\_theme_color.scssc" />
+    <Content Include="aquavision\.sass-cache\23fb10bb6531a16595cc9a8cbcaeb8f40f41ec84\_variables.scssc" />
+    <Content Include="aquavision\.sass-cache\997c61c8c2a2a831333fab68bc2254612bdf8817\style.scssc" />
+    <Content Include="aquavision\.sass-cache\997c61c8c2a2a831333fab68bc2254612bdf8817\_mixin.scssc" />
+    <Content Include="aquavision\.sass-cache\997c61c8c2a2a831333fab68bc2254612bdf8817\_responsive.scssc" />
+    <Content Include="aquavision\.sass-cache\997c61c8c2a2a831333fab68bc2254612bdf8817\_theme_color.scssc" />
+    <Content Include="aquavision\.sass-cache\997c61c8c2a2a831333fab68bc2254612bdf8817\_variables.scssc" />
+    <Content Include="aquavision\css\core-style.css.map" />
+    <Content Include="aquavision\fonts\fontawesome-webfont.eot" />
+    <Content Include="aquavision\fonts\fontawesome-webfont.ttf" />
+    <Content Include="aquavision\fonts\fontawesome-webfont.woff" />
+    <Content Include="aquavision\fonts\fontawesome-webfont.woff2" />
+    <Content Include="aquavision\fonts\FontAwesome.otf" />
+    <Content Include="aquavision\fonts\helveticaneue_medium-webfont.ttf" />
+    <Content Include="aquavision\fonts\helveticaneue_medium-webfont.woff" />
+    <Content Include="aquavision\fonts\helveticaneue_medium-webfont.woff2" />
+    <Content Include="aquavision\fonts\helvetica_neu_bold-webfont.ttf" />
+    <Content Include="aquavision\fonts\helvetica_neu_bold-webfont.woff" />
+    <Content Include="aquavision\fonts\helvetica_neu_bold-webfont.woff2" />
+    <Content Include="aquavision\indexcss\.DS_Store" />
+    <Content Include="aquavision\indexcss\bootstrap-grid.css.map" />
+    <Content Include="aquavision\indexcss\bootstrap-grid.min.css.map" />
+    <Content Include="aquavision\indexcss\bootstrap-reboot.css.map" />
+    <Content Include="aquavision\indexcss\bootstrap-reboot.min.css.map" />
+    <Content Include="aquavision\indexcss\bootstrap.css.map" />
+    <Content Include="aquavision\indexcss\bootstrap.min.css.map" />
+    <Content Include="aquavision\indexjs\.DS_Store" />
+    <Content Include="aquavision\indexjs\bootstrap.bundle.js.map" />
+    <Content Include="aquavision\indexjs\bootstrap.bundle.min.js.map" />
+    <Content Include="aquavision\indexjs\bootstrap.js.map" />
+    <Content Include="aquavision\indexjs\bootstrap.min.js.map" />
+    <Content Include="aquavision\scss\style.scss" />
+    <Content Include="aquavision\scss\_mixin.scss" />
+    <Content Include="aquavision\scss\_responsive.scss" />
+    <Content Include="aquavision\scss\_theme_color.scss" />
+    <Content Include="aquavision\scss\_variables.scss" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="packages.config" />
+    <Content Include="Views\Home\Shop.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58987</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44339/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
