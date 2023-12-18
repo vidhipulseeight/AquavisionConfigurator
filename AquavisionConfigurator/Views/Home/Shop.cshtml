@@ -57,9 +57,21 @@
 			max-width: 300px;
 			height: 100vh;
 			overflow-y: scroll;
+			overflow-x: hidden;
 			background-color: #fff;
+			box-shadow: 0px 3px 5px 0px;
 		}
-
+		.main-content-wrapper .product-summary {
+			padding: 100px 10px;
+			flex: 0 0 800px;
+			width: 800px;
+			max-width: 800px;
+			height: 100vh;
+			overflow-y: scroll;
+			overflow-x: hidden;
+			background-color: #fff;
+			box-shadow: 0px 3px 5px 0px;
+		}
 		/*.catagories-menu {
 			border: 1px solid #ddd;
 			padding: 0px 15px 0px 15px;
@@ -117,8 +129,54 @@
 			flex: 0 0 71.9%;
 			width: 71.9%;
 			max-width: 71.9%;
-			background-image: url(img/product-img/livingbg.jpg);
+			background-image: url(../aquavision/img/product-img/livingbg.jpg);
 			background-repeat: round;
+		}
+		.product-view-summary {
+			-ms-flex: 0 0 41.9% !important;
+			flex: 0 0 41.9% !important;
+			width: 41.9% !important;
+			max-width: 41.9% !important;
+			opacity: 0.5 !important;
+		}
+
+		.main-content-wrapper .cart-table-area .cart-summary {
+			margin-top: 70px;
+		}
+
+		.main-content-wrapper .cart-table-area table tbody tr td {
+			font-size: 14px;
+		}
+
+		.summary-table li {
+			text-transform: uppercase;
+			margin-bottom: 10px;
+		}
+
+			.summary-table li a:hover {
+				font-size: 15px !important;
+			}
+
+		.main-content-wrapper .single-product-area .single_product_desc .cart .amado-btn {
+			width: 310px;
+			height: 50px;
+			line-height: unset;
+			background-color: #131212;
+			text-transform: uppercase;
+		}
+
+		.amado-btn {
+			display: inline-block;
+			min-width: 160px;
+			height: 40px;
+			color: #ffffff;
+			border: none;
+			border-radius: 0;
+			padding: 0 7px;
+			font-size: 15px;
+			line-height: 43px;
+			background-color: #131212;
+			font-weight: normal;
 		}
 
 		.single-product-wrapper .product-description .product-meta-data .product-price {
@@ -265,6 +323,20 @@
 			padding: 20px;
 		}
 
+		.cart-name-td {
+			max-width: 20% !important;
+			flex: 0 0 20% !important;
+			width: 20% !important;
+			white-space: nowrap;
+		}
+
+		.cart-price-td {
+			max-width: 20% !important;
+			flex: 0 0 20% !important;
+			width: 20% !important;
+			white-space: nowrap;
+		}
+
 		/* Mobile view styles */
 		@*@media screen and (max-width: 600px) {
 			.topnav {
@@ -392,7 +464,7 @@
 		</header>
 		<!-- Header Area End -->
 
-		<div class="shop_sidebar_area">
+		<div class="shop_sidebar_area" id="productSidebar">
 			<input type="hidden" id="hdnSectionStep" value="1" />
 			<!-- ##### Single Widget ##### -->
 			<div class="widget catagory mb-30">
@@ -423,10 +495,10 @@
 										<div class="card-footer p-0">
 											<ul class="nav flex-column">
 												@foreach (var productOption in productgroup.GetProductOption()) {
-													<li class="nav-item">
+													<li class="nav-item row">
 														<div class="model-sub-category nav-link">
 															<div class="custom-control custom-radio">
-																<input class="custom-control-input sizeoption" type="radio" id="@productOption.Id" name="@productOption.ProductOptionGroup">
+																<input class="custom-control-input sizeoption" type="radio" id="@productOption.Id" name="@productOption.ProductOptionGroupId" onclick="setProductImage(@productOption.Id)">
 																<label for="@productOption.Id" class="custom-control-label">@productOption.Name</label>
 															</div>
 														</div>
@@ -573,11 +645,143 @@
 				</div>
 			</div>
 			<div class="widget text-center nextbuttonsection mb-15">
-				<input type="button" id="btnNext" class="btn btn-outline-b text-uppercase nextstepbutton" value="Select" onclick="nextstep();" />
+				<input type="button" id="btnNext" class="btn btn-outline-b text-uppercase nextstepbutton" value="Continue" onclick="FinishBuild();" />
 			</div>
 		</div>
-
-		<div class="amado_product_area section-padding-100 d-none d-md-block">
+		<div class="shop_sidebar_area product-summary" id="productSummary">
+			<div class="widget catagory mb-30">
+				<h6 class="widget-title" id="modelName">Genesis</h6>
+				<div class="catagories-menu">
+					<div class="card card-widget">
+						<div class="widget-user-header" style="padding: 5px;">
+							<div class="widget-user-image text-center">
+								<img id="AquavisionTv" class="img-circle elevation-2" src="~/aquavision/img/product-img/aquavision-classic-Genesis.jpg" alt="User Avatar">
+							</div>
+							<span style="color: #1312128c;font-size: 14px;" id="modelDetail"> The number one choice for stand alone televisions. Perfect for bathrooms, bedrooms and kitchens where no Home Network Integration is required. </span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="widget catagory mb-30">
+				<div class="row">
+					<div class="col-12 col-lg-8">
+						<div class="cart-table clearfix">
+							<table class="table table-responsive">
+								<tbody>
+									<tr>
+										<td class="cart-name-td">
+											<span>Genesis</span>
+										</td>
+										<td class="cart-price-td text-right">
+											<span>£1130</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="cart-name-td">
+											<span>Black Glass</span>
+										</td>
+										<td class="cart-price-td text-right">
+											<span>£100</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="cart-name-td">
+											<span>Ceiling Speakers</span>
+										</td>
+										<td class="cart-price-td text-right">
+											<span>£100</span>
+										</td>
+									</tr>
+									<tr style="background: #ddd;">
+										<td class="cart-name-td">
+											<span>GRAND TOTAL</span>
+										</td>
+										<td class="cart-price-td text-right">
+											<span>£1330</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="col-12 col-lg-4">
+						<div class="cart-summary">
+							<ul class="summary-table">
+								<li><a href="#" class="btn amado-btn w-100" onclick="customerSection()">Continue Checkout</a></li>
+								<li><a href="#" class="btn amado-btn w-100" onclick="customerSection()">Save My Build</a></li>
+								<li><a href="#" class="btn amado-btn w-100" onclick="customerSection()">Download My Build</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="shop_sidebar_area product-summary" id="customerSection">
+			<div class="widget catagory mb-30" style="padding:25px;">
+				<form method="post" id="LoginForm">
+					<div class="row">
+						<div class="col-12 mb-3">
+							<span>
+								PLEASE LOGIN BELOW
+							</span>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="text" class="form-control" name="customerEmail" value="" placeholder="Email" required>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="password" class="form-control" name="customerPassword" value="" placeholder="Password" required>
+						</div>
+						<div class="col-md-12 col-lg-6">
+							<div class="checkbox">
+								<label><input type="checkbox" name="rememberme" value="true"> Remember me</label>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<p id="LoginMessage" style="padding-top: 10px; margin: 0; color: #c00;"></p>
+						</div>
+						<div class="col-md-6 mb-3">
+							<input type="button" id="btnLogin" class="btn btn-outline-b text-uppercase nextstepbutton" value="Login" style="width:150px;" onclick="return customerLogin();" />
+							<a onclick="showCustomerForm('L')" style="cursor:pointer;">Create New Account</a>
+						</div>
+						<div class="col-md-6 mb-3 text-right">
+							<a>Forgot Password?</a>
+						</div>
+					</div>
+				</form>
+				<form method="post" id="RegisterForm" style="display:none;">
+					<div class="row">
+						<div class="col-12 mb-3">
+							<span>
+								CREATE NEW ACCOUNT
+							</span>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="text" class="form-control" name="customerRegisterFullName" value="" placeholder="Full Name" required>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="text" class="form-control" name="customerRegisterEmail" value="" placeholder="Email" required>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="text" class="form-control" name="customerRegisterPhone" value="" placeholder="Phone" required>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="password" class="form-control" name="customerRegisterPassword" value="" placeholder="Password" required>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="password" class="form-control" name="customerRegisterConfirmPassword" value="" placeholder="Confirm Password" required>
+						</div>
+						<div class="col-md-12">
+							<p id="RegisterMessage" style="padding-top: 10px; margin: 0; color: #c00;"></p>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="button" id="btnRegister" class="btn btn-outline-b text-uppercase nextstepbutton" value="Register" style="width:150px;" onclick="return customerRegister();" />
+							<a onclick="showCustomerForm('R')" style="cursor:pointer;">Login</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="amado_product_area section-padding-100 d-none d-md-block" id="productView">
 			<div class="container-fluid productarea">
 				<div class="single-product-area section-padding-100 clearfix d-none">
 					<div class="container-fluid">
@@ -920,7 +1124,10 @@
 	<script src="~/aquavision/js/custom.js"></script>
 
 	<script>
-$(document).ready(function () {
+		$(document).ready(function () {
+			$('#productSidebar').show();
+			$('#productSummary').hide();
+			$('#customerSection').hide();
 			getModelDetails(1, 'M');
 			$('.sizeoption,.controloption').on('click', function () {
 				var finalDiv = $('.nextbuttonsection');
@@ -954,7 +1161,7 @@ $(document).ready(function () {
 			$("#productMainImg").removeAttr('style');
 			if (type == 'M') {
 				$("#hdnSectionStep").val("1");
-				$("#btnNext").val("Select");
+				//$("#btnNext").val("Select");
 				$("#AquavisionTv").attr('src', '../aquavision/img/product-img/aquavision-classic-Genesis.jpg');
 				$(".model").show();
 				$("#size16").hide();
@@ -1018,7 +1225,7 @@ $(document).ready(function () {
 			} else if (type == 'G') {
 				$("#productMainImg").attr('src', '../aquavision/img/product-img/maintv.jpg');
 				$("#hdnSectionStep").val("2");
-				$("#btnNext").val("Select");
+				//$("#btnNext").val("Select");
 				$(".model").hide();
 				if (Id == 1) {
 					$('#modelName').text("Black");
@@ -1054,7 +1261,7 @@ $(document).ready(function () {
 				}
 			} else if (type == 'S') {
 				$("#hdnSectionStep").val("3");
-				$("#btnNext").val("Finish My Buid");
+				//$("#btnNext").val("Finish My Buid");
 				$(".model").hide();
 				if (Id == 1) {
 					$('#modelName').text("Ceiling Speakers (Pair)");
@@ -1082,9 +1289,72 @@ $(document).ready(function () {
 			//if (!IsSubCategory) { $(tab).find('.sub-category:first').click(); IsSubCategory = true; }
 			//IsSubCategory = false;
 			location.href = '@Url.Action("Shop", "Home")?productId=' + productId;
-		}</script>
+		}
+		function setProductImage(productOptionId) {
+			$.ajax({
+				url: `@Url.Action("GetProductImage", "Home")?Id=${productOptionId}`,
+				success: function (data) {
+					$('#productMainImg').attr('src', data.ImageURL);
+				},
+				error: function (data) {
+					console.warn(data);
+				}
+			});
+		}
+		function FinishBuild() {
+			$('#productSidebar').hide();
+			$('#productSummary').show();
+			$('#productView').addClass("product-view-summary");
+		}
+		function customerSection() {
+			$('#productSidebar').hide();
+			$('#productSummary').hide();
+			$('#customerSection').show();
+		}
+		function customerRegister() {
+			$('#productSummary').hide();
+			$("#RegisterMessage").text("");
+			var formData = $("#RegisterForm").serialize();
+			var isFormValid = $("#RegisterForm")[0].checkValidity();
+			if (isFormValid) {
+				$.ajax({
+					type: "POST",
+					url: "/Home/Register",
+					data: formData,
+					success: function (data) {
+						if (data.Result) {
+							location.href = 'https://localhost:44339/aquavision/summary.html';
+						} else { $("#RegisterMessage").text(data.Message); }
+					}
+				});
+			} else { $("#RegisterForm")[0].reportValidity(); }
+		}
+
+		function customerLogin() {
+			$('#productSummary').hide();
+			$("#LoginMessage").text("");
+			var formData = $("#LoginForm").serialize();
+			var isFormValid = $("#LoginForm")[0].checkValidity();
+			if (isFormValid) {
+				$.ajax({
+					type: "POST",
+					url: "/Home/Login",
+					data: formData,
+					success: function (data) {
+						if (data.Result) {
+							location.href = 'https://localhost:44339/aquavision/summary.html';
+						} else { $("#LoginMessage").text(data.Message); }
+					}
+				});
+			} else { $("#LoginForm")[0].reportValidity(); }
+		}
+		function showCustomerForm(type) {
+			if (type == 'L') { $("#RegisterForm")[0].reset(); $("#RegisterForm").show(); $("#LoginForm").hide(); }
+			else { $("#LoginForm")[0].reset(); $("#RegisterForm").hide(); $("#LoginForm").show(); }
+		}
+	</script>
 	<script>
-	// JavaScript to toggle the visibility of the mobile menu
+		// JavaScript to toggle the visibility of the mobile menu
 		document.addEventListener('DOMContentLoaded', function () {
 			var nav = document.querySelector('nav ul');
 			nav.classList.add('visible'); // Show the mobile menu by default

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AquavisionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AquavisionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
@@ -19,7 +19,12 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Contact" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerGUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="SaltKey" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerDesign">
           <Key>
@@ -35,14 +40,14 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CustomerDesign" Type="int" Nullable="false" />
-          <Property Name="Product" Type="int" Nullable="false" />
+          <Property Name="ProductOption" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Images">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="ProductOption" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductOption" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Image" Type="nvarchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
@@ -89,14 +94,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Images_ProductOption">
+        <Association Name="FK_CustomerDesignSpecs_ProductOption">
           <End Role="ProductOption" Type="Self.ProductOption" Multiplicity="1" />
-          <End Role="Images" Type="Self.Images" Multiplicity="*" />
+          <End Role="CustomerDesignSpecs" Type="Self.CustomerDesignSpecs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProductOption">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Images">
+            <Dependent Role="CustomerDesignSpecs">
               <PropertyRef Name="ProductOption" />
             </Dependent>
           </ReferentialConstraint>
@@ -151,9 +156,9 @@
             <End Role="CustomerDesign" EntitySet="CustomerDesign" />
             <End Role="CustomerDesignSpecs" EntitySet="CustomerDesignSpecs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Images_ProductOption" Association="Self.FK_Images_ProductOption">
+          <AssociationSet Name="FK_CustomerDesignSpecs_ProductOption" Association="Self.FK_CustomerDesignSpecs_ProductOption">
             <End Role="ProductOption" EntitySet="ProductOption" />
-            <End Role="Images" EntitySet="Images" />
+            <End Role="CustomerDesignSpecs" EntitySet="CustomerDesignSpecs" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductOption_ProductOptionGroup" Association="Self.FK_ProductOption_ProductOptionGroup">
             <End Role="ProductOptionGroup" EntitySet="ProductOptionGroup" />
@@ -168,8 +173,7 @@
             <End Role="ProductType" EntitySet="ProductType" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AquavisionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -188,7 +192,12 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerGUID" Type="Guid" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SaltKey" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerDesign">
           <Key>
@@ -205,8 +214,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CustomerDesignId" Type="Int32" Nullable="false" />
-          <Property Name="Product" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CustomerDesign" Relationship="Self.FK_CustomerDesignSpecs_CustomerDesign" FromRole="CustomerDesignSpecs" ToRole="CustomerDesign" />
+          <Property Name="ProductOptionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ProductOption" Relationship="AquavisionModel.FK_CustomerDesignSpecs_ProductOption" FromRole="CustomerDesignSpec" ToRole="ProductOption" />
         </EntityType>
         <EntityType Name="Image">
           <Key>
@@ -235,6 +245,7 @@
           <Property Name="ProductOptionGroupId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Images" Relationship="Self.FK_Images_ProductOption" FromRole="ProductOption" ToRole="Images" />
           <NavigationProperty Name="ProductOptionGroup" Relationship="Self.FK_ProductOption_ProductOptionGroup" FromRole="ProductOption" ToRole="ProductOptionGroup" />
+          <NavigationProperty Name="CustomerDesignSpecs" Relationship="AquavisionModel.FK_CustomerDesignSpecs_ProductOption" FromRole="ProductOption" ToRole="CustomerDesignSpec" />
         </EntityType>
         <EntityType Name="ProductOptionGroup">
           <Key>
@@ -345,7 +356,23 @@
             <End Role="ProductOptionGroup" EntitySet="ProductOptionGroups" />
             <End Role="ProductOption" EntitySet="ProductOptions" />
           </AssociationSet>
+          <AssociationSet Name="FK_CustomerDesignSpecs_ProductOption" Association="AquavisionModel.FK_CustomerDesignSpecs_ProductOption">
+            <End Role="ProductOption" EntitySet="ProductOptions" />
+            <End Role="CustomerDesignSpec" EntitySet="CustomerDesignSpecs" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_CustomerDesignSpecs_ProductOption">
+          <End Type="AquavisionModel.ProductOption" Role="ProductOption" Multiplicity="1" />
+          <End Type="AquavisionModel.CustomerDesignSpec" Role="CustomerDesignSpec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductOption">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerDesignSpec">
+              <PropertyRef Name="ProductOptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -363,10 +390,15 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="AquavisionModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="SaltKey" ColumnName="SaltKey" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CustomerGUID" ColumnName="CustomerGUID" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Contact" ColumnName="Contact" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -382,9 +414,9 @@
           <EntitySetMapping Name="CustomerDesignSpecs">
             <EntityTypeMapping TypeName="AquavisionModel.CustomerDesignSpec">
               <MappingFragment StoreEntitySet="CustomerDesignSpecs">
+                <ScalarProperty Name="ProductOptionId" ColumnName="ProductOption" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CustomerDesignId" ColumnName="CustomerDesign" />
-                <ScalarProperty Name="Product" ColumnName="Product" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

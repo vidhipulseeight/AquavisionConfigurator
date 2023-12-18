@@ -17,6 +17,11 @@ namespace AquavisionConfigurator.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public string Contact { get; set; }
+        public string Phone { get; set; }
+        public System.Guid CustomerGUID { get; set; }
+        public string Email { get; set; }
+        public string PasswordHash { get; set; }
+        public string SaltKey { get; set; }
+        public bool Deleted { get; set; }
     }
 }

@@ -19,6 +19,7 @@
         <AssociationConnector Association="AquavisionModel.FK_Images_ProductOption" ManuallyRouted="false" />
         <AssociationConnector Association="AquavisionModel.FK_ProductOptionGroup_Product" ManuallyRouted="false" />
         <AssociationConnector Association="AquavisionModel.FK_ProductOption_ProductOptionGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="AquavisionModel.FK_CustomerDesignSpecs_ProductOption" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
