@@ -17,7 +17,6 @@ namespace AquavisionConfigurator.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ProductOption()
         {
-            this.Images = new HashSet<Image>();
             this.CustomerDesignSpecs = new HashSet<CustomerDesignSpec>();
         }
     
@@ -26,9 +25,7 @@ namespace AquavisionConfigurator.Models
         public int ProductOptionGroupId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Image> Images { get; set; }
-        public virtual ProductOptionGroup ProductOptionGroup { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerDesignSpec> CustomerDesignSpecs { get; set; }
+        public virtual ProductOptionGroup ProductOptionGroup { get; set; }
     }
 }

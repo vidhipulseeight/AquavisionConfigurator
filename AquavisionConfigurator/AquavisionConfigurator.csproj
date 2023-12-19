@@ -134,254 +134,155 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Aquavision.Context.cs">
+    <Compile Include="Models\AquavisionModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Aquavision.Context.tt</DependentUpon>
+      <DependentUpon>AquavisionModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Aquavision.cs">
+    <Compile Include="Models\AquavisionModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Aquavision.tt</DependentUpon>
+      <DependentUpon>AquavisionModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Aquavision.Designer.cs">
+    <Compile Include="Models\AquavisionModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Aquavision.edmx</DependentUpon>
+      <DependentUpon>AquavisionModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
-      <DependentUpon>Aquavision.tt</DependentUpon>
+      <DependentUpon>AquavisionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
-      <DependentUpon>Aquavision.tt</DependentUpon>
+      <DependentUpon>AquavisionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomerDesign.cs">
-      <DependentUpon>Aquavision.tt</DependentUpon>
+      <DependentUpon>AquavisionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomerDesignSpec.cs">
-      <DependentUpon>Aquavision.tt</DependentUpon>
+      <DependentUpon>AquavisionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Image.cs">
-      <DependentUpon>Aquavision.tt</DependentUpon>
+      <DependentUpon>AquavisionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>Aquavision.tt</DependentUpon>
+      <DependentUpon>AquavisionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductOption.cs">
-      <DependentUpon>Aquavision.tt</DependentUpon>
+      <DependentUpon>AquavisionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductOptionGroup.cs">
-      <DependentUpon>Aquavision.tt</DependentUpon>
+      <DependentUpon>AquavisionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductOptionGroupHelper.cs" />
     <Compile Include="Models\ProductType.cs">
-      <DependentUpon>Aquavision.tt</DependentUpon>
+      <DependentUpon>AquavisionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="aquavision\checkout.html" />
-    <Content Include="aquavision\css\animate.css" />
-    <Content Include="aquavision\css\bootstrap.min.css" />
-    <Content Include="aquavision\css\classy-nav.min.css" />
-    <Content Include="aquavision\css\core-style.css" />
-    <Content Include="aquavision\css\font-awesome.min.css" />
-    <Content Include="aquavision\css\jquery-ui.min.css" />
-    <Content Include="aquavision\css\magnific-popup.css" />
-    <Content Include="aquavision\css\nice-select.css" />
-    <Content Include="aquavision\css\owl.carousel.css" />
-    <Content Include="aquavision\fonts\fontawesome-webfont.svg" />
-    <Content Include="aquavision\img\bg-img\1.jpg" />
-    <Content Include="aquavision\img\bg-img\2.jpg" />
-    <Content Include="aquavision\img\bg-img\3.jpg" />
-    <Content Include="aquavision\img\bg-img\4.jpg" />
-    <Content Include="aquavision\img\bg-img\5.jpg" />
-    <Content Include="aquavision\img\bg-img\6.jpg" />
-    <Content Include="aquavision\img\bg-img\7.jpg" />
-    <Content Include="aquavision\img\bg-img\8.jpg" />
-    <Content Include="aquavision\img\bg-img\9.jpg" />
-    <Content Include="aquavision\img\bg-img\cart1.jpg" />
-    <Content Include="aquavision\img\bg-img\cart2.jpg" />
-    <Content Include="aquavision\img\bg-img\cart3.jpg" />
-    <Content Include="aquavision\img\core-img\cart.png" />
-    <Content Include="aquavision\img\core-img\favicon.ico" />
-    <Content Include="aquavision\img\core-img\favorites.png" />
-    <Content Include="aquavision\img\core-img\logo.png" />
-    <Content Include="aquavision\img\core-img\logo2.png" />
-    <Content Include="aquavision\img\core-img\paypal.png" />
-    <Content Include="aquavision\img\core-img\search.png" />
-    <Content Include="aquavision\img\product-img\aquavision-classic-Genesis.jpg" />
-    <Content Include="aquavision\img\product-img\aquavision3.jpg" />
-    <Content Include="aquavision\img\product-img\AquavisionLogo.png" />
-    <Content Include="aquavision\img\product-img\black-glass.jpg" />
-    <Content Include="aquavision\img\product-img\custom-glass.jpg" />
-    <Content Include="aquavision\img\product-img\CustomGlassStrip.png" />
-    <Content Include="aquavision\img\product-img\Frameless.jpg" />
-    <Content Include="aquavision\img\product-img\freestanding.jpg" />
-    <Content Include="aquavision\img\product-img\Habitech-marble.png" />
-    <Content Include="aquavision\img\product-img\HomeImage1.jpg" />
-    <Content Include="aquavision\img\product-img\HomeImage2.jpg" />
-    <Content Include="aquavision\img\product-img\HomeImage3.jpg" />
-    <Content Include="aquavision\img\product-img\HomeImage4.jpg" />
-    <Content Include="aquavision\img\product-img\img-back.png" />
-    <Content Include="aquavision\img\product-img\img-black2.png" />
-    <Content Include="aquavision\img\product-img\img-blue.png" />
-    <Content Include="aquavision\img\product-img\img-frame.png" />
-    <Content Include="aquavision\img\product-img\img-green.png" />
-    <Content Include="aquavision\img\product-img\img-yellow.png" />
-    <Content Include="aquavision\img\product-img\Living-room-hover.jpg" />
-    <Content Include="aquavision\img\product-img\Living-room.jpg" />
-    <Content Include="aquavision\img\product-img\livingbg.jpg" />
-    <Content Include="aquavision\img\product-img\maintv.jpg" />
-    <Content Include="aquavision\img\product-img\mirrorvision-glass.jpg" />
-    <Content Include="aquavision\img\product-img\MirrorVisionpuls-glass.jpg" />
-    <Content Include="aquavision\img\product-img\pairspeaker.jpg" />
-    <Content Include="aquavision\img\product-img\pro-big-1.jpg" />
-    <Content Include="aquavision\img\product-img\pro-big-2.jpg" />
-    <Content Include="aquavision\img\product-img\pro-big-3.jpg" />
-    <Content Include="aquavision\img\product-img\pro-big-4.jpg" />
-    <Content Include="aquavision\img\product-img\product1.jpg" />
-    <Content Include="aquavision\img\product-img\product2.jpg" />
-    <Content Include="aquavision\img\product-img\product3.jpg" />
-    <Content Include="aquavision\img\product-img\product4.jpg" />
-    <Content Include="aquavision\img\product-img\product5.jpg" />
-    <Content Include="aquavision\img\product-img\product6.jpg" />
-    <Content Include="aquavision\img\product-img\stereo-speakers.jpg" />
-    <Content Include="aquavision\img\product-img\White-glass.jpg" />
-    <Content Include="aquavision\index.html" />
-    <Content Include="aquavision\indexcss\animate.min.css" />
-    <Content Include="aquavision\indexcss\bootstrap-grid.css" />
-    <Content Include="aquavision\indexcss\bootstrap-grid.min.css" />
-    <Content Include="aquavision\indexcss\bootstrap-reboot.css" />
-    <Content Include="aquavision\indexcss\bootstrap-reboot.min.css" />
-    <Content Include="aquavision\indexcss\bootstrap.css" />
-    <Content Include="aquavision\indexcss\bootstrap.min.css" />
-    <Content Include="aquavision\indexcss\default-skin.css" />
-    <Content Include="aquavision\indexcss\font-awesome.min.css" />
-    <Content Include="aquavision\indexcss\icomoon.css" />
-    <Content Include="aquavision\indexcss\jquery-ui.css" />
-    <Content Include="aquavision\indexcss\jquery.fancybox.min.css" />
-    <Content Include="aquavision\indexcss\jquery.mCustomScrollbar.min.css" />
-    <Content Include="aquavision\indexcss\meanmenu.css" />
-    <Content Include="aquavision\indexcss\nice-select.css" />
-    <Content Include="aquavision\indexcss\normalize.css" />
-    <Content Include="aquavision\indexcss\owl.carousel.min.css" />
-    <Content Include="aquavision\indexcss\responsive.css" />
-    <Content Include="aquavision\indexcss\slick.css" />
-    <Content Include="aquavision\indexcss\style.css" />
-    <Content Include="aquavision\indeximages\banner-bg.png" />
-    <Content Include="aquavision\indeximages\banner-bg1.png" />
-    <Content Include="aquavision\indeximages\bg-1.png" />
-    <Content Include="aquavision\indeximages\contact-bg.png" />
-    <Content Include="aquavision\indeximages\fb-icon.png" />
-    <Content Include="aquavision\indeximages\footer-logo.png" />
-    <Content Include="aquavision\indeximages\header-bg.png" />
-    <Content Include="aquavision\indeximages\icon-1.png" />
-    <Content Include="aquavision\indeximages\icon-2.png" />
-    <Content Include="aquavision\indeximages\icon-3.png" />
-    <Content Include="aquavision\indeximages\icon-4.png" />
-    <Content Include="aquavision\indeximages\img-1.png" />
-    <Content Include="aquavision\indeximages\img-2.png" />
-    <Content Include="aquavision\indeximages\img-3.png" />
-    <Content Include="aquavision\indeximages\img-4.png" />
-    <Content Include="aquavision\indeximages\img-5.png" />
-    <Content Include="aquavision\indeximages\img-6.png" />
-    <Content Include="aquavision\indeximages\img-7.png" />
-    <Content Include="aquavision\indeximages\img-8.png" />
-    <Content Include="aquavision\indeximages\img-9.png" />
-    <Content Include="aquavision\indeximages\instagram-icon.png" />
-    <Content Include="aquavision\indeximages\left-arrow.png" />
-    <Content Include="aquavision\indeximages\linkedin-icon.png" />
-    <Content Include="aquavision\indeximages\Living-room-hover.jpg" />
-    <Content Include="aquavision\indeximages\Living-room.jpg" />
-    <Content Include="aquavision\indeximages\logo.png" />
-    <Content Include="aquavision\indeximages\quote-icon.png" />
-    <Content Include="aquavision\indeximages\right-arrow.png" />
-    <Content Include="aquavision\indeximages\search-icon.png" />
-    <Content Include="aquavision\indeximages\twitter-icon.png" />
-    <Content Include="aquavision\indexjs\bootstrap.bundle.js" />
-    <Content Include="aquavision\indexjs\bootstrap.bundle.min.js" />
-    <Content Include="aquavision\indexjs\bootstrap.js" />
-    <Content Include="aquavision\indexjs\bootstrap.min.js" />
-    <Content Include="aquavision\indexjs\custom.js" />
-    <Content Include="aquavision\indexjs\jquery-3.0.0.min.js" />
-    <Content Include="aquavision\indexjs\jquery.mCustomScrollbar.concat.min.js" />
-    <Content Include="aquavision\indexjs\jquery.min.js" />
-    <Content Include="aquavision\indexjs\jquery.validate.js" />
-    <Content Include="aquavision\indexjs\modernizer.js" />
-    <Content Include="aquavision\indexjs\plugin.js" />
-    <Content Include="aquavision\indexjs\popper.min.js" />
-    <Content Include="aquavision\indexjs\slider-setting.js" />
-    <Content Include="aquavision\js\active.js" />
-    <Content Include="aquavision\js\bootstrap.min.js" />
-    <Content Include="aquavision\js\CanvasStack-2v01.js" />
-    <Content Include="aquavision\js\classy-nav.min.js" />
-    <Content Include="aquavision\js\custom.js" />
-    <Content Include="aquavision\js\jquery\jquery-2.2.4.min.js" />
-    <Content Include="aquavision\js\map-active.js" />
-    <Content Include="aquavision\js\plugins.js" />
-    <Content Include="aquavision\js\popper.min.js" />
-    <Content Include="aquavision\product-details.html" />
-    <Content Include="aquavision\shop.html" />
-    <Content Include="aquavision\summary.html" />
+    <Content Include="Content\checkout.html" />
+    <Content Include="Content\css\animate.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\classy-nav.min.css" />
+    <Content Include="Content\css\core-style.css" />
+    <Content Include="Content\css\custom-index.css" />
+    <Content Include="Content\css\custom-style.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\jquery-ui.min.css" />
+    <Content Include="Content\css\jquery.mCustomScrollbar.min.css" />
+    <Content Include="Content\css\magnific-popup.css" />
+    <Content Include="Content\css\nice-select.css" />
+    <Content Include="Content\css\owl.carousel.css" />
+    <Content Include="Content\css\index-style.css" />
+    <Content Include="Content\css\responsive.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\img\product-img\aquavision-classic-Genesis.jpg" />
+    <Content Include="Content\img\product-img\aquavision3.jpg" />
+    <Content Include="Content\img\product-img\AquavisionLogo.png" />
+    <Content Include="Content\img\product-img\black-glass.jpg" />
+    <Content Include="Content\img\product-img\custom-glass.jpg" />
+    <Content Include="Content\img\product-img\CustomGlassStrip.png" />
+    <Content Include="Content\img\product-img\Frameless.jpg" />
+    <Content Include="Content\img\product-img\freestanding.jpg" />
+    <Content Include="Content\img\product-img\Habitech-marble.png" />
+    <Content Include="Content\img\product-img\HomeImage1.jpg" />
+    <Content Include="Content\img\product-img\HomeImage2.jpg" />
+    <Content Include="Content\img\product-img\HomeImage3.jpg" />
+    <Content Include="Content\img\product-img\HomeImage4.jpg" />
+    <Content Include="Content\img\product-img\icon-1.png" />
+    <Content Include="Content\img\product-img\img-1.png" />
+    <Content Include="Content\img\product-img\img-2.png" />
+    <Content Include="Content\img\product-img\img-3.png" />
+    <Content Include="Content\img\product-img\img-4.png" />
+    <Content Include="Content\img\product-img\img-5.png" />
+    <Content Include="Content\img\product-img\img-6.png" />
+    <Content Include="Content\img\product-img\img-7.png" />
+    <Content Include="Content\img\product-img\img-back.png" />
+    <Content Include="Content\img\product-img\img-black2.png" />
+    <Content Include="Content\img\product-img\img-blue.png" />
+    <Content Include="Content\img\product-img\img-frame.png" />
+    <Content Include="Content\img\product-img\img-green.png" />
+    <Content Include="Content\img\product-img\img-yellow.png" />
+    <Content Include="Content\img\product-img\left-arrow.png" />
+    <Content Include="Content\img\product-img\Living-room-hover.jpg" />
+    <Content Include="Content\img\product-img\Living-room.jpg" />
+    <Content Include="Content\img\product-img\livingbg.jpg" />
+    <Content Include="Content\img\product-img\maintv.jpg" />
+    <Content Include="Content\img\product-img\mirrorvision-glass.jpg" />
+    <Content Include="Content\img\product-img\MirrorVisionpuls-glass.jpg" />
+    <Content Include="Content\img\product-img\pairspeaker.jpg" />
+    <Content Include="Content\img\product-img\pro-big-1.jpg" />
+    <Content Include="Content\img\product-img\pro-big-2.jpg" />
+    <Content Include="Content\img\product-img\pro-big-3.jpg" />
+    <Content Include="Content\img\product-img\pro-big-4.jpg" />
+    <Content Include="Content\img\product-img\product1.jpg" />
+    <Content Include="Content\img\product-img\product2.jpg" />
+    <Content Include="Content\img\product-img\product3.jpg" />
+    <Content Include="Content\img\product-img\product4.jpg" />
+    <Content Include="Content\img\product-img\product5.jpg" />
+    <Content Include="Content\img\product-img\product6.jpg" />
+    <Content Include="Content\img\product-img\quote-icon.png" />
+    <Content Include="Content\img\product-img\right-arrow.png" />
+    <Content Include="Content\img\product-img\stereo-speakers.jpg" />
+    <Content Include="Content\img\product-img\White-glass.jpg" />
+    <Content Include="Content\index.html" />
+    <Content Include="Content\js\active.js" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\CanvasStack-2v01.js" />
+    <Content Include="Content\js\classy-nav.min.js" />
+    <Content Include="Content\js\custom.js" />
+    <Content Include="Content\js\jquery-2.2.4.min.js" />
+    <Content Include="Content\js\jquery.mCustomScrollbar.concat.min.js" />
+    <Content Include="Content\js\map-active.js" />
+    <Content Include="Content\js\plugins.js" />
+    <Content Include="Content\js\popper.min.js" />
+    <Content Include="Content\product-details.html" />
+    <Content Include="Content\shop.html" />
+    <Content Include="Content\summary.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\Aquavision.Context.tt">
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\helveticaneue_medium-webfont.ttf" />
+    <Content Include="Content\fonts\helveticaneue_medium-webfont.woff" />
+    <Content Include="Content\fonts\helveticaneue_medium-webfont.woff2" />
+    <Content Include="Content\fonts\helvetica_neu_bold-webfont.ttf" />
+    <Content Include="Content\fonts\helvetica_neu_bold-webfont.woff" />
+    <Content Include="Content\fonts\helvetica_neu_bold-webfont.woff2" />
+    <Content Include="Models\AquavisionModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Aquavision.edmx</DependentUpon>
-      <LastGenOutput>Aquavision.Context.cs</LastGenOutput>
+      <DependentUpon>AquavisionModel.edmx</DependentUpon>
+      <LastGenOutput>AquavisionModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Aquavision.tt">
+    <Content Include="Models\AquavisionModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Aquavision.edmx</DependentUpon>
-      <LastGenOutput>Aquavision.cs</LastGenOutput>
+      <DependentUpon>AquavisionModel.edmx</DependentUpon>
+      <LastGenOutput>AquavisionModel.cs</LastGenOutput>
     </Content>
-    <EntityDeploy Include="Models\Aquavision.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Aquavision.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Aquavision.edmx.diagram">
-      <DependentUpon>Aquavision.edmx</DependentUpon>
-    </Content>
-    <Content Include="aquavision\.sass-cache\23fb10bb6531a16595cc9a8cbcaeb8f40f41ec84\style.scssc" />
-    <Content Include="aquavision\.sass-cache\23fb10bb6531a16595cc9a8cbcaeb8f40f41ec84\_mixin.scssc" />
-    <Content Include="aquavision\.sass-cache\23fb10bb6531a16595cc9a8cbcaeb8f40f41ec84\_responsive.scssc" />
-    <Content Include="aquavision\.sass-cache\23fb10bb6531a16595cc9a8cbcaeb8f40f41ec84\_theme_color.scssc" />
-    <Content Include="aquavision\.sass-cache\23fb10bb6531a16595cc9a8cbcaeb8f40f41ec84\_variables.scssc" />
-    <Content Include="aquavision\.sass-cache\997c61c8c2a2a831333fab68bc2254612bdf8817\style.scssc" />
-    <Content Include="aquavision\.sass-cache\997c61c8c2a2a831333fab68bc2254612bdf8817\_mixin.scssc" />
-    <Content Include="aquavision\.sass-cache\997c61c8c2a2a831333fab68bc2254612bdf8817\_responsive.scssc" />
-    <Content Include="aquavision\.sass-cache\997c61c8c2a2a831333fab68bc2254612bdf8817\_theme_color.scssc" />
-    <Content Include="aquavision\.sass-cache\997c61c8c2a2a831333fab68bc2254612bdf8817\_variables.scssc" />
-    <Content Include="aquavision\css\core-style.css.map" />
-    <Content Include="aquavision\fonts\fontawesome-webfont.eot" />
-    <Content Include="aquavision\fonts\fontawesome-webfont.ttf" />
-    <Content Include="aquavision\fonts\fontawesome-webfont.woff" />
-    <Content Include="aquavision\fonts\fontawesome-webfont.woff2" />
-    <Content Include="aquavision\fonts\FontAwesome.otf" />
-    <Content Include="aquavision\fonts\helveticaneue_medium-webfont.ttf" />
-    <Content Include="aquavision\fonts\helveticaneue_medium-webfont.woff" />
-    <Content Include="aquavision\fonts\helveticaneue_medium-webfont.woff2" />
-    <Content Include="aquavision\fonts\helvetica_neu_bold-webfont.ttf" />
-    <Content Include="aquavision\fonts\helvetica_neu_bold-webfont.woff" />
-    <Content Include="aquavision\fonts\helvetica_neu_bold-webfont.woff2" />
-    <Content Include="aquavision\indexcss\.DS_Store" />
-    <Content Include="aquavision\indexcss\bootstrap-grid.css.map" />
-    <Content Include="aquavision\indexcss\bootstrap-grid.min.css.map" />
-    <Content Include="aquavision\indexcss\bootstrap-reboot.css.map" />
-    <Content Include="aquavision\indexcss\bootstrap-reboot.min.css.map" />
-    <Content Include="aquavision\indexcss\bootstrap.css.map" />
-    <Content Include="aquavision\indexcss\bootstrap.min.css.map" />
-    <Content Include="aquavision\indexjs\.DS_Store" />
-    <Content Include="aquavision\indexjs\bootstrap.bundle.js.map" />
-    <Content Include="aquavision\indexjs\bootstrap.bundle.min.js.map" />
-    <Content Include="aquavision\indexjs\bootstrap.js.map" />
-    <Content Include="aquavision\indexjs\bootstrap.min.js.map" />
-    <Content Include="aquavision\scss\style.scss" />
-    <Content Include="aquavision\scss\_mixin.scss" />
-    <Content Include="aquavision\scss\_responsive.scss" />
-    <Content Include="aquavision\scss\_theme_color.scss" />
-    <Content Include="aquavision\scss\_variables.scss" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -403,6 +304,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\css\core-style.css.map" />
+    <EntityDeploy Include="Models\AquavisionModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AquavisionModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AquavisionModel.edmx.diagram">
+      <DependentUpon>AquavisionModel.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Home\Shop.cshtml" />
   </ItemGroup>

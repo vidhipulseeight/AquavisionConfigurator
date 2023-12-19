@@ -1,0 +1,59 @@
+﻿.header_section, .banner_section {
+	background-image: none;
+}
+
+#costum_slider a.carousel-control-prev {
+	position: absolute;
+	left: 0;
+	top: 50%;
+}
+
+#costum_slider a.carousel-control-next {
+	position: absolute;
+	right: 0;
+	top: 50%;
+}
+
+#costum_slider a.carousel-control-prev:hover {
+	background: black;
+}
+
+#costum_slider a.carousel-control-next:hover {
+	background: black;
+}
+
+#costum_slider .carousel-control-prev, #costum_slider .carousel-control-next {
+	width: 50px;
+	height: 50px;
+	background: #0000009c;
+	opacity: 1;
+	font-size: 30px;
+	color: #fff;
+	border-radius: 100px;
+}
+
+.carousel-item {
+	height: 700px;
+}
+
+.logo img {
+	height: 100px;
+}
+
+.headermenu {
+	margin-left: 50%;
+}
+
+@media only screen and (max-width: 767px) {
+	.carousel-item {
+		height: 200px;
+	}
+
+	.logo img {
+		height: 50px;
+	}
+
+	.headermenu {
+		margin-left: 0;
+	}
+}

@@ -25,6 +25,7 @@ namespace AquavisionConfigurator.Controllers {
 					productId = defaultProduct.Id;
 				}
 			}
+			ViewBag.ProductId = productId;
 			ViewBag.ProductOptionGroups = myDB.ProductOptionGroups.Where(p => p.ProductId == productId).ToList();
 			return View();
 		}
@@ -93,7 +94,7 @@ namespace AquavisionConfigurator.Controllers {
 
 			var newCustomer = AddCustomer(name, phone, email, password, out var status);
 			if (status == MembershipCreateStatus.Success) {
-				FormsAuthentication.SetAuthCookie(email, false);
+				SetAuthCookie(email, false);
 				//WebSecurity.CreateAccount(email, password, false);
 				return Json(new { Result = true, Message = string.Empty }, JsonRequestBehavior.AllowGet);
 			}

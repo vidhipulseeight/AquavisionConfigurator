@@ -11,8 +11,7 @@ namespace AquavisionConfigurator.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-
+    
     public partial class ProductOptionGroup
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,9 +27,5 @@ namespace AquavisionConfigurator.Models
         public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductOption> ProductOptions { get; set; }
-		public List<ProductOption> GetProductOption() {
-			AquavisionEntities myDB = new AquavisionEntities();
-			return myDB.ProductOptions.Where(p => p.ProductOptionGroupId == Id).ToList();
-		}
-	}
+    }
 }

@@ -17,7 +17,5 @@ namespace AquavisionConfigurator.Models
         public int Id { get; set; }
         public int ProductOptionId { get; set; }
         public string ProductImage { get; set; }
-    
-        public virtual ProductOption ProductOption { get; set; }
     }
 }
