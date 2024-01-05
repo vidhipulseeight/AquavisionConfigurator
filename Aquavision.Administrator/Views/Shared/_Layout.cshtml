@@ -1,0 +1,95 @@
+﻿@using Aquavision.Presentation.Common
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="utf-8" />
+	<title>@ViewBag.Title</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+	<link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
+	@Styles.Render("~/css-admin")
+	@Scripts.Render("~/bundles/allJS")
+	<link href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
+	<script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+	<script src="//canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+</head>
+<body class="page-header-fixed">
+	<div class="header navbar navbar-fixed-top">
+		<div class="header-inner">
+			<a class="navbar-brand" href="@Url.Action("Index", "Home")">
+				<img src="@Url.Content("~/assets/img/logo.png")" alt="SMS" style="display: block; height: 63px; margin-left: 52px;" />
+			</a>
+			<a href="javascript:;" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<img src="@Url.Content("~/assets/img/menu-toggler.png")" alt="" />
+			</a>
+			@if (Request.IsAuthenticated) {
+				<ul class="nav navbar-nav pull-right">
+					<li class="dropdown user">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+							<span class="username" style="line-height: 28px; padding-right: 5px;">
+								@User.Identity.Name.Substring(User.Identity.Name.IndexOf("\\") + 1)
+							</span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="@Url.Action("LogOff", "Account", new { area = "" })">
+									<i class="fa fa-key"></i> Log Out
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			}
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="page-container">
+		<div class="page-sidebar-wrapper">
+			@Html.Partial("_SideBarMenu")
+		</div>
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="page-title">
+							@ViewBag.PageTitle <small>@ViewBag.PageSubTitle</small>
+						</h3>
+						@Html.Partial("_BreadcrumbNav", (List<BreadCrumb>)ViewBag.BreadCrumbs)
+					</div>
+				</div>
+				@if (!string.IsNullOrEmpty(ViewBag.Success)) {
+					<div class="row">
+						<div class="col-md-12">
+							<div class="alert alert-success">
+								<i class="fa-lg fa fa-thumbs-up"></i>
+								@ViewBag.Success
+							</div>
+						</div>
+					</div>
+				}
+				@Html.Partial("_ErrorBox")
+				@RenderBody()
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="footer-inner">
+			@(DateTime.UtcNow.Year) &copy; Aquavision Limited
+		</div>
+		<div class="footer-tools">
+			<span class="go-top">
+				<i class="fa fa-angle-up"></i>
+			</span>
+		</div>
+	</div>
+
+	<script>
+		jQuery(document).ready(function () {
+			App.init();
+		});
+	</script>
+	@RenderSection("scripts", false)
+</body>
+</html>

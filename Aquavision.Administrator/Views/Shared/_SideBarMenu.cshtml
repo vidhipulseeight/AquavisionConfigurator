@@ -1,0 +1,35 @@
+﻿@using Aquavision.Presentation.Common
+<div class="page-sidebar navbar-collapse collapse">
+	<ul class="page-sidebar-menu" data-auto-scroll="true" data-slide-speed="200">
+		<li class="sidebar-toggler-wrapper">
+			<div class="sidebar-toggler hidden-phone"></div>
+		</li>
+
+		<li class="start @Html.MenuLink("Home", string.Empty)">
+			<a href="@Url.Action("Index", "Home")">
+				<i class="fa fa-home"></i>
+				<span class="title">
+					Dashboard
+				</span>
+			</a>
+		</li>
+
+		<li class="@Html.MenuLink("Category", string.Empty)">
+			<a href="@Url.Action("Index", "Category")">
+				<i class="fa fa-cubes"></i>
+				<span class="title">
+					Categories
+				</span>
+			</a>
+		</li>
+
+		<li class="@Html.MenuLink("Product", string.Empty)">
+			<a href="@Url.Action("Index", "Product")">
+				<i class="fa fa-cubes"></i>
+				<span class="title">
+					Products
+				</span>
+			</a>
+		</li>
+	</ul>
+</div>

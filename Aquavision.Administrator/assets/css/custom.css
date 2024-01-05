@@ -1,0 +1,44 @@
+﻿tr.highlight,
+tr.highlight a {
+	background: #008080;
+	color: #fff;
+	}
+
+.field-validation-error {
+	color: #c00;
+	font-weight: 700;
+	}
+
+input[type='checkbox'].form-control {
+	width: 34px;
+}
+
+.warning-banner {
+    display: none;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    .page-header-fixed .navbar-fixed-top {
+        display: none !important;
+    }
+
+    .page-breadcrumb {
+        display: none !important;
+    }
+    .page-sidebar-wrapper {
+        display: none !important;
+    }
+
+    .page-content-wrapper .page-title {
+        display: none !important;
+    }
+
+    .footer {
+        display: none !important;
+    }
+}

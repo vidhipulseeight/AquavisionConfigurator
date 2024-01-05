@@ -64,7 +64,7 @@
 			</div>
 			@{
 				if (ViewBag.ProductOptionGroups != null) {
-					List<AquavisionConfigurator.Models.ProductOptionGroup> productGroupList = ViewBag.ProductOptionGroups;
+					List<Aquavision.Data.Models.ProductOptionGroup> productGroupList = ViewBag.ProductOptionGroups;
 					foreach (var productgroup in productGroupList) {
 						<div class="widget catagory mb-30 model">
 							<h6 class="widget-title">@productgroup.Name</h6>

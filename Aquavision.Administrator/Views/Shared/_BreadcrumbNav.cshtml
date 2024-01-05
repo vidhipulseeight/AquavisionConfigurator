@@ -1,0 +1,44 @@
+﻿@using Aquavision.Presentation.Common
+@model List<BreadCrumb>
+
+<ul class="page-breadcrumb breadcrumb">
+	@if (ViewBag.ActionList != null && ((List<BreadCrumbAction>)ViewBag.ActionList).Any()) {
+		<li class="btn-group">
+			<button type="button" class="btn blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+				<span>
+					Actions
+				</span>
+				<i class="fa fa-angle-down"></i>
+			</button>
+
+			<ul class="dropdown-menu pull-right" role="menu">
+				@foreach (var action in ViewBag.ActionList) {
+					<li>
+						<a href="@Url.Action(action.Action, action.Controller, action.RouteValues)">
+							@action.LinkText
+						</a>
+					</li>
+				}
+			</ul>
+		</li>
+	}
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="@Url.Action("Index", "Home", new { area = "" })">Home</a>
+		<i class="fa fa-angle-right"></i>
+	</li>
+	@if (Model != null) {
+		for (var i = 0; i < Model.Count; i++) {
+			<li>
+				@{
+					var crumb = Model[i];
+					var crumbURL = string.IsNullOrWhiteSpace(crumb.URL) ? "#" : crumb.URL;
+				}
+				<a href="@crumbURL">@crumb.Name</a>
+				@if ((i + 1) != Model.Count) {
+					<i class="fa fa-angle-right"></i>
+				}
+			</li>
+		}
+	}
+</ul>

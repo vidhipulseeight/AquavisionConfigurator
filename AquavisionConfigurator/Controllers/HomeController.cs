@@ -1,14 +1,11 @@
 ﻿using AquavisionConfigurator.App_Start;
-using AquavisionConfigurator.Models;
-using System.Collections.Generic;
 using System;
 using System.Linq;
-using System.Net.Mail;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Security.Cryptography;
 using static System.Web.Security.FormsAuthentication;
-using System.Diagnostics;
+using Aquavision.Data.Models;
 
 namespace AquavisionConfigurator.Controllers {
 	public class HomeController : Controller {
@@ -106,7 +103,7 @@ namespace AquavisionConfigurator.Controllers {
 			return myDB.Customers.FirstOrDefault(c => c.Email == emailAddress);
 		}
 
-		protected Customer AddCustomer(string name,string phone,string email, string password, out MembershipCreateStatus status) {
+		protected Customer AddCustomer(string name, string phone, string email, string password, out MembershipCreateStatus status) {
 
 			email = email.Trim();
 
@@ -139,7 +136,7 @@ namespace AquavisionConfigurator.Controllers {
 			return customer;
 		}
 
-		public Customer CreateCustomer(string name,string phone,Guid customerGuid, string email, string passwordHash, string saltKey) {
+		public Customer CreateCustomer(string name, string phone, Guid customerGuid, string email, string passwordHash, string saltKey) {
 			email = (email ?? string.Empty).Trim();
 			email = CommonHelper.EnsureMaximumLength(email, 255);
 			passwordHash = passwordHash ?? string.Empty;

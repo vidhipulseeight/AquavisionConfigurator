@@ -134,49 +134,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AquavisionModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AquavisionModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AquavisionModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AquavisionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AquavisionModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AquavisionModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Category.cs">
-      <DependentUpon>AquavisionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Customer.cs">
-      <DependentUpon>AquavisionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CustomerDesign.cs">
-      <DependentUpon>AquavisionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CustomerDesignSpec.cs">
-      <DependentUpon>AquavisionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Image.cs">
-      <DependentUpon>AquavisionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Product.cs">
-      <DependentUpon>AquavisionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductOption.cs">
-      <DependentUpon>AquavisionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductOptionGroup.cs">
-      <DependentUpon>AquavisionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductOptionGroupHelper.cs" />
-    <Compile Include="Models\ProductType.cs">
-      <DependentUpon>AquavisionModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -273,16 +230,6 @@
     <Content Include="Content\fonts\helvetica_neu_bold-webfont.ttf" />
     <Content Include="Content\fonts\helvetica_neu_bold-webfont.woff" />
     <Content Include="Content\fonts\helvetica_neu_bold-webfont.woff2" />
-    <Content Include="Models\AquavisionModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AquavisionModel.edmx</DependentUpon>
-      <LastGenOutput>AquavisionModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\AquavisionModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AquavisionModel.edmx</DependentUpon>
-      <LastGenOutput>AquavisionModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -305,18 +252,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\css\core-style.css.map" />
-    <EntityDeploy Include="Models\AquavisionModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AquavisionModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\AquavisionModel.edmx.diagram">
-      <DependentUpon>AquavisionModel.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Home\Shop.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aquavision.Data\Aquavision.Data.csproj">
+      <Project>{ebfaed95-376a-44a8-ae84-79a8aaf85bdb}</Project>
+      <Name>Aquavision.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
