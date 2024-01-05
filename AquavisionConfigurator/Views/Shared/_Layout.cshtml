@@ -1,42 +1,118 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+	@* basic *@
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	@* mobile metas *@
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+	@* site metas *@
+	<title>Aquavision Product Configurator</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	@* Styles *@
+	<link rel="stylesheet" href="~/Content/css/core-style.css">
+	<link rel="stylesheet" href="~/Content/css/index-style.css">
+	<link rel="stylesheet" href="~/Content/css/responsive.css">
+	<link rel="stylesheet" href="~/Content/css/jquery.mCustomScrollbar.min.css">
+	<link rel="stylesheet" href="~/Content/css/custom-index.css">
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+
+	@*@Styles.Render("~/Content/css")
+		@Scripts.Render("~/bundles/modernizr")*@
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+	@* HEADER *@
+	<div class="header_section">
+		<div class="container-fluid">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="logo"><a href="index.html"><img src="~/Content/img/product-img/AquavisionLogo.png"></a></div>
+				<button style="margin-left:115px" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse headermenu" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="index.html">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Application</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">About</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Shop</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Contact</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</div>
+	@*<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li>@Html.ActionLink("Home", "Index", "Home")</li>
+						<li>@Html.ActionLink("About", "About", "Home")</li>
+						<li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+					</ul>
+				</div>
+			</div>
+		</div>*@
+	<div class="container body-content">
+		@RenderBody()
+		<hr />
+		@* FOOTER *@
+		<div class="copyright_section" style="background: #ddd;">
+			<div class="container" style=" padding: 20px;">
+				<div class="row align-items-center">
+					<div class="col-12 col-lg-6">
+						<div class="single_widget_area">
+							<div class="footer-logo mr-50">
+								<a href="index.html"><img src="~/Content/img/product-img/AquavisionLogo.png" alt="" style="height:115px;"></a>
+							</div>
+							<p class="copywrite" style="margin: 0;margin-top: 20px; font-size:12px;">
+								Copyright ©
+								<script>document.write(new Date().getFullYear());</script> Aquavision Distribution Ltd | Registered Company Number: 07756677
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		@*<footer>
+				<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+			</footer>*@
+	</div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+	<script src="~/Content/js/jquery-2.2.4.min.js"></script>
+	<script src="~/Content/js/popper.min.js"></script>
+	<script src="~/Content/js/bootstrap.min.js"></script>
+	<script src="~/Content/js/plugins.js"></script>
+	<script src="~/Content/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+	@*@Scripts.Render("~/bundles/jquery")
+		@Scripts.Render("~/bundles/bootstrap")
+		@RenderSection("scripts", required: false)*@
 </body>
 </html>

@@ -1,0 +1,472 @@
+﻿@model Aquavision.Data.Models.Product
+
+@{
+	Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Aquavision</title>
+
+	<!-- Favicon  -->
+	<link rel="icon" href="img/favicon.ico">
+
+	<!-- Core Style CSS -->
+	<link rel="stylesheet" href="~/Content/css/core-style.css">
+	<link rel="stylesheet" href="~/Content/css/custom-style.css">
+
+	@* temp *@
+	<style>
+		.container1 {
+			display: grid;
+			place-items: center;
+			width: 100vw; /* Set the width of the container */
+			height: 100vh; /* Set the height of the container */
+		}
+
+		.image1 {
+			position: absolute;
+			/* top: 0; */
+			/* left: 0; */
+			align-self: center;
+			width: 25%;
+			height: 50%;
+		}
+
+		.image2 {
+			position: absolute;
+			/* top: 0; */
+			/* left: 0; */
+			align-self: center;
+			/*width: 25%;
+			height: 50%;*/
+		}
+
+		.containerNew {
+			position: relative;
+			width: 500px; /* Set the width of the container */
+		}
+
+		.layer3 {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover; /* Maintain image aspect ratio */
+		}
+	</style>
+</head>
+<body>
+	@*<div class="container1">
+			<img src="~/Content/img/product-img/img-frame.png" alt="Layer 1" class="image1" />
+			<img src="~/Content/img/product-img/img-back.png" alt="Layer 2" class="image1" />
+
+		</div>*@
+	<!--<div class="container3" data-layer1="/Content/img/product-img/img-frame.png" data-layer2="/Content/img/product-img/img-back.png">-->
+	<!-- Images will be dynamically added using JavaScript -->
+	<!--</div>-->
+	<div class="main-content-wrapper d-flex clearfix">
+		<div class="mobile-nav">
+			<div class="shop-navbar-brand">
+				<a href="@Url.Action("Index", "Home")"><img src="~/Content/img/product-img/AquavisionLogo.png" alt=""></a>
+			</div>
+			<div class="shop-navbar-toggler">
+				<span></span><span></span><span></span>
+			</div>
+		</div>
+
+		<header class="header-area clearfix">
+			<div class="nav-close">
+				<i class="fa fa-close" aria-hidden="true"></i>
+			</div>
+			<div class="logo" style="margin-left: 20px;">
+				<a href="@Url.Action("Index", "Home")"><img src="~/Content/img/product-img/AquavisionLogo.png" alt="" class="logoimg"></a>
+			</div>
+			@*<nav class="shop-nav">
+					<ul id="categoryList">
+						<li><a href="#">Change Type</a></li>
+						@foreach (var product in ViewBag.Products) {
+							<li class="@(product.Id == ViewBag.ProductId ? "active" : string.Empty)" onclick="categorytab(@product.Id)">
+								<a>@product.Name</a>
+							</li>
+						}
+					</ul>
+				</nav>*@
+			<div class="widget catagory mb-30" style="margin: 15px;">
+				<h6 class="widget-title" id="modelName">@Model.Name Product</h6>
+				<div class="catagories-menu">
+					<div class="card card-widget">
+						<div class="widget-user-header" style="padding: 5px;">
+							<div class="widget-user-image text-center">
+								<img id="AquavisionTv" class="img-circle elevation-2" src="~/Content/img/product-img/aquavision-classic-Genesis.jpg" alt="User Avatar">
+							</div>
+							<span style="color: #1312128c;font-size: 14px;" id="modelDetail"> The number one choice for stand alone televisions. Perfect for bathrooms, bedrooms and kitchens where no Home Network Integration is required. </span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<div class="shop_sidebar_area" id="productSidebar">
+			@if (Model.ProductOptionGroups.Any()) {
+				foreach (var optionGroup in Model.ProductOptionGroups) {
+					<div class="widget catagory mb-30 model">
+						<h6 class="widget-title">@optionGroup.Name</h6>
+						@if (optionGroup.GetProductOption().Any()) {
+							<div class="catagories-menu">
+								<div class="card card-widget">
+									<div class="card-footer p-0">
+										<ul class="nav flex-column">
+											@if (optionGroup.ProductOptions.Any()) {
+												foreach (var productOption in optionGroup.ProductOptions) {
+													<li class="nav-item row">
+														<div class="model-sub-category nav-link">
+															<div class="custom-control custom-radio">
+																<input class="custom-control-input sizeoption" type="radio" id="@productOption.Id" name="@productOption.ProductOptionGroupId" onclick="setProductImage(@productOption.Id)">
+																<label for="@productOption.Id" class="custom-control-label">@productOption.Name</label>
+															</div>
+														</div>
+													</li>
+												}
+											}
+											@*@foreach (var productOption in optionGroup.GetProductOption()) {
+													<li class="nav-item row">
+														<div class="model-sub-category nav-link">
+															<div class="custom-control custom-radio">
+																<input class="custom-control-input sizeoption" type="radio" id="@productOption.Id" name="@productOption.ProductOptionGroupId" onclick="setProductImage(@productOption.Id)">
+																<label for="@productOption.Id" class="custom-control-label">@productOption.Name</label>
+															</div>
+														</div>
+													</li>
+												}*@
+										</ul>
+									</div>
+								</div>
+							</div>
+						} else {
+							<text><span style="color: #1312128c;font-size: 14px;">No option available at the moment.</span></text>
+						}
+					</div>
+				}
+			} else {
+				<span style="color: #1312128c;font-size: 14px;" id="">This Product Does not have any options</span>
+			}
+			@*@{
+					if (ViewBag.ProductOptionGroups != null) {
+						List<AquavisionConfigurator.Models.ProductOptionGroup> productGroupList = ViewBag.ProductOptionGroups;
+						foreach (var productgroup in productGroupList) {
+							<div class="widget catagory mb-30 model">
+								<h6 class="widget-title">@productgroup.Name</h6>
+								@if (productgroup.GetProductOption().Any()) {
+									<div class="catagories-menu">
+										<div class="card card-widget">
+											<div class="card-footer p-0">
+												<ul class="nav flex-column">
+													@foreach (var productOption in productgroup.GetProductOption()) {
+														<li class="nav-item row">
+															<div class="model-sub-category nav-link">
+																<div class="custom-control custom-radio">
+																	<input class="custom-control-input sizeoption" type="radio" id="@productOption.Id" name="@productOption.ProductOptionGroupId" onclick="setProductImage(@productOption.Id)">
+																	<label for="@productOption.Id" class="custom-control-label">@productOption.Name</label>
+																</div>
+															</div>
+														</li>
+													}
+												</ul>
+											</div>
+										</div>
+									</div>
+								}
+							</div>
+						}
+					}
+				}*@
+			<div class="widget text-center nextbuttonsection mb-15">
+				<input type="button" id="btnNext" class="btn btn-outline-b text-uppercase nextstepbutton" value="Continue" onclick="FinishBuild();" />
+			</div>
+		</div>
+		<div class="shop_sidebar_area product-summary" id="productSummary" style="display:none;">
+			<div class="widget catagory mb-30">
+				<h6 class="widget-title" id="modelName">Genesis</h6>
+				<div class="catagories-menu">
+					<div class="card card-widget">
+						<div class="widget-user-header" style="padding: 5px;">
+							<div class="widget-user-image text-center">
+								<img id="AquavisionTv" class="img-circle elevation-2" src="~/Content/img/product-img/aquavision-classic-Genesis.jpg" alt="User Avatar">
+							</div>
+							<span style="color: #1312128c;font-size: 14px;" id="modelDetail"> The number one choice for stand alone televisions. Perfect for bathrooms, bedrooms and kitchens where no Home Network Integration is required. </span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="widget catagory mb-30">
+				<div class="row">
+					<div class="col-12 col-lg-8">
+						<div class="cart-table clearfix">
+							<table class="table table-responsive">
+								<tbody>
+									<tr>
+										<td class="cart-name-td">
+											<span>Genesis</span>
+										</td>
+										<td class="cart-price-td text-right">
+											<span>£1130</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="cart-name-td">
+											<span>Black Glass</span>
+										</td>
+										<td class="cart-price-td text-right">
+											<span>£100</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="cart-name-td">
+											<span>Ceiling Speakers</span>
+										</td>
+										<td class="cart-price-td text-right">
+											<span>£100</span>
+										</td>
+									</tr>
+									<tr style="background: #ddd;">
+										<td class="cart-name-td">
+											<span>GRAND TOTAL</span>
+										</td>
+										<td class="cart-price-td text-right">
+											<span>£1330</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="col-12 col-lg-4">
+						<div class="cart-summary">
+							<ul class="summary-table">
+								<li><a href="#" class="btn shop-btn w-100" onclick="customerSection()">Continue Checkout</a></li>
+								<li><a href="#" class="btn shop-btn w-100" onclick="customerSection()">Save My Build</a></li>
+								<li><a href="#" class="btn shop-btn w-100" onclick="customerSection()">Download My Build</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="shop_sidebar_area product-summary" id="customerSection" style="display:none;">
+			<div class="widget catagory mb-30" style="padding:25px;">
+				<form method="post" id="LoginForm">
+					<div class="row">
+						<div class="col-12 mb-3">
+							<span>
+								PLEASE LOGIN BELOW
+							</span>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="text" class="form-control" name="customerEmail" value="" placeholder="Email" required>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="password" class="form-control" name="customerPassword" value="" placeholder="Password" required>
+						</div>
+						<div class="col-md-12 col-lg-6">
+							<div class="checkbox">
+								<label><input type="checkbox" name="rememberme" value="true"> Remember me</label>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<p id="LoginMessage" style="padding-top: 10px; margin: 0; color: #c00;"></p>
+						</div>
+						<div class="col-md-6 mb-3">
+							<input type="button" id="btnLogin" class="btn btn-outline-b text-uppercase nextstepbutton" value="Login" style="width:150px;" onclick="return customerLogin();" />
+							<a onclick="showCustomerForm('L')" style="cursor:pointer;">Create New Account</a>
+						</div>
+						<div class="col-md-6 mb-3 text-right">
+							<a>Forgot Password?</a>
+						</div>
+					</div>
+				</form>
+				<form method="post" id="RegisterForm" style="display:none;">
+					<div class="row">
+						<div class="col-12 mb-3">
+							<span>
+								CREATE NEW ACCOUNT
+							</span>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="text" class="form-control" name="customerRegisterFullName" value="" placeholder="Full Name" required>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="text" class="form-control" name="customerRegisterEmail" value="" placeholder="Email" required>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="text" class="form-control" name="customerRegisterPhone" value="" placeholder="Phone" required>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="password" class="form-control" name="customerRegisterPassword" value="" placeholder="Password" required>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="password" class="form-control" name="customerRegisterConfirmPassword" value="" placeholder="Confirm Password" required>
+						</div>
+						<div class="col-md-12">
+							<p id="RegisterMessage" style="padding-top: 10px; margin: 0; color: #c00;"></p>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="button" id="btnRegister" class="btn btn-outline-b text-uppercase nextstepbutton" value="Register" style="width:150px;" onclick="return customerRegister();" />
+							<a onclick="showCustomerForm('R')" style="cursor:pointer;">Login</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="shop_product_area section-padding-100 d-none d-md-block" id="productView">
+			<div class="container-fluid productarea">
+				<div class="row">
+					<div class="col-12">
+						<div class="single-product-wrapper" style="text-align: -webkit-center;">
+							<div class="product-img product-main-div">
+								<div class="containerNew" data-layer1="/Content/img/product-img/img-frame.png" data-layer2="/Content/img/product-img/img-back.png">
+									<!-- Images will be dynamically added using JavaScript -->
+								</div>
+								@* not working *@
+								@*<div class="container2" style="display:grid;place-items:center;">
+										<img src="~/Content/img/product-img/img-frame.png" alt="Layer 1" class="image2" />
+										<img src="~/Content/img/product-img/img-back.png" alt="Layer 2" class="image2" />
+
+									</div>*@
+
+								@*<div class="img-container" style="background-image: url('/Content/img/product-img/img-frame.png'), url('/Content/img/product-img/img-back.png'); background-size: cover; ">
+									</div>*@
+
+								@* working/current *@
+								@*<div class="img-container">
+										<img src="~/Content/img/product-img/img-frame.png" alt="Frame" class="d-none">
+										<img id="productMainImg" src="~/Content/img/product-img/img-back.png" alt="Overlay" class="img-back1">
+									</div>*@
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="~/Content/js/jquery-2.2.4.min.js"></script>
+	<script src="~/Content/js/popper.min.js"></script>
+	<script src="~/Content/js/bootstrap.min.js"></script>
+	<script src="~/Content/js/plugins.js"></script>
+	<script src="~/Content/js/active.js"></script>
+
+	<script>
+		function categorytab(productId) {
+			location.href = '@Url.Action("Shop", "Home")?productId=' + productId;
+		}
+		function setProductImage(productOptionId) {
+			$.ajax({
+				url: `@Url.Action("GetProductImage", "Home")?Id=${productOptionId}`,
+				success: function (data) {
+					$('#productMainImg').attr('src', data.ImageURL);
+				},
+				error: function (data) {
+					console.warn(data);
+				}
+			});
+		}
+		function FinishBuild() {
+			$('#productSidebar').hide();
+			$('#productSummary').show();
+			$('#productView').addClass("product-view-summary");
+		}
+		function customerSection() {
+			$('#productSidebar').hide();
+			$('#productSummary').hide();
+			$('#customerSection').show();
+		}
+		function customerRegister() {
+			$('#productSummary').hide();
+			$("#RegisterMessage").text("");
+			var formData = $("#RegisterForm").serialize();
+			var isFormValid = $("#RegisterForm")[0].checkValidity();
+			if (isFormValid) {
+				$.ajax({
+					type: "POST",
+					url: "/Home/Register",
+					data: formData,
+					success: function (data) {
+						if (data.Result) {
+							location.reload();
+						} else { $("#RegisterMessage").text(data.Message); }
+					}
+				});
+			} else { $("#RegisterForm")[0].reportValidity(); }
+		}
+		function customerLogin() {
+			$('#productSummary').hide();
+			$("#LoginMessage").text("");
+			var formData = $("#LoginForm").serialize();
+			var isFormValid = $("#LoginForm")[0].checkValidity();
+			if (isFormValid) {
+				$.ajax({
+					type: "POST",
+					url: "/Home/Login",
+					data: formData,
+					success: function (data) {
+						if (data.Result) {
+							location.reload();
+						} else { $("#LoginMessage").text(data.Message); }
+					}
+				});
+			} else { $("#LoginForm")[0].reportValidity(); }
+		}
+		function showCustomerForm(type) {
+			if (type == 'L') { $("#RegisterForm")[0].reset(); $("#RegisterForm").show(); $("#LoginForm").hide(); }
+			else { $("#LoginForm")[0].reset(); $("#RegisterForm").hide(); $("#LoginForm").show(); }
+		}
+	</script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			var nav = document.querySelector('nav ul');
+			nav.classList.add('visible');
+			document.querySelector('header').addEventListener('click', function () {
+				nav.classList.toggle('visible');
+			});
+		});
+
+		const container = document.querySelector('.containerNew');
+		const layerCount = Object.keys(container.dataset).filter(key => key.startsWith('layer')).length;
+		let maxHeight = 0;
+		for (let i = 1; i <= layerCount; i++) {
+			const layerAttribute = `data-layer${i}`;
+			const layerUrl = container.getAttribute(layerAttribute);
+
+			if (layerUrl) {
+				const img1 = new Image();
+				console.log(layerUrl);
+				img1.src = layerUrl;
+				img1.onload = function () {
+					// Get the width and height of the image
+					var width = this.width;
+					var height = this.height;
+
+					// Display the dimensions
+					//console.log('Width:', width, 'Height:', height);
+					maxHeight = (height * img.width) / width;
+					container.style.height = `${maxHeight}px`;
+				};
+				
+				const img = document.createElement('img');
+				img.src = layerUrl;
+				img.alt = `Layer ${i}`;
+				img.classList.add('layer3');
+				container.appendChild(img);
+			}
+		}
+
+	</script>
+</body>
+
+</html>
+

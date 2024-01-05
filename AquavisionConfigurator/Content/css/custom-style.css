@@ -163,6 +163,7 @@
 
 .single-product-wrapper .product-img {
 	width: 500px !important;
+	height: auto;
 }
 
 .hover-img {
@@ -278,6 +279,17 @@ section {
 	opacity: 0.5;
 }
 
+.row-content-center {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+
+
+
+/*Responsive design*/
+
 @media only screen and (max-width: 767px) {
 	.section-padding-100 {
 		padding-bottom: 0;
@@ -317,6 +329,7 @@ section {
 
 	.single-product-wrapper .product-img {
 		width: 300px !important;
+		height: auto;
 	}
 
 	.topnav {
