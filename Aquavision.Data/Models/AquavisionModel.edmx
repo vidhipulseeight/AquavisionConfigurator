@@ -62,6 +62,7 @@
           <Property Name="Deleted" Type="bit" Nullable="false" />
           <Property Name="Image" Type="varbinary(max)" />
           <Property Name="ImageMimeType" Type="varchar" MaxLength="200" />
+          <Property Name="Price" Type="decimal" Precision="11" Scale="2" />
         </EntityType>
         <EntityType Name="ProductOption">
           <Key>
@@ -69,8 +70,10 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SKU" Type="nvarchar" MaxLength="50" />
           <Property Name="ProductOptionGroup" Type="int" Nullable="false" />
           <Property Name="DefaultOption" Type="bit" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="11" Scale="2" />
         </EntityType>
         <EntityType Name="ProductOptionGroup">
           <Key>
@@ -349,6 +352,7 @@
           <Property Name="ImageMimeType" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
           <NavigationProperty Name="ProductOptionGroups" Relationship="Self.FK_ProductOptionGroup_Product" FromRole="Product" ToRole="ProductOptionGroup" />
+          <Property Name="Price" Type="Decimal" Precision="11" Scale="2" />
         </EntityType>
         <EntityType Name="ProductOption">
           <Key>
@@ -360,6 +364,8 @@
           <NavigationProperty Name="CustomerDesignSpecs" Relationship="Self.FK_CustomerDesignSpecs_ProductOption" FromRole="ProductOption" ToRole="CustomerDesignSpecs" />
           <NavigationProperty Name="ProductOptionGroup" Relationship="Self.FK_ProductOption_ProductOptionGroup" FromRole="ProductOption" ToRole="ProductOptionGroup" />
           <Property Name="DefaultOption" Type="Boolean" Nullable="false" />
+          <Property Name="SKU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="11" Scale="2" />
         </EntityType>
         <EntityType Name="ProductOptionGroup">
           <Key>
@@ -602,6 +608,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="AquavisionModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="SKU" ColumnName="SKU" />
@@ -615,6 +622,8 @@
           <EntitySetMapping Name="ProductOptions">
             <EntityTypeMapping TypeName="AquavisionModel.ProductOption">
               <MappingFragment StoreEntitySet="ProductOption">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
                 <ScalarProperty Name="DefaultOption" ColumnName="DefaultOption" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

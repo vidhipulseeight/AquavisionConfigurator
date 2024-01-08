@@ -24,6 +24,8 @@ namespace Aquavision.Data.Models
         public string Name { get; set; }
         public int ProductOptionGroupId { get; set; }
         public bool DefaultOption { get; set; }
+        public string SKU { get; set; }
+        public Nullable<decimal> Price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerDesignSpec> CustomerDesignSpecs { get; set; }
