@@ -70,6 +70,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ProductOptionGroup" Type="int" Nullable="false" />
+          <Property Name="DefaultOption" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductOptionGroup">
           <Key>
@@ -358,6 +359,7 @@
           <Property Name="ProductOptionGroupId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CustomerDesignSpecs" Relationship="Self.FK_CustomerDesignSpecs_ProductOption" FromRole="ProductOption" ToRole="CustomerDesignSpecs" />
           <NavigationProperty Name="ProductOptionGroup" Relationship="Self.FK_ProductOption_ProductOptionGroup" FromRole="ProductOption" ToRole="ProductOptionGroup" />
+          <Property Name="DefaultOption" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductOptionGroup">
           <Key>
@@ -613,6 +615,7 @@
           <EntitySetMapping Name="ProductOptions">
             <EntityTypeMapping TypeName="AquavisionModel.ProductOption">
               <MappingFragment StoreEntitySet="ProductOption">
+                <ScalarProperty Name="DefaultOption" ColumnName="DefaultOption" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ProductOptionGroupId" ColumnName="ProductOptionGroup" />

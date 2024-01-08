@@ -329,9 +329,17 @@
 					<div class="col-12">
 						<div class="single-product-wrapper" style="text-align: -webkit-center;">
 							<div class="product-img product-main-div">
-								<div class="containerNew" data-layer1="/Content/img/product-img/img-frame.png" data-layer2="/Content/img/product-img/img-back.png">
+								@* fixed images *@
+								<!--<div class="containerNew" id="imagesContainer" data-layer1="/Content/img/product-img/img-frame.png" data-layer2="/Content/img/product-img/img-back.png">-->
+									<!-- Images will be dynamically added using JavaScript -->
+								<!--</div>-->
+
+								@* adding images dynaically *@
+								<div class="containerNew" id="imagesContainer" >
 									<!-- Images will be dynamically added using JavaScript -->
 								</div>
+
+
 								@* not working *@
 								@*<div class="container2" style="display:grid;place-items:center;">
 										<img src="~/Content/img/product-img/img-frame.png" alt="Layer 1" class="image2" />
@@ -364,17 +372,7 @@
 		function categorytab(productId) {
 			location.href = '@Url.Action("Shop", "Home")?productId=' + productId;
 		}
-		function setProductImage(productOptionId) {
-			$.ajax({
-				url: `@Url.Action("GetProductImage", "Home")?Id=${productOptionId}`,
-				success: function (data) {
-					$('#productMainImg').attr('src', data.ImageURL);
-				},
-				error: function (data) {
-					console.warn(data);
-				}
-			});
-		}
+		
 		function FinishBuild() {
 			$('#productSidebar').hide();
 			$('#productSummary').show();
@@ -427,6 +425,46 @@
 		}
 	</script>
 	<script>
+		$.ajax({
+				url: `@Url.Action("GetProductDefaultImages", "Product")?Id=${@Model.Id}`,
+				success: function (data) {
+					//console.log(data);
+					$.each(data.Images, function(i, v) {
+						$('#imagesContainer').attr("data-layer-" + v.GroupId, v.ProductImage);
+						const container = document.querySelector('.containerNew');
+						const layerAttribute = `data-layer-${v.GroupId}`;
+						const layerUrl = container.getAttribute(layerAttribute);
+
+						if (layerUrl) {
+							const img1 = new Image();
+							img1.src = layerUrl;
+							img1.onload = function () {
+								// Get the width and height of the image
+								var width = this.width;
+								var height = this.height;
+
+								// Display the dimensions
+								//console.log('Width:', width, 'Height:', height);
+								maxHeight = (height * img.width) / width;
+								container.style.height = `${maxHeight}px`;
+							};
+
+							const img = document.createElement('img');
+							img.src = layerUrl;
+							img.id = 'img-' + v.GroupId;
+							img.alt = `Image Layer`;
+							img.classList.add('layer3');
+							container.appendChild(img);
+						}
+					});
+					//$('#productMainImg').attr('src', data.ImageURL);
+
+					
+				},
+				error: function (data) {
+					console.warn(data);
+				}
+			});
 		document.addEventListener('DOMContentLoaded', function () {
 			var nav = document.querySelector('nav ul');
 			nav.classList.add('visible');
@@ -434,35 +472,77 @@
 				nav.classList.toggle('visible');
 			});
 		});
+		//document.onload = function () {
+		//	const container = document.querySelector('.containerNew');
+		//	const layerCount = Object.keys(container.dataset).filter(key => key.startsWith('layer')).length;
+		//	let maxHeight = 0;
+		//	for (let i = 1; i <= layerCount; i++) {
+		//		const layerAttribute = `data-layer${i}`;
+		//		const layerUrl = container.getAttribute(layerAttribute);
 
-		const container = document.querySelector('.containerNew');
-		const layerCount = Object.keys(container.dataset).filter(key => key.startsWith('layer')).length;
-		let maxHeight = 0;
-		for (let i = 1; i <= layerCount; i++) {
-			const layerAttribute = `data-layer${i}`;
-			const layerUrl = container.getAttribute(layerAttribute);
+		//		if (layerUrl) {
+		//			const img1 = new Image();
+		//			console.log(layerUrl);
+		//			img1.src = layerUrl;
+		//			img1.onload = function () {
+		//				// Get the width and height of the image
+		//				var width = this.width;
+		//				var height = this.height;
 
-			if (layerUrl) {
-				const img1 = new Image();
-				console.log(layerUrl);
-				img1.src = layerUrl;
-				img1.onload = function () {
-					// Get the width and height of the image
-					var width = this.width;
-					var height = this.height;
+		//				// Display the dimensions
+		//				//console.log('Width:', width, 'Height:', height);
+		//				maxHeight = (height * img.width) / width;
+		//				container.style.height = `${maxHeight}px`;
+		//			};
 
-					// Display the dimensions
-					//console.log('Width:', width, 'Height:', height);
-					maxHeight = (height * img.width) / width;
-					container.style.height = `${maxHeight}px`;
-				};
-				
-				const img = document.createElement('img');
-				img.src = layerUrl;
-				img.alt = `Layer ${i}`;
-				img.classList.add('layer3');
-				container.appendChild(img);
-			}
+		//			const img = document.createElement('img');
+		//			img.src = layerUrl;
+		//			img.alt = `Layer ${i}`;
+		//			img.classList.add('layer3');
+		//			container.appendChild(img);
+		//		}
+		//	}
+		//}
+		
+
+		function setProductImage(productOptionId) {
+			$.ajax({
+				url: `@Url.Action("GetProductImage", "Product")?Id=${productOptionId}`,
+				success: function (data) {
+					/*$('#productMainImg').attr('src', data.ImageURL);*/
+					//console.log(data);
+					$('#imagesContainer').attr("data-layer-" + data.Image.GroupId, data.Image.ProductImage);
+					const container = document.querySelector('.containerNew');
+					const layerAttribute = `data-layer-${data.Image.GroupId}`;
+					const layerUrl = container.getAttribute(layerAttribute);
+					$('#img-' + data.Image.GroupId).remove();
+					//console.log(layerUrl);
+					if (layerUrl) {
+						const img1 = new Image();
+						img1.src = layerUrl;
+						img1.onload = function () {
+							// Get the width and height of the image
+							var width = this.width;
+							var height = this.height;
+
+							// Display the dimensions
+							//console.log('Width:', width, 'Height:', height);
+							maxHeight = (height * img.width) / width;
+							container.style.height = `${maxHeight}px`;
+						};
+
+						const img = document.createElement('img');
+						img.src = layerUrl;
+						img.id = 'img-' + data.Image.GroupId;
+						img.alt = `Layer `;
+						img.classList.add('layer3');
+						container.appendChild(img);
+					}
+				},
+				error: function (data) {
+					console.warn(data);
+				}
+			});
 		}
 
 	</script>
