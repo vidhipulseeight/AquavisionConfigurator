@@ -1,24 +1,32 @@
 ﻿@model Aquavision.Data.Models.Category
 <div class="row">
 	<div class="col-md-12">
-		@using (Html.BeginForm()) {
-			@Html.HiddenFor(model => model.Id)
-			<div class="form-horizontal">
-				<h4>New Category</h4>
-				<hr />
-				<div class="form-group">
-					@Html.LabelFor(model => model.Name, new { @class = "control-label col-md-3" })
-					<div class="col-md-4">
-						<input class="form-control" id="Name" name="Name" type="text" value="@Model.Name" />
-						@Html.ValidationMessageFor(model => model.Name)
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-md-offset-3 col-md-4">
-						<input type="submit" value="Add" class="btn green" />
-					</div>
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-square"></i>New Category
 				</div>
 			</div>
-		}
+			<div class="portlet-body form">
+				@using (Html.BeginForm("New", "Category", FormMethod.Post, new { @class = "form-horizontal" })) {
+					@Html.HiddenFor(model => model.Id)
+					<div class="form-body">
+						<div class="form-group">
+							@Html.LabelFor(model => model.Name, new { @class = "control-label col-md-3" })
+							<div class="col-md-4">
+								<input class="form-control" id="Name" name="Name" type="text" value="@Model.Name" />
+								@Html.ValidationMessageFor(model => model.Name)
+							</div>
+						</div>
+					</div>
+					<div class="form-actions fluid">
+						<div class="col-md-offset-3 col-md-9">
+							<button type="submit" class="btn blue">Add</button>
+						</div>
+					</div>
+
+				}
+			</div>
+		</div>
 	</div>
 </div>

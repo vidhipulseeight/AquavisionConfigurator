@@ -1,0 +1,54 @@
+﻿@model Aquavision.Data.Models.Product
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-square"></i>New Product
+				</div>
+			</div>
+			<div class="portlet-body form">
+				@using (Html.BeginForm("New", "Product", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" })) {
+					@Html.HiddenFor(model => model.Id)
+					<div class="form-body">
+						<div class="form-group">
+							@Html.LabelFor(model => model.CategoryId, "Category", new { @class = "control-label col-md-3" })
+							<div class="col-md-4">
+								@Html.DropDownList("CategoryId", null, "", new { @class = "form-control col-md-3", style = "width: 300px;", @required = "required" })
+								@Html.ValidationMessageFor(model => model.CategoryId)
+							</div>
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(model => model.Name, new { @class = "control-label col-md-3" })
+							<div class="col-md-4">
+								<input class="form-control" id="Name" name="Name" type="text" value="@Model.Name" required />
+								@Html.ValidationMessageFor(model => model.Name)
+							</div>
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(model => model.SKU, "SKU", new { @class = "control-label col-md-3" })
+							<div class="col-md-4">
+								<input class="form-control" id="SKU" name="SKU" type="text" required />
+								@Html.ValidationMessageFor(model => model.SKU)
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="ProductImage" class="col-md-3 control-label">Product Image</label>
+							<div class="col-md-4">
+								<div class="input-group">
+									<input type="file" id="ProductImage" name="file" class="form-control" required />
+								</div>
+							</div>
+						</div>
+						<div class="form-actions fluid">
+							<div class="col-md-offset-3 col-md-9">
+								<button type="submit" class="btn blue">Add</button>
+							</div>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>
+

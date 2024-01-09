@@ -18,6 +18,7 @@ namespace Aquavision.Data.Models
         public ProductOption()
         {
             this.CustomerDesignSpecs = new HashSet<CustomerDesignSpec>();
+            this.Images = new HashSet<Image>();
         }
     
         public int Id { get; set; }
@@ -30,5 +31,7 @@ namespace Aquavision.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerDesignSpec> CustomerDesignSpecs { get; set; }
         public virtual ProductOptionGroup ProductOptionGroup { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Images { get; set; }
     }
 }

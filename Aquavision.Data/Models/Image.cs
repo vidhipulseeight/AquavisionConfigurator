@@ -17,5 +17,9 @@ namespace Aquavision.Data.Models
         public int Id { get; set; }
         public int ProductOptionId { get; set; }
         public string ProductImage { get; set; }
+        public byte[] ImageData { get; set; }
+        public string ImageMimeType { get; set; }
+    
+        public virtual ProductOption ProductOption { get; set; }
     }
 }

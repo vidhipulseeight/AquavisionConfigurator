@@ -1,0 +1,69 @@
+﻿@model List<Aquavision.Data.Models.Product>
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-cubes"></i>Products
+				</div>
+				<div class="actions">
+					<a href="@Url.Action("New", "Product")" class="btn default yellow-stripe">
+						<i class="fa fa-plus"></i>
+						New Product
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				
+				<table class="table table-bordered">
+					<tr>
+						<th style="width:100px;">Product</th>
+						<th>SKU</th>
+						<th>Name</th>
+						<th>Category</th>
+						<th>&nbsp;</th>
+					</tr>
+					@foreach (var item in Model) {
+						<tr>
+							<td><img src="@item.GetProductImage()" style="width:100px;"></td>
+							<td>@Html.ActionLink(item.SKU, "Edit", "Product", new { id = item.Id }, null)</td>
+							<td>@item.Name</td>
+							<td>@item.Category.Name</td>
+							<td>
+								<a title="Edit" href="@Url.Action("Edit", new { id = item.Id })" class="fa fa-edit btn blue" style="width: 40px;">&nbsp;</a>
+								<a title="Delete" href="#" onclick="deleteCategory(@item.Id, event); return false;" class="fa fa-times btn red" style="width: 40px;">&nbsp;</a>
+							</td>
+						</tr>
+					}
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	function deleteCategory(id, e) {
+		e.preventDefault();
+		$.confirm({
+			title: 'Delete Category',
+			content: 'Are you sure to delete category?',
+			icon: 'fa fa-question-circle',
+			animation: 'scale',
+			closeAnimation: 'scale',
+			opacity: 0.5,
+			buttons: {
+				'confirm': {
+					text: 'Delete',
+					btnClass: 'btn-red',
+					action: function () {
+						location.href = `@Url.Action("Delete", "Category")/${id}`;
+					}
+				},
+				cancel: function () {
+					return true;
+				}
+			}
+		});
+		e.stopPropagation();
+		return false;
+	}
+</script>

@@ -50,6 +50,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductOption" Type="int" Nullable="false" />
           <Property Name="Image" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ImageData" Type="varbinary(max)" />
+          <Property Name="ImageMimeType" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -164,6 +166,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Images_ProductOption">
+          <End Role="ProductOption" Type="Self.ProductOption" Multiplicity="1" />
+          <End Role="Images" Type="Self.Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductOption">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="ProductOption" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -259,6 +273,10 @@
             <End Role="ProductOption" EntitySet="ProductOption" />
             <End Role="CustomerDesignSpecs" EntitySet="CustomerDesignSpecs" />
           </AssociationSet>
+          <AssociationSet Name="FK_Images_ProductOption" Association="Self.FK_Images_ProductOption">
+            <End Role="ProductOption" EntitySet="ProductOption" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
           <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Product" EntitySet="Product" />
@@ -338,6 +356,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductOptionId" Type="Int32" Nullable="false" />
           <Property Name="ProductImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ImageMimeType" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ProductOption" Relationship="AquavisionModel.FK_Images_ProductOption" FromRole="Image" ToRole="ProductOption" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -366,6 +387,7 @@
           <Property Name="DefaultOption" Type="Boolean" Nullable="false" />
           <Property Name="SKU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Precision="11" Scale="2" />
+          <NavigationProperty Name="Images" Relationship="AquavisionModel.FK_Images_ProductOption" FromRole="ProductOption" ToRole="Image" />
         </EntityType>
         <EntityType Name="ProductOptionGroup">
           <Key>
@@ -547,7 +569,23 @@
             <End Role="webpages_Roles" EntitySet="webpages_Roles" />
             <End Role="UserProfile" EntitySet="UserProfiles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Images_ProductOption" Association="AquavisionModel.FK_Images_ProductOption">
+            <End Role="ProductOption" EntitySet="ProductOptions" />
+            <End Role="Image" EntitySet="Images" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Images_ProductOption">
+          <End Type="AquavisionModel.ProductOption" Role="ProductOption" Multiplicity="1" />
+          <End Type="AquavisionModel.Image" Role="Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductOption">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="ProductOptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -599,6 +637,8 @@
           <EntitySetMapping Name="Images">
             <EntityTypeMapping TypeName="AquavisionModel.Image">
               <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="ImageMimeType" ColumnName="ImageMimeType" />
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ProductOptionId" ColumnName="ProductOption" />
                 <ScalarProperty Name="ProductImage" ColumnName="Image" />

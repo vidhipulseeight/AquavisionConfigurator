@@ -1,0 +1,50 @@
+﻿@model Aquavision.Data.Models.ProductOption
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-square"></i>New Product Option
+				</div>
+			</div>
+			<div class="portlet-body form">
+				@using (Html.BeginForm("NewProductOptions", "Product", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" })) {
+					@Html.HiddenFor(model => model.Id)
+					<input type="hidden" name="ProductGroupId" value="@ViewBag.ProductGroupId"/>
+					<input type="hidden" name="ProductId" value="@ViewBag.ProductId"/>
+					<div class="form-body">
+						<div class="form-group">
+							@Html.LabelFor(model => model.Name, new { @class = "control-label col-md-3" })
+							<div class="col-md-4">
+								<input class="form-control" id="Name" name="Name" type="text" required />
+								@Html.ValidationMessageFor(model => model.Name)
+							</div>
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(model => model.SKU, new { @class = "control-label col-md-3" })
+							<div class="col-md-4">
+								<input class="form-control" id="SKU" name="SKU" type="text" required />
+								@Html.ValidationMessageFor(model => model.SKU)
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="OptionImages" class="col-md-3 control-label">Option Images</label>
+							<div class="col-md-4">
+								<div class="input-group">
+									<input type="file" id="OptionImage" name="file" multiple class="form-control" required />
+								</div>
+							</div>
+						</div>
+						<div class="form-actions fluid">
+							<div class="col-md-offset-3 col-md-9">
+								<button type="submit" class="btn blue">Add</button>
+							</div>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>
+
+

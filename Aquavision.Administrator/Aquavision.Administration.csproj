@@ -136,6 +136,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -475,6 +476,7 @@
     <Content Include="assets\img\logo-big.png" />
     <Content Include="assets\img\logo.png" />
     <Content Include="assets\img\menu-toggler.png" />
+    <Content Include="assets\img\noimage.png" />
     <Content Include="assets\img\overlay-icon.png" />
     <Content Include="assets\img\pages\2.jpg" />
     <Content Include="assets\img\pages\3.jpg" />
@@ -900,6 +902,12 @@
     <Content Include="webfonts\fa-solid-900.woff2" />
     <Content Include="sharedassets\plugins\select2\select2.jquery.json" />
     <Content Include="sharedassets\plugins\select2\select2_locale_en.js.template" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\New.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\ProductOptions.cshtml" />
+    <Content Include="Views\Product\NewProductOptions.cshtml" />
+    <Content Include="Views\Product\EditProductOption.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
