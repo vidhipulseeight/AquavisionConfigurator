@@ -4,6 +4,7 @@ using System.Web.Security;
 using WebMatrix.WebData;
 
 namespace Aquavision.Administration.Controllers {
+	[Authorize]
 	public class AccountController : Controller {
 		[AllowAnonymous]
 		public ActionResult Login() {
@@ -74,9 +75,10 @@ namespace Aquavision.Administration.Controllers {
 					return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
 			}
 		}
+		
 		public ActionResult LogOff() {
 			WebSecurity.Logout();
-			return RedirectToAction("Login", "Account");
+			return RedirectToAction("Index", "Home");
 		}
 	}
 }

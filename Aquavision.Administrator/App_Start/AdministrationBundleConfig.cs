@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace Aquavision.Presentation.Common.Configuration {
+namespace Aquavision.Administration {
 	public class AdministrationBundleConfig {
 		public static void RegisterBundles(BundleCollection bundles) {
 			bundles.Add(new ScriptBundle("~/bundles/allJS").Include(

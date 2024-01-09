@@ -3,18 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Web.Mvc;
-namespace Aquavision.Presentation.Common {
+using System.Web.UI.WebControls;
+
+namespace Aquavision.Administration.Helpers {
 	public abstract class BaseController : Controller {
-#if DEBUG
-		protected string BASE_SECURE_PUBLIC_SITE_URL = "https://local.pulse-eight.com";
-#else
-		protected string BASE_SECURE_PUBLIC_SITE_URL = "https://www.pulse-eight.com";
-#endif
-		protected string THEME_COLOUR = "#20b9b9";
-		protected string DEFAULT_META = "UK Based manufacturer of HDBaseT video distribution systems, HDMI over HDBaseT extenders, CEC control solutions, including our exclusive USB-CEC Adapter";
-		
-		protected string DEFAULT_TITLE = "Pulse-Eight";
-		protected string DEFAULT_THEME = "store-branding";
+		protected string DEFAULT_META = "Aquavision";
+		protected string DEFAULT_TITLE = "Aquavision";
+		protected string DEFAULT_THEME = "Aquavision";
 		protected bool myAppendDefaultTitle = true;
 
 		private readonly List<BreadCrumb> myBreadCrumbs = new List<BreadCrumb>();
@@ -122,6 +117,9 @@ namespace Aquavision.Presentation.Common {
 
 		private static bool IsAjax(ExceptionContext filterContext) {
 			return filterContext.HttpContext.Request.Headers["X-Requested-With"] == "XMLHttpRequest";
+		}
+		protected string GetCurrentUserName() {
+			return User.Identity.Name.Substring(User.Identity.Name.IndexOf('\\') + 1);
 		}
 	}
 }

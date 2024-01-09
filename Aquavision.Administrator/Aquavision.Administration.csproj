@@ -131,6 +131,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AdministrationBundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -141,6 +142,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AccessDeniedAuthoriseAttribute.cs" />
+    <Compile Include="Helpers\BaseController.cs" />
+    <Compile Include="Helpers\BreadCrumb.cs" />
+    <Compile Include="Helpers\BreadCrumbAction.cs" />
+    <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Helpers\MenuItem.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -908,6 +914,7 @@
     <Content Include="Views\Product\ProductOptions.cshtml" />
     <Content Include="Views\Product\NewProductOptions.cshtml" />
     <Content Include="Views\Product\EditProductOption.cshtml" />
+    <Content Include="Views\Home\AccessDenied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -941,10 +948,6 @@
     <ProjectReference Include="..\Aquavision.Data\Aquavision.Data.csproj">
       <Project>{ebfaed95-376a-44a8-ae84-79a8aaf85bdb}</Project>
       <Name>Aquavision.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Aquavision.Presentation.Common\Aquavision.Presentation.Common.csproj">
-      <Project>{6c0fde84-cc44-4178-8c3d-6854dafc0419}</Project>
-      <Name>Aquavision.Presentation.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

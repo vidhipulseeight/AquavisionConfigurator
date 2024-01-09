@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquavisionConfigurator", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aquavision.Administration", "Aquavision.Administrator\Aquavision.Administration.csproj", "{99625AE4-D478-4582-887D-8146FB94C0C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aquavision.Presentation.Common", "Aquavision.Presentation.Common\Aquavision.Presentation.Common.csproj", "{6C0FDE84-CC44-4178-8C3D-6854DAFC0419}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aquavision.Data", "Aquavision.Data\Aquavision.Data.csproj", "{EBFAED95-376A-44A8-AE84-79A8AAF85BDB}"
 EndProject
 Global
@@ -55,22 +53,6 @@ Global
 		{99625AE4-D478-4582-887D-8146FB94C0C8}.Staging|Any CPU.Build.0 = Release|Any CPU
 		{99625AE4-D478-4582-887D-8146FB94C0C8}.Staging|x86.ActiveCfg = Release|Any CPU
 		{99625AE4-D478-4582-887D-8146FB94C0C8}.Staging|x86.Build.0 = Release|Any CPU
-		{6C0FDE84-CC44-4178-8C3D-6854DAFC0419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C0FDE84-CC44-4178-8C3D-6854DAFC0419}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C0FDE84-CC44-4178-8C3D-6854DAFC0419}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6C0FDE84-CC44-4178-8C3D-6854DAFC0419}.Debug|x86.Build.0 = Debug|Any CPU
-		{6C0FDE84-CC44-4178-8C3D-6854DAFC0419}.DebugLive|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C0FDE84-CC44-4178-8C3D-6854DAFC0419}.DebugLive|Any CPU.Build.0 = Debug|Any CPU
-		{6C0FDE84-CC44-4178-8C3D-6854DAFC0419}.DebugLive|x86.ActiveCfg = Debug|Any CPU
-		{6C0FDE84-CC44-4178-8C3D-6854DAFC0419}.DebugLive|x86.Build.0 = Debug|Any CPU
-		{6C0FDE84-CC44-4178-8C3D-6854DAFC0419}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C0FDE84-CC44-4178-8C3D-6854DAFC0419}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C0FDE84-CC44-4178-8C3D-6854DAFC0419}.Release|x86.ActiveCfg = Release|Any CPU
-		{6C0FDE84-CC44-4178-8C3D-6854DAFC0419}.Release|x86.Build.0 = Release|Any CPU
-		{6C0FDE84-CC44-4178-8C3D-6854DAFC0419}.Staging|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C0FDE84-CC44-4178-8C3D-6854DAFC0419}.Staging|Any CPU.Build.0 = Debug|Any CPU
-		{6C0FDE84-CC44-4178-8C3D-6854DAFC0419}.Staging|x86.ActiveCfg = Debug|Any CPU
-		{6C0FDE84-CC44-4178-8C3D-6854DAFC0419}.Staging|x86.Build.0 = Debug|Any CPU
 		{EBFAED95-376A-44A8-AE84-79A8AAF85BDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EBFAED95-376A-44A8-AE84-79A8AAF85BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBFAED95-376A-44A8-AE84-79A8AAF85BDB}.Debug|x86.ActiveCfg = Debug|Any CPU

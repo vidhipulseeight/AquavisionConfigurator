@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Web.UI.WebControls;
 
-namespace Aquavision.Presentation.Common {
+namespace Aquavision.Administration.Helpers {
 	public class BreadCrumb {
 		public string Name { get; }
 		public string URL { get; }

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 
-namespace Aquavision.Presentation.Common {
+namespace Aquavision.Administration.Helpers {
 	public static class HtmlHelpers {
 		private static string GetActiveString() {
 			var activeString = ConfigurationManager.AppSettings["MenuActiveString"];

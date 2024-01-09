@@ -1,7 +1,10 @@
-﻿using System.Web.Mvc;
+﻿using Aquavision.Administration.Helpers;
+using System.Web.Mvc;
 namespace Aquavision.Administration.Controllers {
-	public class HomeController : Controller {
+	[Authorize]
+	public class HomeController : BaseController {
 		public ActionResult Index() {
+			var user = GetCurrentUserName();
 			return View();
 		}
 	}

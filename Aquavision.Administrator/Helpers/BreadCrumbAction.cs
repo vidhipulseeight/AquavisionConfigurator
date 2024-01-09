@@ -1,4 +1,4 @@
-﻿namespace Aquavision.Presentation.Common {
+﻿namespace Aquavision.Administration.Helpers {
 	public class BreadCrumbAction {
 		public string Action { set; get; }
 		public string Controller { set; get; }

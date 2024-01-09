@@ -1,5 +1,4 @@
-﻿using Aquavision.Presentation.Common.Configuration;
-using System.Threading;
+﻿using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -17,13 +16,6 @@ namespace Aquavision.Administration {
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			AdministrationBundleConfig.RegisterBundles(BundleTable.Bundles);
-
-			BundleTable.Bundles.Add(new ScriptBundle("~/adminJS").Include(
-				"~/sharedassets/plugins/bootbox/bootbox.js",
-				"~/Scripts/croppic.js"));
-
-			BundleTable.Bundles.Add(new StyleBundle("~/admin").Include("~/Content/croppic.css"));
-
 			LazyInitializer.EnsureInitialized(ref myAuthenticationInitializer, ref myIsAuthenticationInitialized, ref myAuthenticationInitializerLock);
 		}
 

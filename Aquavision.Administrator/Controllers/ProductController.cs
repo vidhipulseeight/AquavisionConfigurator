@@ -1,16 +1,14 @@
-﻿using Aquavision.Data.Models;
-using Aquavision.Presentation.Common;
+﻿using Aquavision.Administration.Helpers;
+using Aquavision.Data.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
-
 namespace Aquavision.Administrator.Controllers {
+	[Authorize]
 	public class ProductController : BaseController {
 		AquavisionEntities myDB = new AquavisionEntities();
 		public ActionResult Index() {
