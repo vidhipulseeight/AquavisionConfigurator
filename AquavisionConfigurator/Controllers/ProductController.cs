@@ -74,6 +74,7 @@ namespace AquavisionConfigurator.Controllers {
 
 		public JsonResult GetProductDefaultImages(int Id) {
 			var product = myDB.Products.FirstOrDefault(p => p.Id == Id);
+			var productImage = Convert.ToBase64String(product.Image);
 			var optionGroups = myDB.ProductOptionGroups.Where(prg => prg.ProductId == Id).Select(prg => prg.Id);
 			var options = myDB.ProductOptions.Where(op => optionGroups.Contains(op.ProductOptionGroupId) && op.DefaultOption).Select(op => op.Id);
 			var productDefaultImages = myDB.Images.Where(i => options.Contains(i.ProductOptionId));
@@ -90,8 +91,8 @@ namespace AquavisionConfigurator.Controllers {
 			}
 			if (productDefaultImages != null) {
 				try {
-					return Json(new { Images = imagesList }, JsonRequestBehavior.AllowGet);
-				} catch { return Json(new { Images = string.Empty }, JsonRequestBehavior.AllowGet); }
+					return Json(new { ProductImage = productImage, Images = imagesList }, JsonRequestBehavior.AllowGet);
+				} catch { return Json(new { ProductImage = productImage, Images = string.Empty }, JsonRequestBehavior.AllowGet); }
 			}
 			return Json(new { Images = string.Empty }, JsonRequestBehavior.AllowGet);
 		}

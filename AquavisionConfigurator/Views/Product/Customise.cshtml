@@ -429,8 +429,29 @@
 				url: `@Url.Action("GetProductDefaultImages", "Product")?Id=${@Model.Id}`,
 				success: function (data) {
 					//console.log(data);
+					$('#imagesContainer').attr("data-layer-default", "data:image/png;base64," + data.ProductImage);
+					const container = document.querySelector('.containerNew');
+					const defaultLayerUrl = container.getAttribute(`data-layer-default`);
+					if (defaultLayerUrl) {
+						const img1 = new Image();
+						img1.src = defaultLayerUrl;
+						img1.onload = function () {
+							var width = this.width;
+							var height = this.height;
+
+							maxHeight = (height * img.width) / width;
+							container.style.height = `${maxHeight}px`;
+						};
+
+						const img = document.createElement('img');
+						img.src = defaultLayerUrl;
+						img.id = 'img-default';
+						img.alt = `Image Layer`;
+						img.classList.add('layer3');
+						container.appendChild(img);
+					}
 					$.each(data.Images, function (i, v) {
-						console.log("ID" + v.ImageData);
+						/*console.log("ID" + v.ImageData);*/
 						$('#imagesContainer').attr("data-layer-" + v.GroupId, "data:image/png;base64,"+v.ImageData);
 						const container = document.querySelector('.containerNew');
 						const layerAttribute = `data-layer-${v.GroupId}`;
