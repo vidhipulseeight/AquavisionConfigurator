@@ -214,14 +214,14 @@ namespace Aquavision.Administrator.Controllers {
 								file.InputStream.CopyTo(ms);
 								var pictureBytes = ms.ToArray();
 
-								var fileNameFromForm = formCollection["files[" + i + "].FileName"];
-								var fileName = Path.GetFileName(file.FileName);
-								var path = Path.Combine(Server.MapPath("~/OptionImages"), fileName);
-								file.SaveAs(path);
-								var filepath = "../OptionImages/" + fileName;
+								//var fileNameFromForm = formCollection["files[" + i + "].FileName"];
+								//var fileName = Path.GetFileName(file.FileName);
+								//var path = Path.Combine(Server.MapPath("~/OptionImages"), fileName);
+								//file.SaveAs(path);
+								//var filepath = "../OptionImages/" + fileName;
 								var optionImages = new Image {
 									ProductOptionId = productOption.Id,
-									ProductImage = filepath,
+									ProductImage = "",
 									ImageData= pictureBytes,
 									ImageMimeType = file.ContentType
 								};

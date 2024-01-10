@@ -60,6 +60,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SKU" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
           <Property Name="Category" Type="int" />
           <Property Name="Deleted" Type="bit" Nullable="false" />
           <Property Name="Image" Type="varbinary(max)" />
@@ -374,6 +375,7 @@
           <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
           <NavigationProperty Name="ProductOptionGroups" Relationship="Self.FK_ProductOptionGroup_Product" FromRole="Product" ToRole="ProductOptionGroup" />
           <Property Name="Price" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ProductOption">
           <Key>
@@ -648,6 +650,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="AquavisionModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

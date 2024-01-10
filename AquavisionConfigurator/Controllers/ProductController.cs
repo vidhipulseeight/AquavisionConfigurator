@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Aquavision.Data.Models;
@@ -47,6 +48,7 @@ namespace AquavisionConfigurator.Controllers {
 			public int OptionId { get; set; }
 			public int GroupId { get; set; }
 			public string ProductImage { get; set; }
+			public string ImageData { get; set; }
 		}
 
 		public JsonResult GetProductImage(int Id) {
@@ -57,7 +59,8 @@ namespace AquavisionConfigurator.Controllers {
 					Id = productImage.Id,
 					OptionId = productImage.ProductOptionId,
 					ProductImage = productImage.ProductImage,
-					GroupId = option.ProductOptionGroupId
+					GroupId = option.ProductOptionGroupId,
+					ImageData = Convert.ToBase64String(productImage.ImageData)
 				};
 				try {
 					return Json(new { Image = image }, JsonRequestBehavior.AllowGet);
@@ -81,7 +84,8 @@ namespace AquavisionConfigurator.Controllers {
 					Id = image.Id,
 					OptionId = image.ProductOptionId,
 					ProductImage = image.ProductImage,
-					GroupId = option.ProductOptionGroupId
+					GroupId = option.ProductOptionGroupId,
+					ImageData = Convert.ToBase64String(image.ImageData)
 				});
 			}
 			if (productDefaultImages != null) {

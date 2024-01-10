@@ -429,22 +429,19 @@
 				url: `@Url.Action("GetProductDefaultImages", "Product")?Id=${@Model.Id}`,
 				success: function (data) {
 					//console.log(data);
-					$.each(data.Images, function(i, v) {
-						$('#imagesContainer').attr("data-layer-" + v.GroupId, v.ProductImage);
+					$.each(data.Images, function (i, v) {
+						console.log("ID" + v.ImageData);
+						$('#imagesContainer').attr("data-layer-" + v.GroupId, "data:image/png;base64,"+v.ImageData);
 						const container = document.querySelector('.containerNew');
 						const layerAttribute = `data-layer-${v.GroupId}`;
 						const layerUrl = container.getAttribute(layerAttribute);
-
 						if (layerUrl) {
 							const img1 = new Image();
 							img1.src = layerUrl;
 							img1.onload = function () {
-								// Get the width and height of the image
 								var width = this.width;
 								var height = this.height;
 
-								// Display the dimensions
-								//console.log('Width:', width, 'Height:', height);
 								maxHeight = (height * img.width) / width;
 								container.style.height = `${maxHeight}px`;
 							};
@@ -456,8 +453,32 @@
 							img.classList.add('layer3');
 							container.appendChild(img);
 						}
+
+						/*working fine*/
+						//$('#imagesContainer').attr("data-layer-" + v.GroupId, v.ProductImage);
+						//const container = document.querySelector('.containerNew');
+						//const layerAttribute = `data-layer-${v.GroupId}`;
+						//const layerUrl = container.getAttribute(layerAttribute);
+
+						//if (layerUrl) {
+						//	const img1 = new Image();
+						//	img1.src = layerUrl;
+						//	img1.onload = function () {
+						//		var width = this.width;
+						//		var height = this.height;
+
+						//		maxHeight = (height * img.width) / width;
+						//		container.style.height = `${maxHeight}px`;
+						//	};
+
+						//	const img = document.createElement('img');
+						//	img.src = layerUrl;
+						//	img.id = 'img-' + v.GroupId;
+						//	img.alt = `Image Layer`;
+						//	img.classList.add('layer3');
+						//	container.appendChild(img);
+						//}
 					});
-					//$('#productMainImg').attr('src', data.ImageURL);
 
 					
 				},
@@ -509,24 +530,19 @@
 			$.ajax({
 				url: `@Url.Action("GetProductImage", "Product")?Id=${productOptionId}`,
 				success: function (data) {
-					/*$('#productMainImg').attr('src', data.ImageURL);*/
-					//console.log(data);
-					$('#imagesContainer').attr("data-layer-" + data.Image.GroupId, data.Image.ProductImage);
+
+					$('#imagesContainer').attr("data-layer-" + data.Image.GroupId, "data:image/png;base64," + data.Image.ImageData);
 					const container = document.querySelector('.containerNew');
 					const layerAttribute = `data-layer-${data.Image.GroupId}`;
 					const layerUrl = container.getAttribute(layerAttribute);
 					$('#img-' + data.Image.GroupId).remove();
-					//console.log(layerUrl);
 					if (layerUrl) {
 						const img1 = new Image();
 						img1.src = layerUrl;
 						img1.onload = function () {
-							// Get the width and height of the image
 							var width = this.width;
 							var height = this.height;
 
-							// Display the dimensions
-							//console.log('Width:', width, 'Height:', height);
 							maxHeight = (height * img.width) / width;
 							container.style.height = `${maxHeight}px`;
 						};
@@ -538,6 +554,33 @@
 						img.classList.add('layer3');
 						container.appendChild(img);
 					}
+					/*$('#productMainImg').attr('src', data.ImageURL);*/
+					//console.log(data);
+
+					/*working*/
+					//$('#imagesContainer').attr("data-layer-" + data.Image.GroupId, data.Image.ProductImage);
+					//const container = document.querySelector('.containerNew');
+					//const layerAttribute = `data-layer-${data.Image.GroupId}`;
+					//const layerUrl = container.getAttribute(layerAttribute);
+					//$('#img-' + data.Image.GroupId).remove();
+					//if (layerUrl) {
+					//	const img1 = new Image();
+					//	img1.src = layerUrl;
+					//	img1.onload = function () {
+					//		var width = this.width;
+					//		var height = this.height;
+
+					//		maxHeight = (height * img.width) / width;
+					//		container.style.height = `${maxHeight}px`;
+					//	};
+
+					//	const img = document.createElement('img');
+					//	img.src = layerUrl;
+					//	img.id = 'img-' + data.Image.GroupId;
+					//	img.alt = `Layer `;
+					//	img.classList.add('layer3');
+					//	container.appendChild(img);
+					//}
 				},
 				error: function (data) {
 					console.warn(data);

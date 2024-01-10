@@ -28,6 +28,7 @@ namespace Aquavision.Data.Models
         public byte[] Image { get; set; }
         public string ImageMimeType { get; set; }
         public Nullable<decimal> Price { get; set; }
+        public string Description { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
