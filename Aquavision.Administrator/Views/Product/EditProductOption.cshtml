@@ -1,6 +1,6 @@
 ﻿@model Aquavision.Data.Models.ProductOption
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-12">
 		<div class="portlet">
 			<div class="portlet-title">
 				<div class="caption">
@@ -8,7 +8,7 @@
 				</div>
 			</div>
 			<div class="portlet-body form">
-				@using (Html.BeginForm("EditProductOption", "Product", FormMethod.Post, new { @class = "form-horizontal" })) {
+				@using (Html.BeginForm("EditProductOption", "Product", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" })) {
 					@Html.HiddenFor(model => model.Id)
 					<div class="form-body">
 						<div class="form-group">
@@ -25,6 +25,30 @@
 								@Html.ValidationMessageFor(model => model.SKU)
 							</div>
 						</div>
+						<div class="form-group">
+							@Html.LabelFor(model => model.Price, new { @class = "control-label col-md-3" })
+							<div class="col-md-4">
+								<input class="form-control" id="Price" name="Price" value="@Model.Price" type="number" min="1" required />
+								@Html.ValidationMessageFor(model => model.Price)
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Default Option</label>
+							<div class="col-md-4">
+								<input class="form-control" id="chkDefaultOption" checked="@Model.DefaultOption" name="chkDefaultOption" type="checkbox" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Option Image</label>
+							<div class="col-md-4">
+								<input type="file" id="ProductImage" name="file" class="form-control" />
+							</div>
+							<div class="col-md-5">
+								@if (Model.Images.Any()) {
+									<img src="@(Model.Images.First().GetProductOptionImage())" style="width:150px;">
+								}
+							</div>
+						</div>
 					</div>
 					<div class="form-actions fluid">
 						<div class="col-md-offset-3 col-md-9">
@@ -35,7 +59,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-6">
+	<div class="col-md-6 display-none">
 		<div class="portlet">
 			<div class="portlet-title">
 				<div class="caption">

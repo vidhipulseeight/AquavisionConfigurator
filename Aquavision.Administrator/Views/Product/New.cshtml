@@ -28,8 +28,22 @@
 						<div class="form-group">
 							@Html.LabelFor(model => model.SKU, "SKU", new { @class = "control-label col-md-3" })
 							<div class="col-md-4">
-								<input class="form-control" id="SKU" name="SKU" type="text" required />
+								<input class="form-control" id="SKU" name="SKU" type="text" value="@Model.SKU" required />
 								@Html.ValidationMessageFor(model => model.SKU)
+							</div>
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(model => model.Description, "Description", new { @class = "control-label col-md-3" })
+							<div class="col-md-4">
+								<textarea class="form-control" id="Description" name="Description" required cols="50" rows="3">@Model.Description</textarea>
+								@Html.ValidationMessageFor(model => model.Description)
+							</div>
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(model => model.Price, "Price (GBP)", new { @class = "control-label col-md-3" })
+							<div class="col-md-4">
+								<input class="form-control" id="Price" name="Price" type="number" min="1" value="@Model.Price" required/>
+								@Html.ValidationMessageFor(model => model.Price)
 							</div>
 						</div>
 						<div class="form-group">

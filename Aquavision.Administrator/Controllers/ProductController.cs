@@ -72,7 +72,7 @@ namespace Aquavision.Administrator.Controllers {
 		}
 
 		[HttpPost]
-		public ActionResult Edit(Product product) {
+		public ActionResult Edit(Product product, HttpPostedFileBase file) {
 			var originalProduct = myDB.Products.FirstOrDefault(c => c.Id == product.Id);
 			if (originalProduct == null) {
 				return RedirectToAction("Index");
@@ -85,6 +85,15 @@ namespace Aquavision.Administrator.Controllers {
 				originalProduct.CategoryId = product.CategoryId;
 				originalProduct.SKU = product.SKU;
 				originalProduct.Name = product.Name;
+				originalProduct.Description = product.Description;
+				originalProduct.Price = product.Price;
+				if (file != null) {
+					var ms = new MemoryStream();
+					file.InputStream.CopyTo(ms);
+					var pictureBytes = ms.ToArray();
+					originalProduct.Image = pictureBytes;
+					originalProduct.ImageMimeType = file.ContentType;
+				}
 				try {
 					myDB.SaveChanges();
 				} catch (DbEntityValidationException ex) {
@@ -183,25 +192,27 @@ namespace Aquavision.Administrator.Controllers {
 			return View(new ProductOption());
 		}
 		[HttpPost]
-		public ActionResult NewProductOptions(FormCollection formCollection) {
-			var ProductGroupId = Convert.ToInt32(formCollection["ProductGroupId"]);
-			var productId = Convert.ToInt32(formCollection["productId"]);
-			var optionName = formCollection["Name"];
-			var optionSKU = formCollection["SKU"];
+		public ActionResult NewProductOptions(ProductOption productOption,FormCollection formCollection) {
+			var productGroupId = Convert.ToInt32(formCollection["ProductGroupId"]);
+			var productId = Convert.ToInt32(formCollection["ProductId"]);
+			var defaultOption = formCollection["chkDefaultOption"] == "on";
 
 			if (ModelState.IsValid) {
 				try {
-					var checkOptionSKU = myDB.ProductOptions.Where(p => p.SKU == optionSKU).FirstOrDefault();
+					var checkOptionSKU = myDB.ProductOptions.Where(p => p.SKU == productOption.SKU).FirstOrDefault();
 					if (checkOptionSKU != null) {
 						TempData["Error"] = "SKU is already exits.";
-						return RedirectToAction("NewProductOptions", "Product", new { productGroupId = ProductGroupId, productId });
+						return RedirectToAction("NewProductOptions", "Product", new { productGroupId, productId });
 					}
-
-					var productOption = new ProductOption {
-						ProductOptionGroupId = ProductGroupId,
-						Name = optionName,
-						SKU= optionSKU,
-					};
+					if (defaultOption) {
+						var checkDefaultOption = myDB.ProductOptions.Where(p => p.ProductOptionGroupId == productGroupId && p.DefaultOption).FirstOrDefault();
+						if (checkDefaultOption != null) {
+							TempData["Error"] = checkDefaultOption.SKU + " is already selected as default option.";
+							return RedirectToAction("NewProductOptions", "Product", new { productGroupId, productId });
+						}
+					}			
+					productOption.ProductOptionGroupId = productGroupId;
+					productOption.DefaultOption = defaultOption;
 					myDB.ProductOptions.Add(productOption);
 					myDB.SaveChanges();
 
@@ -230,7 +241,7 @@ namespace Aquavision.Administrator.Controllers {
 							}
 						}
 					}
-					return RedirectToAction("ProductOptions", "Product", new { productGroupId = ProductGroupId, productId });
+					return RedirectToAction("ProductOptions", "Product", new { productGroupId, productId });
 				} catch (DbEntityValidationException ex) {
 					foreach (var dbValidationError in ex.EntityValidationErrors.SelectMany(error => error.ValidationErrors)) {
 						Debug.WriteLine(dbValidationError.ErrorMessage);
@@ -238,13 +249,7 @@ namespace Aquavision.Administrator.Controllers {
 					}
 				}
 			}
-			ViewBag.PageTitle = "New Product Option";
-			AddBreadCrumb(new BreadCrumb("Products", Url.Action("Index", "Product")));
-			AddBreadCrumb(new BreadCrumb(myDB.Products.FirstOrDefault(p => p.Id == productId)?.Name, Url.Action("Edit", "Product", new { id = productId })));
-			AddBreadCrumb(new BreadCrumb("Edit", Url.Action("Edit", "Product", new { id = productId })));
-			AddBreadCrumb(new BreadCrumb("Options", Url.Action("ProductOptions", "Product", new { productGroupId = ProductGroupId, productId = productId })));
-			AddBreadCrumb(new BreadCrumb("OptionNew"));
-			return View(new ProductOption());
+			return RedirectToAction("NewProductOptions", "Product", new { productGroupId, productId });
 		}
 		public ActionResult DeleteProductOption(int id,int productGroupId,int productId) {
 			var productOption = myDB.ProductOptions.FirstOrDefault(p => p.Id == id);
@@ -272,7 +277,8 @@ namespace Aquavision.Administrator.Controllers {
 			return View(productOption);
 		}
 		[HttpPost]
-		public ActionResult EditProductOption(ProductOption productOption) {
+		public ActionResult EditProductOption(ProductOption productOption, FormCollection formCollection) {
+			var defaultOption = formCollection["chkDefaultOption"] == "on";
 			var originalProductOption = myDB.ProductOptions.FirstOrDefault(c => c.Id == productOption.Id);
 			if (originalProductOption == null) {
 				return RedirectToAction("Index");
@@ -284,15 +290,41 @@ namespace Aquavision.Administrator.Controllers {
 			AddBreadCrumb(new BreadCrumb("Options", Url.Action("ProductOptions", "Product", new { productGroupId = originalProductOption.ProductOptionGroupId, productId = originalProductOption.ProductOptionGroup.ProductId })));
 			AddBreadCrumb(new BreadCrumb("OptionEdit"));
 			if (ModelState.IsValid) {
-				var checkOptionSKU = myDB.ProductOptions.Where(p => p.SKU == productOption.SKU && p.Id != originalProductOption.Id).FirstOrDefault();
-				if (checkOptionSKU != null) {
-					TempData["Error"] = "SKU is already exits.";
-					return RedirectToAction("EditProductOption", "Product", new { originalProductOption.Id });
-				}
-				originalProductOption.Name = productOption.Name;
-				originalProductOption.SKU = productOption.SKU;
 				try {
+					var checkOptionSKU = myDB.ProductOptions.Where(p => p.SKU == productOption.SKU && p.Id != originalProductOption.Id).FirstOrDefault();
+					if (checkOptionSKU != null) {
+						TempData["Error"] = "SKU is already exits.";
+						return RedirectToAction("EditProductOption", "Product", new { originalProductOption.Id });
+					}
+					if (defaultOption) {
+						var checkDefaultOption = myDB.ProductOptions.Where(p => p.ProductOptionGroupId == originalProductOption.ProductOptionGroupId && p.DefaultOption && p.Id != originalProductOption.Id).FirstOrDefault();
+						if (checkDefaultOption != null) {
+							TempData["Error"] = checkDefaultOption.SKU + " is already selected as default option.";
+							return RedirectToAction("EditProductOption", "Product", new { originalProductOption.Id });
+						}
+					}
+					originalProductOption.Name = productOption.Name;
+					originalProductOption.SKU = productOption.SKU;
+					originalProductOption.Price = productOption.Price;
+					originalProductOption.DefaultOption = defaultOption;
 					myDB.SaveChanges();
+
+					var files = Request.Files;
+					if (files != null && files.Count > 0) {
+						for (int i = 0; i < files.Count; i++) {
+							var file = files[i];
+							if (file != null && file.ContentLength > 0) {
+								var ms = new MemoryStream();
+								file.InputStream.CopyTo(ms);
+								var pictureBytes = ms.ToArray();
+								foreach (var optionImage in originalProductOption.Images) {
+									optionImage.ImageData = pictureBytes;
+									optionImage.ImageMimeType = file.ContentType;
+								}
+								myDB.SaveChanges();
+							}
+						}
+					}
 				} catch (DbEntityValidationException ex) {
 					foreach (var dbValidationError in ex.EntityValidationErrors.SelectMany(error => error.ValidationErrors)) {
 						Debug.WriteLine(dbValidationError.ErrorMessage);
@@ -302,6 +334,7 @@ namespace Aquavision.Administrator.Controllers {
 			}
 			return RedirectToAction("ProductOptions", "Product", new { productGroupId = originalProductOption.ProductOptionGroupId, productId = originalProductOption.ProductOptionGroup.ProductId });
 		}
+
 		[HttpPost]
 		public ActionResult AddOptionImages(int Id, HttpPostedFileBase file) {
 			var productOption = myDB.ProductOptions.FirstOrDefault(c => c.Id == Id);

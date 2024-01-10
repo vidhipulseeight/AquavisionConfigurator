@@ -20,6 +20,7 @@
 						<th style="width:100px;">Product</th>
 						<th>SKU</th>
 						<th>Name</th>
+						<th>Price (GBP)</th>
 						<th>Category</th>
 						<th>&nbsp;</th>
 					</tr>
@@ -28,6 +29,7 @@
 							<td><img src="@item.GetProductImage()" style="width:100px;"></td>
 							<td>@Html.ActionLink(item.SKU, "Edit", "Product", new { id = item.Id }, null)</td>
 							<td>@item.Name</td>
+							<td>@(item.Price?.ToString("0.00"))</td>
 							<td>@item.Category.Name</td>
 							<td>
 								<a title="Edit" href="@Url.Action("Edit", new { id = item.Id })" class="fa fa-edit btn blue" style="width: 40px;">&nbsp;</a>

@@ -14,7 +14,7 @@ namespace Aquavision.Data.Models {
 			if (Image != null) {
 				string base64Image = Convert.ToBase64String(Image);
 				return $"data:image/jpeg;base64,{base64Image}";
-			} else { return "../assets/img/noimage.png"; }
+			} else { return "../../assets/img/noimage.png"; }
 		}
 	}
 }

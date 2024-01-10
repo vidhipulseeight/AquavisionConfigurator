@@ -16,22 +16,35 @@
 						<div class="form-group">
 							@Html.LabelFor(model => model.Name, new { @class = "control-label col-md-3" })
 							<div class="col-md-4">
-								<input class="form-control" id="Name" name="Name" type="text" required />
+								<input class="form-control" id="Name" name="Name" value="@Model.Name" type="text" required />
 								@Html.ValidationMessageFor(model => model.Name)
 							</div>
 						</div>
 						<div class="form-group">
 							@Html.LabelFor(model => model.SKU, new { @class = "control-label col-md-3" })
 							<div class="col-md-4">
-								<input class="form-control" id="SKU" name="SKU" type="text" required />
+								<input class="form-control" id="SKU" name="SKU" value="@Model.SKU" type="text" required />
 								@Html.ValidationMessageFor(model => model.SKU)
+							</div>
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(model => model.Price, new { @class = "control-label col-md-3" })
+							<div class="col-md-4">
+								<input class="form-control" id="Price" name="Price" value="@Model.Price" type="number" min="1" required />
+								@Html.ValidationMessageFor(model => model.Price)
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Default Option</label>
+							<div class="col-md-4">
+								<input class="form-control" id="chkDefaultOption" checked="@Model.DefaultOption" name="chkDefaultOption" type="checkbox" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="OptionImages" class="col-md-3 control-label">Option Images</label>
 							<div class="col-md-4">
 								<div class="input-group">
-									<input type="file" id="OptionImage" name="file" multiple class="form-control" required />
+									<input type="file" id="OptionImage" name="file" class="form-control" required />
 								</div>
 							</div>
 						</div>
