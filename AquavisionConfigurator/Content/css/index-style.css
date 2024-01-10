@@ -376,7 +376,7 @@ button {
     border-radius: 100px;
 }
 #costum_slider .carousel-control-prev:hover, #costum_slider .carousel-control-next:hover, #costum_slider .carousel-control-prev:focus, #costum_slider .carousel-control-next:focus {
-    background: #f8ca12;
+    background: #20b9b9;
     color: #fff;
 }
 
@@ -750,7 +750,7 @@ a:hover {
     color: #fff;
 }
 #main_slider .carousel-control-prev:hover, #main_slider .carousel-control-next:hover, #main_slider .carousel-control-prev:focus, #main_slider .carousel-control-next:focus {
-    background: #f8ca12;
+    background: #20b9b9;
     color: #fff;
 }
 .clients_section {
