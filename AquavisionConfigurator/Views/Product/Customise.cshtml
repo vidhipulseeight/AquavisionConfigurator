@@ -551,30 +551,32 @@
 			$.ajax({
 				url: `@Url.Action("GetProductImage", "Product")?Id=${productOptionId}`,
 				success: function (data) {
+					if (data.Result) {
+						$('#imagesContainer').attr("data-layer-" + data.Image.GroupId, "data:image/png;base64," + data.Image.ImageData);
+						const container = document.querySelector('.containerNew');
+						const layerAttribute = `data-layer-${data.Image.GroupId}`;
+						const layerUrl = container.getAttribute(layerAttribute);
+						$('#img-' + data.Image.GroupId).remove();
+						if (layerUrl) {
+							const img1 = new Image();
+							img1.src = layerUrl;
+							img1.onload = function () {
+								var width = this.width;
+								var height = this.height;
 
-					$('#imagesContainer').attr("data-layer-" + data.Image.GroupId, "data:image/png;base64," + data.Image.ImageData);
-					const container = document.querySelector('.containerNew');
-					const layerAttribute = `data-layer-${data.Image.GroupId}`;
-					const layerUrl = container.getAttribute(layerAttribute);
-					$('#img-' + data.Image.GroupId).remove();
-					if (layerUrl) {
-						const img1 = new Image();
-						img1.src = layerUrl;
-						img1.onload = function () {
-							var width = this.width;
-							var height = this.height;
+								maxHeight = (height * img.width) / width;
+								container.style.height = `${maxHeight}px`;
+							};
 
-							maxHeight = (height * img.width) / width;
-							container.style.height = `${maxHeight}px`;
-						};
-
-						const img = document.createElement('img');
-						img.src = layerUrl;
-						img.id = 'img-' + data.Image.GroupId;
-						img.alt = `Layer `;
-						img.classList.add('layer3');
-						container.appendChild(img);
+							const img = document.createElement('img');
+							img.src = layerUrl;
+							img.id = 'img-' + data.Image.GroupId;
+							img.alt = `Layer `;
+							img.classList.add('layer3');
+							container.appendChild(img);
+						}
 					}
+					
 					/*$('#productMainImg').attr('src', data.ImageURL);*/
 					//console.log(data);
 
