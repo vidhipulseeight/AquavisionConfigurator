@@ -121,13 +121,13 @@
 							<div class="catagories-menu">
 								<div class="card card-widget">
 									<div class="card-footer p-0">
-										<ul class="nav flex-column">
+										<ul class="nav flex-column" id="productOptionList">
 											@if (optionGroup.ProductOptions.Any()) {
 												foreach (var productOption in optionGroup.ProductOptions) {
 													<li class="nav-item row">
 														<div class="model-sub-category nav-link">
 															<div class="custom-control custom-radio">
-																<input class="custom-control-input sizeoption" type="radio" id="@productOption.Id" name="@productOption.ProductOptionGroupId" onclick="setProductImage(@productOption.Id)">
+																<input class="custom-control-input productoption" type="radio" id="@productOption.Id" name="@productOption.ProductOptionGroupId" onclick="setProductImage(@productOption.Id)">
 																<label for="@productOption.Id" class="custom-control-label">@productOption.Name</label>
 															</div>
 														</div>
@@ -331,11 +331,10 @@
 							<div class="product-img product-main-div">
 								@* fixed images *@
 								<!--<div class="containerNew" id="imagesContainer" data-layer1="/Content/img/product-img/img-frame.png" data-layer2="/Content/img/product-img/img-back.png">-->
-									<!-- Images will be dynamically added using JavaScript -->
+								<!-- Images will be dynamically added using JavaScript -->
 								<!--</div>-->
-
 								@* adding images dynaically *@
-								<div class="containerNew" id="imagesContainer" >
+								<div class="containerNew" id="imagesContainer">
 									<!-- Images will be dynamically added using JavaScript -->
 								</div>
 
@@ -372,11 +371,37 @@
 		function categorytab(productId) {
 			location.href = '@Url.Action("Shop", "Home")?productId=' + productId;
 		}
-		
+
 		function FinishBuild() {
-			$('#productSidebar').hide();
-			$('#productSummary').show();
-			$('#productView').addClass("product-view-summary");
+			var productOption = [];
+			var selectedProductOption = $('#productOptionList .productoption:checked');
+			for (var i = 0; i < $(selectedProductOption).length; i++) {
+				productOption.push({
+					Id: $(selectedProductOption[i]).attr('id')
+				});
+			}
+			if (productOption.length > 0) {
+				$.ajax({
+					url: '/Product/SaveBuild',
+					data: JSON.stringify({
+						productId: @Model.Id,
+						productOptions: productOption
+					}),
+					contentType: 'application/json',
+					processData: false,
+					type: 'POST',
+					success: function (data) {
+						if (data.result) {
+							$('#productSidebar').hide();
+							$('#productSummary').show();
+							$('#productView').addClass("product-view-summary");
+						} else {
+							alert(data.ErrorMessage);
+						}
+					}
+				});
+			} else { alert("Select any option to continue"); }
+
 		}
 		function customerSection() {
 			$('#productSidebar').hide();
@@ -501,7 +526,7 @@
 						//}
 					});
 
-					
+
 				},
 				error: function (data) {
 					console.warn(data);
@@ -545,7 +570,7 @@
 		//		}
 		//	}
 		//}
-		
+
 
 		function setProductImage(productOptionId) {
 			$.ajax({

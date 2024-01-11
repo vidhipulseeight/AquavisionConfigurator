@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using Aquavision.Data.Models;
-using Microsoft.Ajax.Utilities;
+using AquavisionConfigurator.App_Start;
+using AquavisionConfigurator.Helpers;
 
 namespace AquavisionConfigurator.Controllers {
-	public class ProductController : Controller {
+	public class ProductController : BaseController {
 		AquavisionEntities myDB = new AquavisionEntities();
 		public ActionResult List(int? categoryId) {
 			ViewBag.Category = myDB.Categories.ToList();
@@ -96,6 +98,50 @@ namespace AquavisionConfigurator.Controllers {
 			}
 			return Json(new { Images = string.Empty }, JsonRequestBehavior.AllowGet);
 		}
+		public JsonResult SaveBuild(int productId,List<ProductOption> productOptions) {
+			try {
+				var product = myDB.Products.FirstOrDefault(p=>p.Id == productId);
+				if (product == null) {
+					return Json(new { result = false, ErrorMessage = "Invalid Product" });
+				}
+				if (productOptions.Any()) {
+					if (AquavisionContext.Current.Session == null) {
+						AquavisionContext.Current.Session = AquavisionContext.Current.GetSession(true);
+					}
 
+					var buildCart = myDB.BuildCarts.FirstOrDefault(b => b.ProductId == product.Id && b.CustomerSessionGUID == AquavisionContext.Current.Session.GUID);
+					if (buildCart != null) {
+						buildCart.UpdatedOn = DateTime.Now;
+					} else {
+						buildCart = new BuildCart {
+							CustomerSessionGUID = AquavisionContext.Current.Session.GUID,
+							ProductId = product.Id,
+							CreatedOn = DateTime.UtcNow,
+							UpdatedOn = DateTime.UtcNow
+						};
+						myDB.BuildCarts.Add(buildCart);
+					}
+					
+					foreach (var option in productOptions) {
+						var productOption = myDB.ProductOptions.FirstOrDefault(p => p.Id == option.Id);
+						if (productOption != null) {
+							var checkBuildItem = myDB.BuildCartItems.Where(b => b.BuildCartId == buildCart.BuildCartId && b.ProductOption.ProductOptionGroup.ProductId == product.Id);
+							if (checkBuildItem != null) {
+								myDB.BuildCartItems.RemoveRange(checkBuildItem);
+							}
+							var buildCartItem = new BuildCartItem {
+								BuildCartId = buildCart.BuildCartId,
+								ProductOptionId = productOption.Id,
+							};
+							myDB.BuildCartItems.Add(buildCartItem);
+						}
+					}
+					myDB.SaveChanges();
+				}
+			} catch{
+				return Json(new { result = false, ErrorMessage = "Something wrong while adding into cart." });
+			}
+			return Json(new { result = true });
+		}
 	}
 }

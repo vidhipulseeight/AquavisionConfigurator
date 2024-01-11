@@ -5,6 +5,24 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="AquavisionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BuildCart">
+          <Key>
+            <PropertyRef Name="BuildCartId" />
+          </Key>
+          <Property Name="BuildCartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerSessionGUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Product" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BuildCartItem">
+          <Key>
+            <PropertyRef Name="BuildCartItemId" />
+          </Key>
+          <Property Name="BuildCartItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BuildCart" Type="int" Nullable="false" />
+          <Property Name="ProductOption" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
@@ -42,6 +60,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CustomerDesign" Type="int" Nullable="false" />
           <Property Name="ProductOption" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerSession">
+          <Key>
+            <PropertyRef Name="CustomerSessionGUID" />
+          </Key>
+          <Property Name="CustomerSessionGUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="LastAccessed" Type="datetime" Nullable="false" />
+          <Property Name="IsExpired" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Images">
           <Key>
@@ -143,6 +170,54 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_BuildCart_CustomerSession">
+          <End Role="CustomerSession" Type="Self.CustomerSession" Multiplicity="1" />
+          <End Role="BuildCart" Type="Self.BuildCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerSession">
+              <PropertyRef Name="CustomerSessionGUID" />
+            </Principal>
+            <Dependent Role="BuildCart">
+              <PropertyRef Name="CustomerSessionGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BuildCart_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="BuildCart" Type="Self.BuildCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BuildCart">
+              <PropertyRef Name="Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BuildCartItem_BuildCart">
+          <End Role="BuildCart" Type="Self.BuildCart" Multiplicity="1" />
+          <End Role="BuildCartItem" Type="Self.BuildCartItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BuildCart">
+              <PropertyRef Name="BuildCartId" />
+            </Principal>
+            <Dependent Role="BuildCartItem">
+              <PropertyRef Name="BuildCart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BuildCartItem_ProductOption">
+          <End Role="ProductOption" Type="Self.ProductOption" Multiplicity="1" />
+          <End Role="BuildCartItem" Type="Self.BuildCartItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductOption">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BuildCartItem">
+              <PropertyRef Name="ProductOption" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CustomerDesignSpecs_CustomerDesign">
           <End Role="CustomerDesign" Type="Self.CustomerDesign" Multiplicity="1" />
           <End Role="CustomerDesignSpecs" Type="Self.CustomerDesignSpecs" Multiplicity="*" />
@@ -252,10 +327,13 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="AquavisionModelStoreContainer">
+          <EntitySet Name="BuildCart" EntityType="Self.BuildCart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BuildCartItem" EntityType="Self.BuildCartItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerDesign" EntityType="Self.CustomerDesign" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerDesignSpecs" EntityType="Self.CustomerDesignSpecs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerSession" EntityType="Self.CustomerSession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductOption" EntityType="Self.ProductOption" Schema="dbo" store:Type="Tables" />
@@ -266,6 +344,22 @@
           <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BuildCart_CustomerSession" Association="Self.FK_BuildCart_CustomerSession">
+            <End Role="CustomerSession" EntitySet="CustomerSession" />
+            <End Role="BuildCart" EntitySet="BuildCart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BuildCart_Product" Association="Self.FK_BuildCart_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="BuildCart" EntitySet="BuildCart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BuildCartItem_BuildCart" Association="Self.FK_BuildCartItem_BuildCart">
+            <End Role="BuildCart" EntitySet="BuildCart" />
+            <End Role="BuildCartItem" EntitySet="BuildCartItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BuildCartItem_ProductOption" Association="Self.FK_BuildCartItem_ProductOption">
+            <End Role="ProductOption" EntitySet="ProductOption" />
+            <End Role="BuildCartItem" EntitySet="BuildCartItem" />
+          </AssociationSet>
           <AssociationSet Name="FK_CustomerDesignSpecs_CustomerDesign" Association="Self.FK_CustomerDesignSpecs_CustomerDesign">
             <End Role="CustomerDesign" EntitySet="CustomerDesign" />
             <End Role="CustomerDesignSpecs" EntitySet="CustomerDesignSpecs" />
@@ -376,6 +470,7 @@
           <NavigationProperty Name="ProductOptionGroups" Relationship="Self.FK_ProductOptionGroup_Product" FromRole="Product" ToRole="ProductOptionGroup" />
           <Property Name="Price" Type="Decimal" Precision="11" Scale="2" />
           <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BuildCarts" Relationship="AquavisionModel.FK_BuildCart_Product" FromRole="Product" ToRole="BuildCart" />
         </EntityType>
         <EntityType Name="ProductOption">
           <Key>
@@ -390,7 +485,8 @@
           <Property Name="SKU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Precision="11" Scale="2" />
           <NavigationProperty Name="Images" Relationship="AquavisionModel.FK_Images_ProductOption" FromRole="ProductOption" ToRole="Image" />
-        </EntityType>
+          <NavigationProperty Name="BuildCartItems" Relationship="AquavisionModel.FK_BuildCartItem_ProductOption" FromRole="ProductOption" ToRole="BuildCartItem" />
+          </EntityType>
         <EntityType Name="ProductOptionGroup">
           <Key>
             <PropertyRef Name="Id" />
@@ -575,7 +671,26 @@
             <End Role="ProductOption" EntitySet="ProductOptions" />
             <End Role="Image" EntitySet="Images" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="CustomerSessions" EntityType="AquavisionModel.CustomerSession" />
+          <EntitySet Name="BuildCarts" EntityType="AquavisionModel.BuildCart" />
+          <AssociationSet Name="FK_BuildCart_CustomerSession" Association="AquavisionModel.FK_BuildCart_CustomerSession">
+            <End Role="CustomerSession" EntitySet="CustomerSessions" />
+            <End Role="BuildCart" EntitySet="BuildCarts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BuildCart_Product" Association="AquavisionModel.FK_BuildCart_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="BuildCart" EntitySet="BuildCarts" />
+          </AssociationSet>
+          <EntitySet Name="BuildCartItems" EntityType="AquavisionModel.BuildCartItem" />
+          <AssociationSet Name="FK_BuildCartItem_BuildCart" Association="AquavisionModel.FK_BuildCartItem_BuildCart">
+            <End Role="BuildCart" EntitySet="BuildCarts" />
+            <End Role="BuildCartItem" EntitySet="BuildCartItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BuildCartItem_ProductOption" Association="AquavisionModel.FK_BuildCartItem_ProductOption">
+            <End Role="ProductOption" EntitySet="ProductOptions" />
+            <End Role="BuildCartItem" EntitySet="BuildCartItems" />
+          </AssociationSet>
+          </EntityContainer>
         <Association Name="FK_Images_ProductOption">
           <End Type="AquavisionModel.ProductOption" Role="ProductOption" Multiplicity="1" />
           <End Type="AquavisionModel.Image" Role="Image" Multiplicity="*" />
@@ -588,7 +703,88 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="CustomerSession">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="LastAccessed" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsExpired" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BuildCarts" Relationship="AquavisionModel.FK_BuildCart_CustomerSession" FromRole="CustomerSession" ToRole="BuildCart" />
+        </EntityType>
+        <EntityType Name="BuildCart">
+          <Key>
+            <PropertyRef Name="BuildCartId" />
+          </Key>
+          <Property Name="BuildCartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerSessionGUID" Type="Guid" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CustomerSession" Relationship="AquavisionModel.FK_BuildCart_CustomerSession" FromRole="BuildCart" ToRole="CustomerSession" />
+          <NavigationProperty Name="Product" Relationship="AquavisionModel.FK_BuildCart_Product" FromRole="BuildCart" ToRole="Product" />
+          <NavigationProperty Name="BuildCartItems" Relationship="AquavisionModel.FK_BuildCartItem_BuildCart" FromRole="BuildCart" ToRole="BuildCartItem" />
+        </EntityType>
+        <Association Name="FK_BuildCart_CustomerSession">
+          <End Type="AquavisionModel.CustomerSession" Role="CustomerSession" Multiplicity="1" />
+          <End Type="AquavisionModel.BuildCart" Role="BuildCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerSession">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="BuildCart">
+              <PropertyRef Name="CustomerSessionGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BuildCart_Product">
+          <End Type="AquavisionModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="AquavisionModel.BuildCart" Role="BuildCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BuildCart">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BuildCartItem">
+          <Key>
+            <PropertyRef Name="BuildCartItemId" />
+          </Key>
+          <Property Name="BuildCartItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuildCartId" Type="Int32" Nullable="false" />
+          <Property Name="ProductOptionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BuildCart" Relationship="AquavisionModel.FK_BuildCartItem_BuildCart" FromRole="BuildCartItem" ToRole="BuildCart" />
+          <NavigationProperty Name="ProductOption" Relationship="AquavisionModel.FK_BuildCartItem_ProductOption" FromRole="BuildCartItem" ToRole="ProductOption" />
+        </EntityType>
+        <Association Name="FK_BuildCartItem_BuildCart">
+          <End Type="AquavisionModel.BuildCart" Role="BuildCart" Multiplicity="1" />
+          <End Type="AquavisionModel.BuildCartItem" Role="BuildCartItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BuildCart">
+              <PropertyRef Name="BuildCartId" />
+            </Principal>
+            <Dependent Role="BuildCartItem">
+              <PropertyRef Name="BuildCartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BuildCartItem_ProductOption">
+          <End Type="AquavisionModel.ProductOption" Role="ProductOption" Multiplicity="1" />
+          <End Type="AquavisionModel.BuildCartItem" Role="BuildCartItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductOption">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BuildCartItem">
+              <PropertyRef Name="ProductOptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -744,6 +940,36 @@
               <ScalarProperty Name="UserId" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="CustomerSessions">
+            <EntityTypeMapping TypeName="AquavisionModel.CustomerSession">
+              <MappingFragment StoreEntitySet="CustomerSession">
+                <ScalarProperty Name="IsExpired" ColumnName="IsExpired" />
+                <ScalarProperty Name="LastAccessed" ColumnName="LastAccessed" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerID" />
+                <ScalarProperty Name="GUID" ColumnName="CustomerSessionGUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BuildCarts">
+            <EntityTypeMapping TypeName="AquavisionModel.BuildCart">
+              <MappingFragment StoreEntitySet="BuildCart">
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ProductId" ColumnName="Product" />
+                <ScalarProperty Name="CustomerSessionGUID" ColumnName="CustomerSessionGUID" />
+                <ScalarProperty Name="BuildCartId" ColumnName="BuildCartId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BuildCartItems">
+            <EntityTypeMapping TypeName="AquavisionModel.BuildCartItem">
+              <MappingFragment StoreEntitySet="BuildCartItem">
+                <ScalarProperty Name="ProductOptionId" ColumnName="ProductOption" />
+                <ScalarProperty Name="BuildCartId" ColumnName="BuildCart" />
+                <ScalarProperty Name="BuildCartItemId" ColumnName="BuildCartItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -66,6 +66,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AquavisionModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\BuildCart.cs">
+      <DependentUpon>AquavisionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BuildCartItem.cs">
+      <DependentUpon>AquavisionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs">
       <DependentUpon>AquavisionModel.tt</DependentUpon>
     </Compile>
@@ -76,6 +82,9 @@
       <DependentUpon>AquavisionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomerDesignSpec.cs">
+      <DependentUpon>AquavisionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerSession.cs">
       <DependentUpon>AquavisionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Image.cs">

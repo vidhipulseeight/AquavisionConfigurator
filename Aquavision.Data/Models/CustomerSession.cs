@@ -12,28 +12,19 @@ namespace Aquavision.Data.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class CustomerSession
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public CustomerSession()
         {
-            this.ProductOptionGroups = new HashSet<ProductOptionGroup>();
             this.BuildCarts = new HashSet<BuildCart>();
         }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string SKU { get; set; }
-        public Nullable<int> CategoryId { get; set; }
-        public bool Deleted { get; set; }
-        public byte[] Image { get; set; }
-        public string ImageMimeType { get; set; }
-        public Nullable<decimal> Price { get; set; }
-        public string Description { get; set; }
+        public System.Guid GUID { get; set; }
+        public int CustomerId { get; set; }
+        public System.DateTime LastAccessed { get; set; }
+        public bool IsExpired { get; set; }
     
-        public virtual Category Category { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductOptionGroup> ProductOptionGroups { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BuildCart> BuildCarts { get; set; }
     }

@@ -12,28 +12,22 @@ namespace Aquavision.Data.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductOption
+    public partial class BuildCart
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ProductOption()
+        public BuildCart()
         {
-            this.CustomerDesignSpecs = new HashSet<CustomerDesignSpec>();
-            this.Images = new HashSet<Image>();
             this.BuildCartItems = new HashSet<BuildCartItem>();
         }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int ProductOptionGroupId { get; set; }
-        public bool DefaultOption { get; set; }
-        public string SKU { get; set; }
-        public Nullable<decimal> Price { get; set; }
+        public int BuildCartId { get; set; }
+        public System.Guid CustomerSessionGUID { get; set; }
+        public int ProductId { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public System.DateTime UpdatedOn { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CustomerDesignSpec> CustomerDesignSpecs { get; set; }
-        public virtual ProductOptionGroup ProductOptionGroup { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Image> Images { get; set; }
+        public virtual CustomerSession CustomerSession { get; set; }
+        public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BuildCartItem> BuildCartItems { get; set; }
     }

@@ -38,5 +38,8 @@ namespace Aquavision.Data.Models
         public virtual DbSet<webpages_Membership> webpages_Membership { get; set; }
         public virtual DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
         public virtual DbSet<webpages_Roles> webpages_Roles { get; set; }
+        public virtual DbSet<CustomerSession> CustomerSessions { get; set; }
+        public virtual DbSet<BuildCart> BuildCarts { get; set; }
+        public virtual DbSet<BuildCartItem> BuildCartItems { get; set; }
     }
 }

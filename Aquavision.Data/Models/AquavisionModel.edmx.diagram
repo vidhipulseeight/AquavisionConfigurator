@@ -26,7 +26,14 @@
         <AssociationConnector Association="AquavisionModel.FK_ProductOption_ProductOptionGroup" ManuallyRouted="false" />
         <AssociationConnector Association="AquavisionModel.webpages_UsersInRoles" ManuallyRouted="false" />
         <AssociationConnector Association="AquavisionModel.FK_Images_ProductOption" />
-      </Diagram>
+        <EntityTypeShape EntityType="AquavisionModel.CustomerSession" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="AquavisionModel.BuildCart" Width="1.5" PointX="5.25" PointY="4.625" />
+        <AssociationConnector Association="AquavisionModel.FK_BuildCart_CustomerSession" />
+        <AssociationConnector Association="AquavisionModel.FK_BuildCart_Product" />
+        <EntityTypeShape EntityType="AquavisionModel.BuildCartItem" Width="1.5" PointX="12.75" PointY="3.375" />
+        <AssociationConnector Association="AquavisionModel.FK_BuildCartItem_BuildCart" />
+        <AssociationConnector Association="AquavisionModel.FK_BuildCartItem_ProductOption" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
