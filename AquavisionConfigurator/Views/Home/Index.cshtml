@@ -76,19 +76,27 @@
 			</div>
 		</div>
 	</div>
+
 	<div class="services_section">
 		<div class="container">
-			<h1 class="services_taital">Products</h1>
-			<p class="many_taital">There are many variations of passages of Lorem Ipsum </p>
+			<h1 class="services_taital">Categories</h1>
+			<p class="many_taital">List Of Product Categories </p>
 			<div class="services_section2 layout_padding">
-				<div class="row">
-					@foreach (var item in ViewBag.Category) {
-						<div class="col-lg-3 col-sm-6">
-							<div class="icon_1"><img src="~/Content/img/product-img/icon-1.png"></div>
+				<div class="row row-content-center">
+					@foreach (var item in ViewBag.Categories) {
+						<div class="col-lg-3 col-sm-6" style="padding: 15px;">
+							<div class="icon_1">
+								@*<img src="~/Content/img/product-img/AquavisionLogo.png">*@
+								@*@if (item.Image != null) {
+									<img src="data:image/png;base64,@(Convert.ToBase64String(item.Image))">
+								} else {
+									<img src="~/Content/img/product-img/icon-1.png">
+								}*@
+							</div>
 							<h2 class="furnitures_text">@item.Name</h2>
-							<p class="dummy_text d-none">There are many variations of passages of Lorem Ipsum available, but the</p>
+							@*<p class="dummy_text d-none">@item.Description</p>*@
 							<div class="read_bt_main">
-								<div class="read_bt"><a href="@Url.Action("Shop", "Home")">Shop</a></div>
+								<div class="read_bt"><a href="@Url.Action("List", "Product", new {categoryId = item.Id})">See Products</a></div>
 							</div>
 						</div>
 					}
@@ -96,7 +104,35 @@
 			</div>
 		</div>
 	</div>
-	<div class="projects_section">
+
+	<div class="services_section">
+		<div class="container">
+			<h1 class="services_taital">Products</h1>
+			<p class="many_taital">List Of Products </p>
+			<div class="services_section2 layout_padding">
+				<div class="row row-content-center">
+					@foreach (var item in ViewBag.Products) {
+						<div class="col-lg-3 col-sm-6" style="padding: 15px;">
+							<div class="icon_1">
+								@if (item.Image != null) {
+									<img src="data:image/png;base64,@(Convert.ToBase64String(item.Image))">
+								} else {
+									<img src="~/Content/img/product-img/icon-1.png">
+								}
+							</div>
+							<h2 class="furnitures_text">@item.Name</h2>
+							<p class="dummy_text d-none">@item.Description</p>
+							<div class="read_bt_main">
+								<div class="read_bt"><a href="@Url.Action("Customise", "Product", new {productId = item.Id})">Customise</a></div>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	@*<div class="projects_section">
 		<div class="container">
 			<h1 class="our_text">Our Applications</h1>
 			<p class="ipsum_text">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
@@ -182,8 +218,8 @@
 				</a>
 			</div>
 		</div>
-	</div>
-	<div class="clients_section" style="padding-top:0px;">
+	</div>*@
+	@*<div class="clients_section" style="padding-top:0px;">
 		<div class="container">
 			<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">
@@ -316,7 +352,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>*@
 	<div class="copyright_section" style="background: #ddd;">
 		<div class="container" style=" padding: 20px;">
 			<div class="row align-items-center">

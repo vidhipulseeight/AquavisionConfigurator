@@ -11,7 +11,8 @@ namespace AquavisionConfigurator.Controllers {
 	public class HomeController : Controller {
 		AquavisionEntities myDB = new AquavisionEntities();
 		public ActionResult Index() {
-			ViewBag.Category = myDB.Categories.ToList();
+			ViewBag.Categories = myDB.Categories.ToList();
+			ViewBag.Products = myDB.Products.Take(4).ToList();
 			return View();
 		}
 		public ActionResult Shop(int? productId) {
