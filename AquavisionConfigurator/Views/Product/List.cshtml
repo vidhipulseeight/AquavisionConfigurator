@@ -30,24 +30,26 @@
 		<h1 class="services_taital">Products</h1>
 		<p class="many_taital">List Of Products </p>
 		<div class="services_section2 layout_padding">
-			<div class="row row-content-center">
-				@foreach (var item in Model) {
-					<div class="col-lg-3 col-sm-6" style="padding: 15px;">
-						<div class="icon_1">
-							@if (item.Image != null) {
-								<img src="data:image/png;base64,@(Convert.ToBase64String(item.Image))">
-							} else {
-								<img src="~/Content/img/product-img/icon-1.png">
-							}
+			@if (Model.Any()) {
+				<div class="row row-content-center">
+					@foreach (var item in Model) {
+						<div class="col-lg-3 col-sm-6" style="padding: 15px;">
+							<div class="icon_1">
+								@if (item.Image != null) {
+									<img src="data:image/png;base64,@(Convert.ToBase64String(item.Image))">
+								} else {
+									<img src="~/Content/img/product-img/icon-1.png">
+								}
+							</div>
+							<h2 class="furnitures_text">@item.Name</h2>
+							<p class="dummy_text d-none">@item.Description</p>
+							<div class="read_bt_main">
+								<div class="read_bt"><a href="@Url.Action("Customise", "Product", new {productId = item.Id})">Customise</a></div>
+							</div>
 						</div>
-						<h2 class="furnitures_text">@item.Name</h2>
-						<p class="dummy_text d-none">@item.Description</p>
-						<div class="read_bt_main">
-							<div class="read_bt"><a href="@Url.Action("Customise", "Product", new {productId = item.Id})">Customise</a></div>
-						</div>
-					</div>
-				}
-			</div>
+					}
+				</div>
+			}
 		</div>
 	</div>
 </div>
