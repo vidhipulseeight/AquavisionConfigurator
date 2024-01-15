@@ -1,0 +1,37 @@
+﻿@model List<Aquavision.Data.Models.BuildCartItem>
+<table class="table table-responsive">
+	<tbody>
+		@if (Model.Any()) {
+			<tr>
+				<td class="cart-name-td">
+					<span>
+						@Model.First().ProductOption.ProductOptionGroup.Product.Name
+					</span>
+				</td>
+				<td class="cart-price-td text-right">
+					<span>£@Model.First().ProductOption.ProductOptionGroup.Product.Price</span>
+				</td>
+			</tr>
+			foreach (var item in Model) {
+				<tr>
+					<td class="cart-name-td">
+						<span>
+							@("(" + item.ProductOption.ProductOptionGroup.Name + ") " + item.ProductOption.Name)
+						</span>
+					</td>
+					<td class="cart-price-td text-right">
+						<span>£@item.ProductOption.Price</span>
+					</td>
+				</tr>
+			}
+			<tr style="background: #ddd;">
+				<td class="cart-name-td">
+					<span>GRAND TOTAL</span>
+				</td>
+				<td class="cart-price-td text-right">
+					<span>£@(Model.Sum(b => b.ProductOption.Price) + Model.First().ProductOption.ProductOptionGroup.Product.Price)</span>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

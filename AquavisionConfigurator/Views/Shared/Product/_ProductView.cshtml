@@ -1,0 +1,35 @@
+﻿<div class="container-fluid productarea">
+	<div class="row">
+		<div class="col-12">
+			<div class="single-product-wrapper" style="text-align: -webkit-center;">
+				<div class="product-img product-main-div">
+					@* fixed images *@
+					<!--<div class="containerNew" id="imagesContainer" data-layer1="/Content/img/product-img/img-frame.png" data-layer2="/Content/img/product-img/img-back.png">-->
+					<!-- Images will be dynamically added using JavaScript -->
+					<!--</div>-->
+					@* adding images dynaically *@
+					<div class="containerNew" id="imagesContainer">
+						<!-- Images will be dynamically added using JavaScript -->
+					</div>
+
+
+					@* not working *@
+					@*<div class="container2" style="display:grid;place-items:center;">
+							<img src="~/Content/img/product-img/img-frame.png" alt="Layer 1" class="image2" />
+							<img src="~/Content/img/product-img/img-back.png" alt="Layer 2" class="image2" />
+
+						</div>*@
+
+					@*<div class="img-container" style="background-image: url('/Content/img/product-img/img-frame.png'), url('/Content/img/product-img/img-back.png'); background-size: cover; ">
+						</div>*@
+
+					@* working/current *@
+					@*<div class="img-container">
+							<img src="~/Content/img/product-img/img-frame.png" alt="Frame" class="d-none">
+							<img id="productMainImg" src="~/Content/img/product-img/img-back.png" alt="Overlay" class="img-back1">
+						</div>*@
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

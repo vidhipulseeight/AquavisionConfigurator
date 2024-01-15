@@ -1,0 +1,38 @@
+﻿@model Aquavision.Data.Models.Product
+@if (Model.ProductOptionGroups.Any()) {
+	foreach (var optionGroup in Model.ProductOptionGroups) {
+		<div class="widget catagory mb-30 model">
+			<h6 class="widget-title">@optionGroup.Name</h6>
+			@if (optionGroup.GetProductOption().Any()) {
+				<div class="catagories-menu">
+					<div class="card card-widget">
+						<div class="card-footer p-0">
+							<ul class="nav flex-column" id="productOptionList">
+								@if (optionGroup.ProductOptions.Any()) {
+									foreach (var productOption in optionGroup.ProductOptions) {
+										<li class="nav-item row">
+											<div class="model-sub-category nav-link col-sm-6" style="white-space: nowrap; ">
+												<div class="custom-control custom-radio">
+													<input class="custom-control-input productoption" type="radio" id="@productOption.Id" name="@productOption.ProductOptionGroupId" onclick="setProductImage(@productOption.Id)" @(productOption.DefaultOption ? "checked" : string.Empty)>
+													<label for="@productOption.Id" class="custom-control-label">@productOption.Name</label>
+												</div>
+											</div>
+											<div class="col-sm-6 text-right" style="margin-top: 5px;"> £@(productOption.Price?.ToString("0.00"))</div>
+										</li>
+									}
+								}
+							</ul>
+						</div>
+					</div>
+				</div>
+			} else {
+				<text><span style="color: #1312128c;font-size: 14px;">No option available at the moment.</span></text>
+			}
+		</div>
+	}
+} else {
+	<span style="color: #1312128c;font-size: 14px;" id="">This Product Does not have any options</span>
+}
+<div class="widget text-center nextbuttonsection mb-15">
+	<input type="button" id="btnNext" class="btn btn-outline-b text-uppercase nextstepbutton" value="Continue" onclick="finishBuild();" />
+</div>

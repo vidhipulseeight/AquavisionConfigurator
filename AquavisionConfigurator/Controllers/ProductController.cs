@@ -98,7 +98,10 @@ namespace AquavisionConfigurator.Controllers {
 			}
 			return Json(new { Images = string.Empty }, JsonRequestBehavior.AllowGet);
 		}
+
 		public JsonResult SaveBuild(int productId,List<ProductOption> productOptions) {
+			var partialViewResult = string.Empty;
+			var buildCartItemList = new List<BuildCartItem>();
 			try {
 				var product = myDB.Products.FirstOrDefault(p=>p.Id == productId);
 				if (product == null) {
@@ -134,14 +137,16 @@ namespace AquavisionConfigurator.Controllers {
 								ProductOptionId = productOption.Id,
 							};
 							myDB.BuildCartItems.Add(buildCartItem);
+							buildCartItemList.Add(buildCartItem);
 						}
 					}
 					myDB.SaveChanges();
+					partialViewResult = RenderPartialViewToString("Product/_BuildCart", buildCartItemList);
 				}
 			} catch{
-				return Json(new { result = false, ErrorMessage = "Something wrong while adding into cart." });
+				return Json(new { result = false, ResultString = "Something wrong while adding into cart." });
 			}
-			return Json(new { result = true });
+			return Json(new { result = true, ResultString = partialViewResult });
 		}
 	}
 }

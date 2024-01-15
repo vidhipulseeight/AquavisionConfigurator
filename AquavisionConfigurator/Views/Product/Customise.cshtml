@@ -48,7 +48,8 @@
 
 		.containerNew {
 			position: relative;
-			width: 500px; /* Set the width of the container */
+			width: auto;
+			/*width: 500px;*/ /* Set the width of the container */
 		}
 
 		.layer3 {
@@ -62,14 +63,6 @@
 	</style>
 </head>
 <body>
-	@*<div class="container1">
-			<img src="~/Content/img/product-img/img-frame.png" alt="Layer 1" class="image1" />
-			<img src="~/Content/img/product-img/img-back.png" alt="Layer 2" class="image1" />
-
-		</div>*@
-	<!--<div class="container3" data-layer1="/Content/img/product-img/img-frame.png" data-layer2="/Content/img/product-img/img-back.png">-->
-	<!-- Images will be dynamically added using JavaScript -->
-	<!--</div>-->
 	<div class="main-content-wrapper d-flex clearfix">
 		<div class="mobile-nav">
 			<div class="shop-navbar-brand">
@@ -87,25 +80,17 @@
 			<div class="logo" style="margin-left: 20px;">
 				<a href="@Url.Action("Index", "Home")"><img src="~/Content/img/product-img/AquavisionLogo.png" alt="" class="logoimg"></a>
 			</div>
-			@*<nav class="shop-nav">
-					<ul id="categoryList">
-						<li><a href="#">Change Type</a></li>
-						@foreach (var product in ViewBag.Products) {
-							<li class="@(product.Id == ViewBag.ProductId ? "active" : string.Empty)" onclick="categorytab(@product.Id)">
-								<a>@product.Name</a>
-							</li>
-						}
-					</ul>
-				</nav>*@
 			<div class="widget catagory mb-30" style="margin: 15px;">
-				<h6 class="widget-title" id="modelName">@Model.Name Product</h6>
+				<h6 class="widget-title" id="modelName">@Model.Name</h6>
 				<div class="catagories-menu">
 					<div class="card card-widget">
 						<div class="widget-user-header" style="padding: 5px;">
 							<div class="widget-user-image text-center">
-								<img id="AquavisionTv" class="img-circle elevation-2" src="~/Content/img/product-img/aquavision-classic-Genesis.jpg" alt="User Avatar">
+								<img id="AquavisionTv" class="img-circle elevation-2" src="@Model.GetProductImage()" alt="@Model.Name">
 							</div>
-							<span style="color: #1312128c;font-size: 14px;" id="modelDetail"> The number one choice for stand alone televisions. Perfect for bathrooms, bedrooms and kitchens where no Home Network Integration is required. </span>
+							<div style="color: #1312128c;font-size: 14px;" id="modelDetail">@Model.SKU</div>
+							<div style="color: #1312128c;font-size: 14px;" id="modelDetail">£@(Model.Price?.ToString("0.00"))</div>
+							<div style="color: #1312128c;font-size: 14px;" id="modelDetail">@Model.Description</>
 						</div>
 					</div>
 				</div>
@@ -113,150 +98,10 @@
 		</header>
 
 		<div class="shop_sidebar_area" id="productSidebar">
-			@if (Model.ProductOptionGroups.Any()) {
-				foreach (var optionGroup in Model.ProductOptionGroups) {
-					<div class="widget catagory mb-30 model">
-						<h6 class="widget-title">@optionGroup.Name</h6>
-						@if (optionGroup.GetProductOption().Any()) {
-							<div class="catagories-menu">
-								<div class="card card-widget">
-									<div class="card-footer p-0">
-										<ul class="nav flex-column" id="productOptionList">
-											@if (optionGroup.ProductOptions.Any()) {
-												foreach (var productOption in optionGroup.ProductOptions) {
-													<li class="nav-item row">
-														<div class="model-sub-category nav-link">
-															<div class="custom-control custom-radio">
-																<input class="custom-control-input productoption" type="radio" id="@productOption.Id" name="@productOption.ProductOptionGroupId" onclick="setProductImage(@productOption.Id)">
-																<label for="@productOption.Id" class="custom-control-label">@productOption.Name</label>
-															</div>
-														</div>
-													</li>
-												}
-											}
-											@*@foreach (var productOption in optionGroup.GetProductOption()) {
-													<li class="nav-item row">
-														<div class="model-sub-category nav-link">
-															<div class="custom-control custom-radio">
-																<input class="custom-control-input sizeoption" type="radio" id="@productOption.Id" name="@productOption.ProductOptionGroupId" onclick="setProductImage(@productOption.Id)">
-																<label for="@productOption.Id" class="custom-control-label">@productOption.Name</label>
-															</div>
-														</div>
-													</li>
-												}*@
-										</ul>
-									</div>
-								</div>
-							</div>
-						} else {
-							<text><span style="color: #1312128c;font-size: 14px;">No option available at the moment.</span></text>
-						}
-					</div>
-				}
-			} else {
-				<span style="color: #1312128c;font-size: 14px;" id="">This Product Does not have any options</span>
-			}
-			@*@{
-					if (ViewBag.ProductOptionGroups != null) {
-						List<AquavisionConfigurator.Models.ProductOptionGroup> productGroupList = ViewBag.ProductOptionGroups;
-						foreach (var productgroup in productGroupList) {
-							<div class="widget catagory mb-30 model">
-								<h6 class="widget-title">@productgroup.Name</h6>
-								@if (productgroup.GetProductOption().Any()) {
-									<div class="catagories-menu">
-										<div class="card card-widget">
-											<div class="card-footer p-0">
-												<ul class="nav flex-column">
-													@foreach (var productOption in productgroup.GetProductOption()) {
-														<li class="nav-item row">
-															<div class="model-sub-category nav-link">
-																<div class="custom-control custom-radio">
-																	<input class="custom-control-input sizeoption" type="radio" id="@productOption.Id" name="@productOption.ProductOptionGroupId" onclick="setProductImage(@productOption.Id)">
-																	<label for="@productOption.Id" class="custom-control-label">@productOption.Name</label>
-																</div>
-															</div>
-														</li>
-													}
-												</ul>
-											</div>
-										</div>
-									</div>
-								}
-							</div>
-						}
-					}
-				}*@
-			<div class="widget text-center nextbuttonsection mb-15">
-				<input type="button" id="btnNext" class="btn btn-outline-b text-uppercase nextstepbutton" value="Continue" onclick="FinishBuild();" />
-			</div>
+			@Html.Partial("Product/_ProductOption", Model)
 		</div>
 		<div class="shop_sidebar_area product-summary" id="productSummary" style="display:none;">
-			<div class="widget catagory mb-30">
-				<h6 class="widget-title" id="modelName">Genesis</h6>
-				<div class="catagories-menu">
-					<div class="card card-widget">
-						<div class="widget-user-header" style="padding: 5px;">
-							<div class="widget-user-image text-center">
-								<img id="AquavisionTv" class="img-circle elevation-2" src="~/Content/img/product-img/aquavision-classic-Genesis.jpg" alt="User Avatar">
-							</div>
-							<span style="color: #1312128c;font-size: 14px;" id="modelDetail"> The number one choice for stand alone televisions. Perfect for bathrooms, bedrooms and kitchens where no Home Network Integration is required. </span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="widget catagory mb-30">
-				<div class="row">
-					<div class="col-12 col-lg-8">
-						<div class="cart-table clearfix">
-							<table class="table table-responsive">
-								<tbody>
-									<tr>
-										<td class="cart-name-td">
-											<span>Genesis</span>
-										</td>
-										<td class="cart-price-td text-right">
-											<span>£1130</span>
-										</td>
-									</tr>
-									<tr>
-										<td class="cart-name-td">
-											<span>Black Glass</span>
-										</td>
-										<td class="cart-price-td text-right">
-											<span>£100</span>
-										</td>
-									</tr>
-									<tr>
-										<td class="cart-name-td">
-											<span>Ceiling Speakers</span>
-										</td>
-										<td class="cart-price-td text-right">
-											<span>£100</span>
-										</td>
-									</tr>
-									<tr style="background: #ddd;">
-										<td class="cart-name-td">
-											<span>GRAND TOTAL</span>
-										</td>
-										<td class="cart-price-td text-right">
-											<span>£1330</span>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<div class="col-12 col-lg-4">
-						<div class="cart-summary">
-							<ul class="summary-table">
-								<li><a href="#" class="btn shop-btn w-100" onclick="customerSection()">Continue Checkout</a></li>
-								<li><a href="#" class="btn shop-btn w-100" onclick="customerSection()">Save My Build</a></li>
-								<li><a href="#" class="btn shop-btn w-100" onclick="customerSection()">Download My Build</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
+			@Html.Partial("Product/_ProductSummary", Model)
 		</div>
 		<div class="shop_sidebar_area product-summary" id="customerSection" style="display:none;">
 			<div class="widget catagory mb-30" style="padding:25px;">
@@ -323,42 +168,8 @@
 				</form>
 			</div>
 		</div>
-		<div class="shop_product_area section-padding-100 d-none d-md-block" id="productView">
-			<div class="container-fluid productarea">
-				<div class="row">
-					<div class="col-12">
-						<div class="single-product-wrapper" style="text-align: -webkit-center;">
-							<div class="product-img product-main-div">
-								@* fixed images *@
-								<!--<div class="containerNew" id="imagesContainer" data-layer1="/Content/img/product-img/img-frame.png" data-layer2="/Content/img/product-img/img-back.png">-->
-								<!-- Images will be dynamically added using JavaScript -->
-								<!--</div>-->
-								@* adding images dynaically *@
-								<div class="containerNew" id="imagesContainer">
-									<!-- Images will be dynamically added using JavaScript -->
-								</div>
-
-
-								@* not working *@
-								@*<div class="container2" style="display:grid;place-items:center;">
-										<img src="~/Content/img/product-img/img-frame.png" alt="Layer 1" class="image2" />
-										<img src="~/Content/img/product-img/img-back.png" alt="Layer 2" class="image2" />
-
-									</div>*@
-
-								@*<div class="img-container" style="background-image: url('/Content/img/product-img/img-frame.png'), url('/Content/img/product-img/img-back.png'); background-size: cover; ">
-									</div>*@
-
-								@* working/current *@
-								@*<div class="img-container">
-										<img src="~/Content/img/product-img/img-frame.png" alt="Frame" class="d-none">
-										<img id="productMainImg" src="~/Content/img/product-img/img-back.png" alt="Overlay" class="img-back1">
-									</div>*@
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="shop_product_area section-padding-100" id="productView">
+			@Html.Partial("Product/_ProductView", Model)
 		</div>
 	</div>
 	<script src="~/Content/js/jquery-2.2.4.min.js"></script>
@@ -371,8 +182,12 @@
 		function categorytab(productId) {
 			location.href = '@Url.Action("Shop", "Home")?productId=' + productId;
 		}
-
-		function FinishBuild() {
+		function productSection() {
+			$('#productSidebar').show();
+			$('#productSummary').hide();
+			$('#productView').removeClass("product-view-summary");
+		}
+		function finishBuild() {
 			var productOption = [];
 			var selectedProductOption = $('#productOptionList .productoption:checked');
 			for (var i = 0; i < $(selectedProductOption).length; i++) {
@@ -392,6 +207,8 @@
 					type: 'POST',
 					success: function (data) {
 						if (data.result) {
+							var resultData = data.ResultString;
+							$('#cartTableContainer').html(resultData);
 							$('#productSidebar').hide();
 							$('#productSummary').show();
 							$('#productView').addClass("product-view-summary");
@@ -570,8 +387,6 @@
 		//		}
 		//	}
 		//}
-
-
 		function setProductImage(productOptionId) {
 			$.ajax({
 				url: `@Url.Action("GetProductImage", "Product")?Id=${productOptionId}`,
@@ -601,7 +416,7 @@
 							container.appendChild(img);
 						}
 					}
-					
+
 					/*$('#productMainImg').attr('src', data.ImageURL);*/
 					//console.log(data);
 
@@ -635,7 +450,6 @@
 				}
 			});
 		}
-
 	</script>
 </body>
 

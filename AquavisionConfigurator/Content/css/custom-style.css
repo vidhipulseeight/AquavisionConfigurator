@@ -298,7 +298,7 @@ section {
 	.main-content-wrapper .shop_sidebar_area {
 		flex: auto;
 		width: auto;
-		max-width: max-content;
+		max-width: none;
 		height: auto;
 		overflow-y: unset;
 		margin-top: 15px;

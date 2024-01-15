@@ -258,6 +258,10 @@
     <Content Include="Views\Home\Shop.cshtml" />
     <Content Include="Views\Product\Customise.cshtml" />
     <Content Include="Views\Product\List.cshtml" />
+    <Content Include="Views\Shared\Product\_BuildCart.cshtml" />
+    <Content Include="Views\Shared\Product\_ProductOption.cshtml" />
+    <Content Include="Views\Shared\Product\_ProductView.cshtml" />
+    <Content Include="Views\Shared\Product\_ProductSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
