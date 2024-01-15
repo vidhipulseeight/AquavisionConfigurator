@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 namespace Aquavision.Administrator.Controllers {
 	[Authorize]
+	[AccessDeniedAuthorize(Roles = "Administrator")]
 	public class ProductController : BaseController {
 		AquavisionEntities myDB = new AquavisionEntities();
 		public ActionResult Index() {

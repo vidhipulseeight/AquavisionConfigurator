@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Aquavision.Administration.Helpers;
 namespace Aquavision.Administrator.Controllers {
 	[Authorize]
+	[AccessDeniedAuthorize(Roles = "Administrator")]
 	public class CategoryController :BaseController {
 		AquavisionEntities myDB = new AquavisionEntities();
 		public ActionResult Index() {
@@ -14,12 +15,14 @@ namespace Aquavision.Administrator.Controllers {
 			var categoryList = myDB.Categories.Where(c=>!c.Deleted).ToList();
 			return View(categoryList);
         }
+
 		public ActionResult New() {
 			ViewBag.PageTitle = "Categories";
 			AddBreadCrumb(new BreadCrumb("Categories", Url.Action("Index", "Category")));
 			AddBreadCrumb(new BreadCrumb("New"));
 			return View(new Category());
 		}
+
 		[HttpPost]
 		public ActionResult New(Category category) {
 			var checkCategoryExits = myDB.Categories.Where(c => c.Name == category.Name && !c.Deleted).ToList();
