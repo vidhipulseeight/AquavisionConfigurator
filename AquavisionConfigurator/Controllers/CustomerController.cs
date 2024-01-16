@@ -17,7 +17,7 @@ namespace AquavisionConfigurator.Controllers {
 		}
 
 		[HttpPost]
-		public JsonResult Login(FormCollection collection, int? productId, List<ProductOption> productOptions) {
+		public JsonResult Login(FormCollection collection) {
 			var email = collection["customerEmail"];
 			var password = collection["customerPassword"];
 			var rememberme = collection["rememberme"];
@@ -43,32 +43,13 @@ namespace AquavisionConfigurator.Controllers {
 					myDB.SaveChanges();
 				}
 
-				if (productId.HasValue) {
-					var customerDesign = new CustomerDesign {
-						CustomerId = customer.Id,
-						ProductId = productId.Value
-					};
-					myDB.CustomerDesigns.Add(customerDesign);
-					myDB.SaveChanges();
-					foreach (var option in productOptions) {
-						var productOption = myDB.ProductOptions.FirstOrDefault(p => p.Id == option.Id);
-						if (productOption != null) {
-							var customerDesignSpec = new CustomerDesignSpec {
-								CustomerDesignId = customerDesign.Id,
-								ProductOptionId = productOption.Id
-							};
-							myDB.CustomerDesignSpecs.Add(customerDesignSpec);
-							myDB.SaveChanges();
-						}
-					}
-				}
-				return Json(new { Result = true, Message = string.Empty }, JsonRequestBehavior.AllowGet);
+				return Json(new { Result = true, CustomerId = customer.Id, Message = string.Empty }, JsonRequestBehavior.AllowGet);
 			}
 			return Json(new { Result = false, Message = "Sorry your username or password is incorrect" }, JsonRequestBehavior.AllowGet);
 		}
 
 		[HttpPost]
-		public JsonResult Register(FormCollection collection, int? productId, List<ProductOption> productOptions) {
+		public JsonResult Register(FormCollection collection) {
 			var name = collection["customerRegisterFullName"];
 			var phone = collection["customerRegisterPhone"];
 			var email = collection["customerRegisterEmail"];
@@ -124,29 +105,34 @@ namespace AquavisionConfigurator.Controllers {
 			if (status == MembershipCreateStatus.Success) {
 				SetAuthCookie(email, false);
 				//WebSecurity.CreateAccount(email, password, false);
-				if (productId.HasValue) {
-					var customerDesign = new CustomerDesign {
-						CustomerId = customer.Id,
-						ProductId = productId.Value
-					};
-					myDB.CustomerDesigns.Add(customerDesign);
-					myDB.SaveChanges();
-					foreach (var option in productOptions) {
-						var productOption = myDB.ProductOptions.FirstOrDefault(p => p.Id == option.Id);
-						if (productOption != null) {
-							var customerDesignSpec = new CustomerDesignSpec {
-								CustomerDesignId = customerDesign.Id,
-								ProductOptionId = productOption.Id
-							};
-							myDB.CustomerDesignSpecs.Add(customerDesignSpec);
-							myDB.SaveChanges();
-						}
-					}
-				}
-				return Json(new { Result = true, Message = string.Empty }, JsonRequestBehavior.AllowGet);
+				return Json(new { Result = true, CustomerId = customer.Id, Message = string.Empty }, JsonRequestBehavior.AllowGet);
 			}
 
 			return Json(new { Result = false, Message = "Something went wrong creating your new account, please try again later" }, JsonRequestBehavior.AllowGet);
+		}
+
+		public JsonResult LinkCustomerBuild(int? productId, List<ProductOption> productOptions, int? customerId) {
+			if (productId.HasValue) {
+				var customerDesign = new CustomerDesign {
+					CustomerId = customerId.Value,
+					ProductId = productId.Value
+				};
+				myDB.CustomerDesigns.Add(customerDesign);
+				myDB.SaveChanges();
+				foreach (var option in productOptions) {
+					var productOption = myDB.ProductOptions.FirstOrDefault(p => p.Id == option.Id);
+					if (productOption != null) {
+						var customerDesignSpec = new CustomerDesignSpec {
+							CustomerDesignId = customerDesign.Id,
+							ProductOptionId = productOption.Id
+						};
+						myDB.CustomerDesignSpecs.Add(customerDesignSpec);
+						myDB.SaveChanges();
+					}
+				}
+				return Json(new { Result = true }, JsonRequestBehavior.AllowGet);
+			}
+			return Json(new { Result = false }, JsonRequestBehavior.AllowGet);
 		}
 
 		public JsonResult IsRegistered() {

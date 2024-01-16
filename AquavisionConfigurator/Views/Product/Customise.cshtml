@@ -228,10 +228,27 @@
 			$.ajax({
 				type: "POST",
 				url: "/Customer/IsRegistered",
-				//data: formData,
+				data: formData,
 				success: function (data) {
 					if (data.Result) {
-						location.href = `@Url.Action("Details", "Customer")`;
+						$.ajax({
+							url: '/Customer/LinkCustomerBuild',
+							data: JSON.stringify({
+								productId: @Model.Id,
+								productOptions: productOption,
+								customerId: data.CustomerId
+							}),
+							contentType: 'application/json',
+							processData: false,
+							type: 'POST',
+							success: function (data) {
+								if (data.result) {
+									location.href = `@Url.Action("Details", "Customer")`;
+								} else {
+									alert(data.ErrorMessage);
+								}
+							}
+						});
 					} else {
 						$('#customerSection').show();
 					}
@@ -254,15 +271,33 @@
 				$.ajax({
 					type: "POST",
 					url: "/Customer/Register",
-					//data: formData,
-					data: JSON.stringify({
+					data: formData,
+					@*data: JSON.stringify({
 						formData: formData,
 						productId: @Model.Id,
 						productOptions: productOption
-					}),
+					}),*@
 					success: function (data) {
 						if (data.Result) {
-							location.href = `@Url.Action("Details", "Customer")`;
+							$.ajax({
+								url: '/Customer/LinkCustomerBuild',
+								data: JSON.stringify({
+									productId: @Model.Id,
+									productOptions: productOption,
+									customerId: data.CustomerId
+								}),
+								contentType: 'application/json',
+								processData: false,
+								type: 'POST',
+								success: function (data) {
+									if (data.result) {
+										location.href = `@Url.Action("Details", "Customer")`;
+									} else {
+										alert(data.ErrorMessage);
+									}
+								}
+							});
+							@*location.href = `@Url.Action("Details", "Customer")`;*@
 						} else {
 							$("#RegisterMessage").text(data.Message);
 						}
@@ -287,12 +322,12 @@
 				$.ajax({
 					type: "POST",
 					url: "/Customer/Login",
-					//data: formData,
-					data: JSON.stringify({
+					data: formData,
+					@*data: JSON.stringify({
 						formData: formData,
 						productId: @Model.Id,
 						productOptions: productOption
-					}),
+					}),*@
 					success: function (data) {
 						if (data.Result) {
 							location.href = `@Url.Action("Details", "Customer")`;
