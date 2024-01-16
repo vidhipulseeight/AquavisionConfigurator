@@ -143,25 +143,25 @@ namespace AquavisionConfigurator.Controllers {
 					myDB.SaveChanges();
 
 					//saving to customer design tables
-					var customer = GetCurrentCustomerData();
-					if (customer != null) {
-						var customerDesign = new CustomerDesign {
-							CustomerId = customer.Id,
-							ProductId = product.Id
-						};
-						myDB.CustomerDesigns.Add(customerDesign);
-						myDB.SaveChanges();
-						foreach (var option in productOptions) {
-							var productOption = myDB.ProductOptions.FirstOrDefault(p => p.Id == option.Id);
-							if(productOption != null) {
-								var customerDesignSpec = new CustomerDesignSpec {
-									CustomerDesignId = customerDesign.Id,
-									ProductOptionId = productOption.Id
-								};
-								myDB.CustomerDesignSpecs.Add(customerDesignSpec);
-								myDB.SaveChanges();
-							}
-						}
+					//var customer = GetCurrentCustomerData();
+					//if (customer != null) {
+					//	var customerDesign = new CustomerDesign {
+					//		CustomerId = customer.Id,
+					//		ProductId = product.Id
+					//	};
+					//	myDB.CustomerDesigns.Add(customerDesign);
+					//	myDB.SaveChanges();
+					//	foreach (var option in productOptions) {
+					//		var productOption = myDB.ProductOptions.FirstOrDefault(p => p.Id == option.Id);
+					//		if(productOption != null) {
+					//			var customerDesignSpec = new CustomerDesignSpec {
+					//				CustomerDesignId = customerDesign.Id,
+					//				ProductOptionId = productOption.Id
+					//			};
+					//			myDB.CustomerDesignSpecs.Add(customerDesignSpec);
+					//			myDB.SaveChanges();
+					//		}
+					//	}
 					}
 
 					partialViewResult = RenderPartialViewToString("Product/_BuildCart", buildCartItemList);

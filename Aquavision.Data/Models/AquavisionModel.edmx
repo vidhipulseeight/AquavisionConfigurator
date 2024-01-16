@@ -242,18 +242,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CustomerDesignSpecs_CustomerDesign">
-          <End Role="CustomerDesign" Type="Self.CustomerDesign" Multiplicity="1" />
-          <End Role="CustomerDesignSpecs" Type="Self.CustomerDesignSpecs" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CustomerDesign">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CustomerDesignSpecs">
-              <PropertyRef Name="CustomerDesign" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CustomerDesignSpecs_ProductOption">
           <End Role="ProductOption" Type="Self.ProductOption" Multiplicity="1" />
           <End Role="CustomerDesignSpecs" Type="Self.CustomerDesignSpecs" Multiplicity="*" />
@@ -391,10 +379,6 @@
           <AssociationSet Name="FK_CustomerDesign_Product" Association="Self.FK_CustomerDesign_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="CustomerDesign" EntitySet="CustomerDesign" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CustomerDesignSpecs_CustomerDesign" Association="Self.FK_CustomerDesignSpecs_CustomerDesign">
-            <End Role="CustomerDesign" EntitySet="CustomerDesign" />
-            <End Role="CustomerDesignSpecs" EntitySet="CustomerDesignSpecs" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomerDesignSpecs_ProductOption" Association="Self.FK_CustomerDesignSpecs_ProductOption">
             <End Role="ProductOption" EntitySet="ProductOption" />
