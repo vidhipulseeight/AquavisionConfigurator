@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Aquavision.Data.Models.BuildCart>
+
+@* add to bundle or layout*@
+<link href="~/Content/css/custom-style.css" rel="stylesheet" />
+
+<div class="services_section">
+	<div class="container">
+		<p class="many_taital text-left"> <a style="color: black; font-size: 16px;" href="@Url.Action("List", "Product")">Products</a> >> Open Builds </p>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th style="width:120px;">Product</th>
+					<th>Name</th>
+					<th>SKU</th>
+					<th>Created On</th>
+					<th style="width:10px;"></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model) {
+					<tr>
+						<td>
+							@if (item.Product.Image != null) {
+								<img src="data:image/png;base64,@(Convert.ToBase64String(item.Product.Image))">
+							} else {
+								<img src="~/Content/img/product-img/icon-1.png">
+							}
+						</td>
+						<td>@item.Product.Name</td>
+						<td>@item.Product.SKU</td>
+						<td>@item.CreatedOn</td>
+						<th><a class="btn btn-outline-b" title="View Customise"><i class="fa fa-eye"></i></a></th>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+

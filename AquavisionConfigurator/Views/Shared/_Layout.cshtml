@@ -39,21 +39,26 @@
 				</button>
 				<div class="collapse navbar-collapse headermenu" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
-						<li class="nav-item">
-							<a class="nav-link" href="index.html">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Application</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">About</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Shop</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Contact</a>
-						</li>
+						@if (User.Identity.IsAuthenticated) {
+							<li class="nav-item">
+								<a class="nav-link" href="#">@("Hi, " + AquavisionConfigurator.App_Start.AquavisionContext.Current.Customer.Name)</a>
+							</li>
+							<li class="nav-item"><a class="nav-link" href="@Url.Action("Details", "Customer")"><span>My Build</span></a></li>
+							<li class="nav-item"><a class="nav-link" href="@Url.Action("Logout", "Customer")"><span>Logout</span></a></li>
+						} else {
+							<li class="nav-item">
+								<a class="nav-link" href="@Url.Action("Index", "Home")">Home</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="@Url.Action("List", "Product")">Products</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">Contact</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="@Url.Action("Login", "Customer")">Login</a>
+							</li>
+						}
 					</ul>
 				</div>
 			</nav>

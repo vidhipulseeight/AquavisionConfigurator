@@ -1,0 +1,127 @@
+﻿<link href="~/Content/css/custom-style.css" rel="stylesheet" />
+<style>
+	.form-control {
+		border-color: black !important;
+		color: black !important;
+	}
+
+		.form-control:focus {
+			border-color: black !important;
+			color: black !important;
+		}
+</style>
+<div class="services_section col-md-6" style="padding-bottom:0px !important;">
+	<div class="container">
+		<div>
+			<div class="row row-content-center">
+				<form method="post" id="LoginForm">
+					<div class="row">
+						<div class="col-12 mb-3">
+							<h1>LOGIN</h1>
+							<span>
+								PLEASE LOGIN BELOW
+							</span>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="text" class="form-control" name="customerEmail" value="" placeholder="Email" required>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="password" class="form-control" name="customerPassword" value="" placeholder="Password" required>
+						</div>
+						<div class="col-md-12 col-lg-6">
+							<div class="checkbox">
+								<label><input type="checkbox" name="rememberme" value="true"> Remember me</label>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<p id="LoginMessage" style="padding-top: 10px; margin: 0; color: #c00;"></p>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="button" id="btnLogin" class="btn btn-outline-b text-uppercase nextstepbutton" value="Login" style="width:150px;" onclick="return customerLogin();" />
+						</div>
+						<div class="col-12 mb-3">
+							<a>Forgot Password?</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="services_section col-md-6" style="padding-bottom: 0px !important;">
+	<div class="container">
+		<div>
+			<div class="row row-content-center">
+				<form method="post" id="RegisterForm">
+					<div class="row">
+						<div class="col-12 mb-3">
+							<h1>
+								CREATE NEW ACCOUNT
+							</h1>
+							<span>
+								CREATE YOUR AQUAVISION MEMBER ACCOUNT
+							</span>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="text" class="form-control" name="customerRegisterFullName" value="" placeholder="Full Name" required>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="text" class="form-control" name="customerRegisterEmail" value="" placeholder="Email" required>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="text" class="form-control" name="customerRegisterPhone" value="" placeholder="Phone" required>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="password" class="form-control" name="customerRegisterPassword" value="" placeholder="Password" required>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="password" class="form-control" name="customerRegisterConfirmPassword" value="" placeholder="Confirm Password" required>
+						</div>
+						<div class="col-md-12">
+							<p id="RegisterMessage" style="padding-top: 10px; margin: 0; color: #c00;"></p>
+						</div>
+						<div class="col-12 mb-3">
+							<input type="button" id="btnRegister" class="btn btn-outline-b text-uppercase nextstepbutton" value="Register" style="width:150px;" onclick="return customerRegister();" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	function customerRegister() {
+		$("#RegisterMessage").text("");
+		var formData = $("#RegisterForm").serialize();
+		var isFormValid = $("#RegisterForm")[0].checkValidity();
+		if (isFormValid) {
+			$.ajax({
+				type: "POST",
+				url: "/Customer/Register",
+				data: formData,
+				success: function (data) {
+					if (data.Result) {
+						location.href = '@Url.Action("Details", "Customer")';
+					} else { $("#RegisterMessage").text(data.Message); }
+				}
+			});
+		} else { $("#RegisterForm")[0].reportValidity(); }
+	}
+	function customerLogin() {
+		$("#LoginMessage").text("");
+		var formData = $("#LoginForm").serialize();
+		var isFormValid = $("#LoginForm")[0].checkValidity();
+		if (isFormValid) {
+			$.ajax({
+				type: "POST",
+				url: "/Customer/Login",
+				data: formData,
+				success: function (data) {
+					if (data.Result) {
+						location.href = '@Url.Action("Details", "Customer")';
+					} else { $("#LoginMessage").text(data.Message); }
+				}
+			});
+		} else { $("#LoginForm")[0].reportValidity(); }
+	}
+</script>
