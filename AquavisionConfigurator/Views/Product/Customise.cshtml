@@ -232,7 +232,31 @@
 				//data: formData,
 				success: function (data) {
 					if (data.Result) {
-						location.href = `@Url.Action("Details", "Customer")`;
+						var productOption = [];
+						var selectedProductOption = $('#productOptionList .productoption:checked');
+						for (var i = 0; i < $(selectedProductOption).length; i++) {
+							productOption.push({
+								Id: $(selectedProductOption[i]).attr('id')
+							});
+						}
+						$.ajax({
+							url: '/Customer/LinkCustomerBuild',
+							data: JSON.stringify({
+								productId: @Model.Id,
+								productOptions: productOption,
+								customerId: data.CustomerId
+							}),
+							contentType: 'application/json',
+							processData: false,
+							type: 'POST',
+							success: function (data) {
+								if (data.result) {
+									location.href = `@Url.Action("Details", "Customer")`;
+								} else {
+									alert(data.ErrorMessage);
+								}
+							}
+						});
 					} else {
 						$('#customerSection').show();
 					}
@@ -315,23 +339,23 @@
 					success: function (data) {
 						if (data.Result) {
 							$.ajax({
-							url: '/Customer/LinkCustomerBuild',
-							data: JSON.stringify({
-								productId: @Model.Id,
-								productOptions: productOption,
-								customerId: data.CustomerId
-							}),
-							contentType: 'application/json',
-							processData: false,
-							type: 'POST',
-							success: function (data) {
-								if (data.result) {
-									location.href = `@Url.Action("Details", "Customer")`;
-								} else {
-									alert(data.ErrorMessage);
+								url: '/Customer/LinkCustomerBuild',
+								data: JSON.stringify({
+									productId: @Model.Id,
+									productOptions: productOption,
+									customerId: data.CustomerId
+								}),
+								contentType: 'application/json',
+								processData: false,
+								type: 'POST',
+								success: function (data) {
+									if (data.result) {
+										location.href = `@Url.Action("Details", "Customer")`;
+									} else {
+										alert(data.ErrorMessage);
+									}
 								}
-							}
-						});
+							});
 						} else {
 							$("#LoginMessage").text(data.Message);
 						}

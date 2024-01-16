@@ -137,7 +137,7 @@ namespace AquavisionConfigurator.Controllers {
 
 		public JsonResult IsRegistered() {
 			if(GetCurrentCustomerData() != null) {
-				return Json(new { Result = true }, JsonRequestBehavior.AllowGet);
+				return Json(new { Result = true, CustomerId = GetCurrentCustomerData().Id }, JsonRequestBehavior.AllowGet);
 			} else {
 				return Json(new { Result = false }, JsonRequestBehavior.AllowGet);
 			}
