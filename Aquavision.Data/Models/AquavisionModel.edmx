@@ -218,6 +218,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CustomerDesign_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="CustomerDesign" Type="Self.CustomerDesign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerDesign">
+              <PropertyRef Name="Customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerDesign_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="CustomerDesign" Type="Self.CustomerDesign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerDesign">
+              <PropertyRef Name="Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CustomerDesignSpecs_CustomerDesign">
           <End Role="CustomerDesign" Type="Self.CustomerDesign" Multiplicity="1" />
           <End Role="CustomerDesignSpecs" Type="Self.CustomerDesignSpecs" Multiplicity="*" />
@@ -360,6 +384,14 @@
             <End Role="ProductOption" EntitySet="ProductOption" />
             <End Role="BuildCartItem" EntitySet="BuildCartItem" />
           </AssociationSet>
+          <AssociationSet Name="FK_CustomerDesign_Customer" Association="Self.FK_CustomerDesign_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CustomerDesign" EntitySet="CustomerDesign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerDesign_Product" Association="Self.FK_CustomerDesign_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="CustomerDesign" EntitySet="CustomerDesign" />
+          </AssociationSet>
           <AssociationSet Name="FK_CustomerDesignSpecs_CustomerDesign" Association="Self.FK_CustomerDesignSpecs_CustomerDesign">
             <End Role="CustomerDesign" EntitySet="CustomerDesign" />
             <End Role="CustomerDesignSpecs" EntitySet="CustomerDesignSpecs" />
@@ -424,15 +456,18 @@
           <Property Name="PasswordHash" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SaltKey" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CustomerDesigns" Relationship="AquavisionModel.FK_CustomerDesign_Customer" FromRole="Customer" ToRole="CustomerDesign" />
         </EntityType>
         <EntityType Name="CustomerDesign">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Customer" Type="Int32" Nullable="false" />
-          <Property Name="Product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="CustomerDesignSpecs" Relationship="Self.FK_CustomerDesignSpecs_CustomerDesign" FromRole="CustomerDesign" ToRole="CustomerDesignSpecs" />
+          <NavigationProperty Name="Customer" Relationship="AquavisionModel.FK_CustomerDesign_Customer" FromRole="CustomerDesign" ToRole="Customer" />
+          <NavigationProperty Name="Product" Relationship="AquavisionModel.FK_CustomerDesign_Product" FromRole="CustomerDesign" ToRole="Product" />
         </EntityType>
         <EntityType Name="CustomerDesignSpec">
           <Key>
@@ -471,6 +506,7 @@
           <Property Name="Price" Type="Decimal" Precision="11" Scale="2" />
           <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BuildCarts" Relationship="AquavisionModel.FK_BuildCart_Product" FromRole="Product" ToRole="BuildCart" />
+          <NavigationProperty Name="CustomerDesigns" Relationship="AquavisionModel.FK_CustomerDesign_Product" FromRole="Product" ToRole="CustomerDesign" />
         </EntityType>
         <EntityType Name="ProductOption">
           <Key>
@@ -690,6 +726,14 @@
             <End Role="ProductOption" EntitySet="ProductOptions" />
             <End Role="BuildCartItem" EntitySet="BuildCartItems" />
           </AssociationSet>
+          <AssociationSet Name="FK_CustomerDesign_Customer" Association="AquavisionModel.FK_CustomerDesign_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="CustomerDesign" EntitySet="CustomerDesigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerDesign_Product" Association="AquavisionModel.FK_CustomerDesign_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="CustomerDesign" EntitySet="CustomerDesigns" />
+          </AssociationSet>
           </EntityContainer>
         <Association Name="FK_Images_ProductOption">
           <End Type="AquavisionModel.ProductOption" Role="ProductOption" Multiplicity="1" />
@@ -784,6 +828,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CustomerDesign_Customer">
+          <End Type="AquavisionModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="AquavisionModel.CustomerDesign" Role="CustomerDesign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerDesign">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerDesign_Product">
+          <End Type="AquavisionModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="AquavisionModel.CustomerDesign" Role="CustomerDesign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerDesign">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -818,8 +886,8 @@
             <EntityTypeMapping TypeName="AquavisionModel.CustomerDesign">
               <MappingFragment StoreEntitySet="CustomerDesign">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Customer" ColumnName="Customer" />
-                <ScalarProperty Name="Product" ColumnName="Product" />
+                <ScalarProperty Name="CustomerId" ColumnName="Customer" />
+                <ScalarProperty Name="ProductId" ColumnName="Product" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

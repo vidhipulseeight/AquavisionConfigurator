@@ -223,22 +223,47 @@
 		function customerSection() {
 			$('#productSidebar').hide();
 			$('#productSummary').hide();
-			$('#customerSection').show();
+			$.ajax({
+				type: "POST",
+				url: "/Customer/IsRegistered",
+				//data: formData,
+				success: function (data) {
+					if (data.Result) {
+						location.href = `@Url.Action("Details", "Customer")`;
+					} else {
+						$('#customerSection').show();
+					}
+				}
+			});
 		}
 		function customerRegister() {
 			$('#productSummary').hide();
 			$("#RegisterMessage").text("");
 			var formData = $("#RegisterForm").serialize();
 			var isFormValid = $("#RegisterForm")[0].checkValidity();
+			var productOption = [];
+			var selectedProductOption = $('#productOptionList .productoption:checked');
+			for (var i = 0; i < $(selectedProductOption).length; i++) {
+				productOption.push({
+					Id: $(selectedProductOption[i]).attr('id')
+				});
+			}
 			if (isFormValid) {
 				$.ajax({
 					type: "POST",
-					url: "/Home/Register",
-					data: formData,
+					url: "/Customer/Register",
+					//data: formData,
+					data: JSON.stringify({
+						formData = formData,
+						productId: @Model.Id,
+						productOptions: productOption
+					}),
 					success: function (data) {
 						if (data.Result) {
-							location.reload();
-						} else { $("#RegisterMessage").text(data.Message); }
+							location.href = `@Url.Action("Details", "Customer")`;
+						} else {
+							$("#RegisterMessage").text(data.Message);
+						}
 					}
 				});
 			} else { $("#RegisterForm")[0].reportValidity(); }
@@ -248,15 +273,30 @@
 			$("#LoginMessage").text("");
 			var formData = $("#LoginForm").serialize();
 			var isFormValid = $("#LoginForm")[0].checkValidity();
+			var productOption = [];
+			var selectedProductOption = $('#productOptionList .productoption:checked');
+			for (var i = 0; i < $(selectedProductOption).length; i++) {
+				productOption.push({
+					Id: $(selectedProductOption[i]).attr('id')
+				});
+			}
+
 			if (isFormValid) {
 				$.ajax({
 					type: "POST",
-					url: "/Home/Login",
-					data: formData,
+					url: "/Customer/Login",
+					//data: formData,
+					data: JSON.stringify({
+						formData = formData,
+						productId: @Model.Id,
+						productOptions: productOption
+					}),
 					success: function (data) {
 						if (data.Result) {
-							location.reload();
-						} else { $("#LoginMessage").text(data.Message); }
+							location.href = `@Url.Action("Details", "Customer")`;
+						} else {
+							$("#LoginMessage").text(data.Message);
+						}
 					}
 				});
 			} else { $("#LoginForm")[0].reportValidity(); }
