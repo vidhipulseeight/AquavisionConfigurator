@@ -7,7 +7,6 @@
       <Diagram DiagramId="a7c98bea3fdb4afea9a23d0c615f26f4" Name="Diagram1">
         <EntityTypeShape EntityType="AquavisionModel.Category" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="AquavisionModel.Customer" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AquavisionModel.CustomerDesign" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AquavisionModel.CustomerDesignSpec" Width="1.5" PointX="9.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AquavisionModel.Image" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AquavisionModel.Product" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
@@ -20,7 +19,6 @@
         <EntityTypeShape EntityType="AquavisionModel.webpages_Roles" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
         <AssociationConnector Association="AquavisionModel.FK_Product_Category" ManuallyRouted="false" />
         <AssociationConnector Association="AquavisionModel.FK_ProductType_Category" ManuallyRouted="false" />
-        <AssociationConnector Association="AquavisionModel.FK_CustomerDesignSpecs_CustomerDesign" ManuallyRouted="false" />
         <AssociationConnector Association="AquavisionModel.FK_CustomerDesignSpecs_ProductOption" ManuallyRouted="false" />
         <AssociationConnector Association="AquavisionModel.FK_ProductOptionGroup_Product" ManuallyRouted="false" />
         <AssociationConnector Association="AquavisionModel.FK_ProductOption_ProductOptionGroup" ManuallyRouted="false" />
@@ -33,6 +31,7 @@
         <EntityTypeShape EntityType="AquavisionModel.BuildCartItem" Width="1.5" PointX="12.75" PointY="3.375" />
         <AssociationConnector Association="AquavisionModel.FK_BuildCartItem_BuildCart" />
         <AssociationConnector Association="AquavisionModel.FK_BuildCartItem_ProductOption" />
+        <EntityTypeShape EntityType="AquavisionModel.CustomerDesign" Width="1.5" PointX="12" PointY="6.375" />
         <AssociationConnector Association="AquavisionModel.FK_CustomerDesign_Customer" />
         <AssociationConnector Association="AquavisionModel.FK_CustomerDesign_Product" />
         </Diagram>
