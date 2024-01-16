@@ -14,6 +14,8 @@ namespace AquavisionConfigurator.Controllers {
 			ViewBag.Category = myDB.Categories.ToList();
 			var products = myDB.Products.Where(p => !p.Deleted).ToList();
 			if(categoryId.HasValue) {
+				var category = myDB.Categories.FirstOrDefault(c => c.Id == categoryId);
+				ViewBag.SelectedCategory = category.Name;
 				products = products.Where(p => p.CategoryId.HasValue && p.CategoryId == categoryId).ToList();
 			}
 			return View(products);

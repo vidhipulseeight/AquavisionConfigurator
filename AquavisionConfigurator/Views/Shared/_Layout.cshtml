@@ -33,28 +33,28 @@
 	<div class="header_section">
 		<div class="container-fluid">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<div class="logo"><a href="index.html"><img src="~/Content/img/product-img/AquavisionLogo.png"></a></div>
+				<div class="logo"><a href="@Url.Action("Index", "Home")"><img src="~/Content/img/product-img/AquavisionLogo.png"></a></div>
 				<button style="margin-left:115px" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse headermenu" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="@Url.Action("Index", "Home")">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="@Url.Action("List", "Product")">Products</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Contact</a>
+						</li>
 						@if (User.Identity.IsAuthenticated) {
-							<li class="nav-item">
+							@*<li class="nav-item">
 								<a class="nav-link" href="#">@("Hi, " + AquavisionConfigurator.App_Start.AquavisionContext.Current.Customer.Name)</a>
-							</li>
-							<li class="nav-item"><a class="nav-link" href="@Url.Action("Details", "Customer")"><span>My Build</span></a></li>
+							</li>*@
+							<li class="nav-item"><a class="nav-link" href="@Url.Action("Details", "Customer")"><span>@(AquavisionConfigurator.App_Start.AquavisionContext.Current.Customer.Name)(My Build)</span></a></li>
 							<li class="nav-item"><a class="nav-link" href="@Url.Action("Logout", "Customer")"><span>Logout</span></a></li>
 						} else {
-							<li class="nav-item">
-								<a class="nav-link" href="@Url.Action("Index", "Home")">Home</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="@Url.Action("List", "Product")">Products</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Contact</a>
-							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="@Url.Action("Login", "Customer")">Login</a>
 							</li>

@@ -1,147 +1,90 @@
-﻿@{
-	Layout = null;
-}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<!-- basic -->
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- mobile metas -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
-	<!-- site metas -->
-	<title>Aquavision</title>
-	<meta name="keywords" content="">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<!-- bootstrap css -->
-	<link rel="stylesheet" href="~/Content/css/core-style.css">
-	<link rel="stylesheet" href="~/Content/css/index-style.css">
-	<link rel="stylesheet" href="~/Content/css/responsive.css">
-	<link rel="stylesheet" href="~/Content/css/jquery.mCustomScrollbar.min.css">
-	<link rel="stylesheet" href="~/Content/css/custom-index.css">
-	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-</head>
-<body>
-	<div class="header_section">
-		<div class="container-fluid">
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<div class="logo"><a href="index.html"><img src="~/Content/img/product-img/AquavisionLogo.png"></a></div>
-				<button style="margin-left:115px" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse headermenu" id="navbarSupportedContent">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item">
-							<a class="nav-link" href="index.html">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Application</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">About</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Shop</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Contact</a>
-						</li>
-					</ul>
+﻿<div class="banner_section">
+	<div class="container-fluid">
+		<div id="costum_slider" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="~/Content/img/product-img/HomeImage1.jpg" alt="Image">
 				</div>
-			</nav>
-		</div>
-	</div>
-	<div class="banner_section">
-		<div class="container-fluid">
-			<div id="costum_slider" class="carousel slide" data-ride="carousel">
-				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img src="~/Content/img/product-img/HomeImage1.jpg" alt="Image">
-					</div>
-					<div class="carousel-item">
-						<img src="~/Content/img/product-img/HomeImage4.jpg" alt="Image">
-					</div>
+				<div class="carousel-item">
+					<img src="~/Content/img/product-img/HomeImage4.jpg" alt="Image">
+				</div>
 
-				</div>
-				<a class="carousel-control-prev" href="#costum_slider" role="button" data-slide="prev">
-					<i class=""><img src="~/Content/img/product-img/left-arrow.png"></i>
-				</a>
-				<a class="carousel-control-next" href="#costum_slider" role="button" data-slide="next">
-					<i class=""><img src="~/Content/img/product-img/right-arrow.png"></i>
-				</a>
 			</div>
+			<a class="carousel-control-prev" href="#costum_slider" role="button" data-slide="prev">
+				<i class=""><img src="~/Content/img/product-img/left-arrow.png"></i>
+			</a>
+			<a class="carousel-control-next" href="#costum_slider" role="button" data-slide="next">
+				<i class=""><img src="~/Content/img/product-img/right-arrow.png"></i>
+			</a>
 		</div>
 	</div>
+</div>
 
-	@if(ViewBag.Categories != null) { 
-		<div class="services_section">
-			<div class="container">
-				<h1 class="services_taital">Categories</h1>
-				<p class="many_taital">List Of Product Categories </p>
-				<div class="services_section2 layout_padding">
-					<div class="row row-content-center">
-						@foreach (var item in ViewBag.Categories) {
-							<div class="col-lg-3 col-sm-6" style="padding: 15px;">
-								<div class="icon_1">
-									@*<img src="~/Content/img/product-img/AquavisionLogo.png">*@
-									@*@if (item.Image != null) {
+@if (ViewBag.Categories != null) {
+	<div class="services_section">
+		<div class="container">
+			<h1 class="services_taital">Categories</h1>
+			<p class="many_taital">List Of Product Categories </p>
+			<div class="services_section2 layout_padding">
+				<div class="row row-content-center">
+					@foreach (var item in ViewBag.Categories) {
+						<div class="col-lg-3 col-sm-6" style="padding: 15px;">
+							<div class="icon_1">
+								@*<img src="~/Content/img/product-img/AquavisionLogo.png">*@
+								@*@if (item.Image != null) {
 										<img src="data:image/png;base64,@(Convert.ToBase64String(item.Image))">
 									} else {
 										<img src="~/Content/img/product-img/icon-1.png">
 									}*@
-								</div>
-								<h2 class="furnitures_text">@item.Name</h2>
-								@*<p class="dummy_text d-none">@item.Description</p>*@
-								<div class="read_bt_main">
-									<div class="read_bt"><a href="@Url.Action("List", "Product", new {categoryId = item.Id})">See Products</a></div>
-								</div>
 							</div>
-						}
-					</div>
+							<h2 class="furnitures_text">@item.Name</h2>
+							@*<p class="dummy_text d-none">@item.Description</p>*@
+							<div class="read_bt_main">
+								<div class="read_bt"><a href="@Url.Action("List", "Product", new {categoryId = item.Id})">See Products</a></div>
+							</div>
+						</div>
+					}
 				</div>
 			</div>
 		</div>
-	} else { 
-		<p class="many_taital">No categories added yet</p>
-	}
-	
-	@if (ViewBag.Products != null) { 
-		<div class="services_section">
-			<div class="container">
-				<h1 class="services_taital">Products</h1>
-				<p class="many_taital">List Of Products </p>
-				<div class="services_section2 layout_padding">
-					<div class="row row-content-center">
-						@foreach (var item in ViewBag.Products) {
-							<div class="col-lg-3 col-sm-6" style="padding: 15px;">
-								<div class="icon_1">
-									@if (item.Image != null) {
-										<img src="data:image/png;base64,@(Convert.ToBase64String(item.Image))">
-									} else {
-										<img src="~/Content/img/product-img/icon-1.png">
-									}
-								</div>
-								<h2 class="furnitures_text">@item.Name</h2>
-								<p class="dummy_text d-none">@item.Description</p>
-								<div class="read_bt_main">
-									<div class="read_bt"><a href="@Url.Action("Customise", "Product", new {productId = item.Id})">Customise</a></div>
-								</div>
-							</div>
-						}
-					</div>
-				</div>
-			</div>
-		</div>
-	} else { 
-		<p class="many_taital">No products added yet</p>
-	}
-	
+	</div>
+} else {
+	<p class="many_taital">No categories added yet</p>
+}
 
-	@*<div class="projects_section">
+@if (ViewBag.Products != null) {
+	<div class="services_section">
+		<div class="container">
+			<h1 class="services_taital">Products</h1>
+			<p class="many_taital">List Of Products <a href="@Url.Action("List", "Product")">(See All)</a></p>
+			<div class="services_section2 layout_padding">
+				<div class="row row-content-center">
+					@foreach (var item in ViewBag.Products) {
+						<div class="col-lg-3 col-sm-6" style="padding: 15px;">
+							<div class="icon_1">
+								@if (item.Image != null) {
+									<img src="data:image/png;base64,@(Convert.ToBase64String(item.Image))">
+								} else {
+									<img src="~/Content/img/product-img/icon-1.png">
+								}
+							</div>
+							<h2 class="furnitures_text">@item.Name</h2>
+							<p class="dummy_text d-none">@item.Description</p>
+							<div class="read_bt_main">
+								<div class="read_bt"><a href="@Url.Action("Customise", "Product", new {productId = item.Id})">Customise</a></div>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+} else {
+	<p class="many_taital">No products added yet</p>
+}
+
+
+@*<div class="projects_section">
 		<div class="container">
 			<h1 class="our_text">Our Applications</h1>
 			<p class="ipsum_text">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
@@ -228,7 +171,7 @@
 			</div>
 		</div>
 	</div>*@
-	@*<div class="clients_section" style="padding-top:0px;">
+@*<div class="clients_section" style="padding-top:0px;">
 		<div class="container">
 			<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">
@@ -362,28 +305,3 @@
 			</div>
 		</div>
 	</div>*@
-	<div class="copyright_section" style="background: #ddd;">
-		<div class="container" style=" padding: 20px;">
-			<div class="row align-items-center">
-				<div class="col-12 col-lg-4">
-					<div class="single_widget_area">
-						<div class="footer-logo mr-50">
-							<a href="index.html"><img src="~/Content/img/product-img/AquavisionLogo.png" alt="" style="height:115px;"></a>
-						</div>
-						<p class="copywrite" style="margin: 0;margin-top: 20px; font-size:12px;">	
-							Copyright ©
-							<script>document.write(new Date().getFullYear());</script>2023 Aquavision Distribution Ltd | Registered Company Number: 07756677
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script src="~/Content/js/jquery-2.2.4.min.js"></script>
-	<script src="~/Content/js/popper.min.js"></script>
-	<script src="~/Content/js/bootstrap.min.js"></script>
-	<script src="~/Content/js/plugins.js"></script>
-	<script src="~/Content/js/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-</body>
-</html>
