@@ -162,7 +162,7 @@ namespace AquavisionConfigurator.Controllers {
 					//			myDB.SaveChanges();
 					//		}
 					//	}
-					}
+					//}
 
 					partialViewResult = RenderPartialViewToString("Product/_BuildCart", buildCartItemList);
 				}
