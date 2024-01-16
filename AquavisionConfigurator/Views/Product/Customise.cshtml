@@ -217,7 +217,9 @@
 						}
 					}
 				});
-			} else { alert("Select any option to continue"); }
+			} else {
+				alert("Select any option to continue");
+			}
 
 		}
 		function customerSection() {
@@ -254,7 +256,7 @@
 					url: "/Customer/Register",
 					//data: formData,
 					data: JSON.stringify({
-						formData = formData,
+						formData: formData,
 						productId: @Model.Id,
 						productOptions: productOption
 					}),
@@ -287,7 +289,7 @@
 					url: "/Customer/Login",
 					//data: formData,
 					data: JSON.stringify({
-						formData = formData,
+						formData: formData,
 						productId: @Model.Id,
 						productOptions: productOption
 					}),
