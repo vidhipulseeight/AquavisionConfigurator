@@ -46,8 +46,8 @@ namespace AquavisionConfigurator.Helpers {
 		}
 
 		protected Customer GetCurrentCustomerData() {
-			if (AquavisionContext.Current.Session != null) {
-				var customerId = AquavisionContext.Current.Session.CustomerId;
+			if (User.Identity.IsAuthenticated) {
+				var customerId = AquavisionContext.Current.Customer.Id;
 				var myDB = new AquavisionEntities();
 				var customer = myDB.Customers.FirstOrDefault(c => c.Id == customerId);
 				if (customer != null) {
