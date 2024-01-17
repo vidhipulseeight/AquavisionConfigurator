@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Aquavision.Data.Models.BuildCart>
+﻿@model IEnumerable<Aquavision.Data.Models.CustomerDesign>
 
 @* add to bundle or layout*@
 <link href="~/Content/css/custom-style.css" rel="stylesheet" />
@@ -28,8 +28,8 @@
 						</td>
 						<td>@item.Product.Name</td>
 						<td>@item.Product.SKU</td>
-						<td>@item.CreatedOn</td>
-						<th><a class="btn btn-outline-b" title="View Customise"><i class="fa fa-eye"></i></a></th>
+						@*<td>@item.CreatedOn</td>*@
+						<th><a class="btn btn-outline-b" href="@Url.Action("BuildDetails", "Customer", new { id = item.Id })" title="View Customise"><i class="fa fa-eye"></i></a></th>
 					</tr>
 				}
 			</tbody>

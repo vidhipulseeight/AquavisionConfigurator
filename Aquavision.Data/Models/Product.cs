@@ -19,6 +19,7 @@ namespace Aquavision.Data.Models
         {
             this.ProductOptionGroups = new HashSet<ProductOptionGroup>();
             this.BuildCarts = new HashSet<BuildCart>();
+            this.CustomerDesigns = new HashSet<CustomerDesign>();
         }
     
         public int Id { get; set; }
@@ -36,5 +37,7 @@ namespace Aquavision.Data.Models
         public virtual ICollection<ProductOptionGroup> ProductOptionGroups { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BuildCart> BuildCarts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CustomerDesign> CustomerDesigns { get; set; }
     }
 }

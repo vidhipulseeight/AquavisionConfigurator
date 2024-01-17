@@ -18,7 +18,6 @@ namespace Aquavision.Data.Models
         public int CustomerDesignId { get; set; }
         public int ProductOptionId { get; set; }
     
-        public virtual CustomerDesign CustomerDesign { get; set; }
         public virtual ProductOption ProductOption { get; set; }
     }
 }

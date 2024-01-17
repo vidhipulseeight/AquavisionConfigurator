@@ -44,6 +44,18 @@ namespace AquavisionConfigurator.Helpers {
 			}
 			return string.Empty;
 		}
+
+		protected Customer GetCurrentCustomerData() {
+			if (User.Identity.IsAuthenticated) {
+				var customerId = AquavisionContext.Current.Customer.Id;
+				var myDB = new AquavisionEntities();
+				var customer = myDB.Customers.FirstOrDefault(c => c.Id == customerId);
+				if (customer != null) {
+					return customer;
+				}
+			}
+			return null;
+		}
 		protected override void OnAuthentication(AuthenticationContext filterContext) {
 			var myDB = new AquavisionEntities();
 			if (User?.Identity.IsAuthenticated ?? false) {

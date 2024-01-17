@@ -90,11 +90,12 @@
 							</div>
 							<div style="color: #1312128c;font-size: 14px;" id="modelDetail">@Model.SKU</div>
 							<div style="color: #1312128c;font-size: 14px;" id="modelDetail">£@(Model.Price?.ToString("0.00"))</div>
-							<div style="color: #1312128c;font-size: 14px;" id="modelDetail">@Model.Description</>
+							<div style="color: #1312128c;font-size: 14px;" id="modelDetail">
+								@Model.Description</>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 		</header>
 
 		<div class="shop_sidebar_area" id="productSidebar">
@@ -217,28 +218,97 @@
 						}
 					}
 				});
-			} else { alert("Select any option to continue"); }
+			} else {
+				alert("Select any option to continue");
+			}
 
 		}
 		function customerSection() {
 			$('#productSidebar').hide();
 			$('#productSummary').hide();
-			$('#customerSection').show();
+			$.ajax({
+				type: "POST",
+				url: "/Customer/IsRegistered",
+				//data: formData,
+				success: function (data) {
+					if (data.Result) {
+						var productOption = [];
+						var selectedProductOption = $('#productOptionList .productoption:checked');
+						for (var i = 0; i < $(selectedProductOption).length; i++) {
+							productOption.push({
+								Id: $(selectedProductOption[i]).attr('id')
+							});
+						}
+						$.ajax({
+							url: '/Customer/LinkCustomerBuild',
+							data: JSON.stringify({
+								productId: @Model.Id,
+								productOptions: productOption,
+								customerId: data.CustomerId
+							}),
+							contentType: 'application/json',
+							processData: false,
+							type: 'POST',
+							success: function (data) {
+								if (data.result) {
+									location.href = `@Url.Action("Details", "Customer")`;
+								} else {
+									alert(data.ErrorMessage);
+								}
+							}
+						});
+					} else {
+						$('#customerSection').show();
+					}
+				}
+			});
 		}
 		function customerRegister() {
 			$('#productSummary').hide();
 			$("#RegisterMessage").text("");
 			var formData = $("#RegisterForm").serialize();
 			var isFormValid = $("#RegisterForm")[0].checkValidity();
+			var productOption = [];
+			var selectedProductOption = $('#productOptionList .productoption:checked');
+			for (var i = 0; i < $(selectedProductOption).length; i++) {
+				productOption.push({
+					Id: $(selectedProductOption[i]).attr('id')
+				});
+			}
 			if (isFormValid) {
 				$.ajax({
 					type: "POST",
-					url: "/Home/Register",
+					url: "/Customer/Register",
 					data: formData,
+					@*data: JSON.stringify({
+						formData: formData,
+						productId: @Model.Id,
+						productOptions: productOption
+					}),*@
 					success: function (data) {
 						if (data.Result) {
-							location.reload();
-						} else { $("#RegisterMessage").text(data.Message); }
+							$.ajax({
+								url: '/Customer/LinkCustomerBuild',
+								data: JSON.stringify({
+									productId: @Model.Id,
+									productOptions: productOption,
+									customerId: data.CustomerId
+								}),
+								contentType: 'application/json',
+								processData: false,
+								type: 'POST',
+								success: function (data) {
+									if (data.result) {
+										location.href = `@Url.Action("Details", "Customer")`;
+									} else {
+										alert(data.ErrorMessage);
+									}
+								}
+							});
+							@*location.href = `@Url.Action("Details", "Customer")`;*@
+						} else {
+							$("#RegisterMessage").text(data.Message);
+						}
 					}
 				});
 			} else { $("#RegisterForm")[0].reportValidity(); }
@@ -248,15 +318,47 @@
 			$("#LoginMessage").text("");
 			var formData = $("#LoginForm").serialize();
 			var isFormValid = $("#LoginForm")[0].checkValidity();
+			var productOption = [];
+			var selectedProductOption = $('#productOptionList .productoption:checked');
+			for (var i = 0; i < $(selectedProductOption).length; i++) {
+				productOption.push({
+					Id: $(selectedProductOption[i]).attr('id')
+				});
+			}
+
 			if (isFormValid) {
 				$.ajax({
 					type: "POST",
-					url: "/Home/Login",
+					url: "/Customer/Login",
 					data: formData,
+					@*data: JSON.stringify({
+						formData: formData,
+						productId: @Model.Id,
+						productOptions: productOption
+					}),*@
 					success: function (data) {
 						if (data.Result) {
-							location.reload();
-						} else { $("#LoginMessage").text(data.Message); }
+							$.ajax({
+								url: '/Customer/LinkCustomerBuild',
+								data: JSON.stringify({
+									productId: @Model.Id,
+									productOptions: productOption,
+									customerId: data.CustomerId
+								}),
+								contentType: 'application/json',
+								processData: false,
+								type: 'POST',
+								success: function (data) {
+									if (data.result) {
+										location.href = `@Url.Action("Details", "Customer")`;
+									} else {
+										alert(data.ErrorMessage);
+									}
+								}
+							});
+						} else {
+							$("#LoginMessage").text(data.Message);
+						}
 					}
 				});
 			} else { $("#LoginForm")[0].reportValidity(); }

@@ -14,6 +14,12 @@ namespace Aquavision.Data.Models
     
     public partial class Customer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Customer()
+        {
+            this.CustomerDesigns = new HashSet<CustomerDesign>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
@@ -23,5 +29,8 @@ namespace Aquavision.Data.Models
         public string PasswordHash { get; set; }
         public string SaltKey { get; set; }
         public bool Deleted { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CustomerDesign> CustomerDesigns { get; set; }
     }
 }

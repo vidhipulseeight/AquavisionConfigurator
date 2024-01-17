@@ -14,17 +14,11 @@ namespace Aquavision.Data.Models
     
     public partial class CustomerDesign
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CustomerDesign()
-        {
-            this.CustomerDesignSpecs = new HashSet<CustomerDesignSpec>();
-        }
-    
         public int Id { get; set; }
-        public int Customer { get; set; }
-        public int Product { get; set; }
+        public int CustomerId { get; set; }
+        public int ProductId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CustomerDesignSpec> CustomerDesignSpecs { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

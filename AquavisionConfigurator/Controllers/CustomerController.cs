@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using static System.Web.Security.FormsAuthentication;
 using Aquavision.Data.Models;
 using AquavisionConfigurator.Helpers;
+using System.Collections.Generic;
 
 namespace AquavisionConfigurator.Controllers {
 	public class CustomerController : BaseController {
@@ -41,7 +42,8 @@ namespace AquavisionConfigurator.Controllers {
 					AquavisionContext.Current.Session = customerSession;
 					myDB.SaveChanges();
 				}
-				return Json(new { Result = true, Message = string.Empty }, JsonRequestBehavior.AllowGet);
+
+				return Json(new { Result = true, CustomerId = customer.Id, Message = string.Empty }, JsonRequestBehavior.AllowGet);
 			}
 			return Json(new { Result = false, Message = "Sorry your username or password is incorrect" }, JsonRequestBehavior.AllowGet);
 		}
@@ -103,10 +105,42 @@ namespace AquavisionConfigurator.Controllers {
 			if (status == MembershipCreateStatus.Success) {
 				SetAuthCookie(email, false);
 				//WebSecurity.CreateAccount(email, password, false);
-				return Json(new { Result = true, Message = string.Empty }, JsonRequestBehavior.AllowGet);
+				return Json(new { Result = true, CustomerId = customer.Id, Message = string.Empty }, JsonRequestBehavior.AllowGet);
 			}
 
 			return Json(new { Result = false, Message = "Something went wrong creating your new account, please try again later" }, JsonRequestBehavior.AllowGet);
+		}
+
+		public JsonResult LinkCustomerBuild(int? productId, List<ProductOption> productOptions, int? customerId) {
+			if (productId.HasValue) {
+				var customerDesign = new CustomerDesign {
+					CustomerId = customerId.Value,
+					ProductId = productId.Value
+				};
+				myDB.CustomerDesigns.Add(customerDesign);
+				myDB.SaveChanges();
+				foreach (var option in productOptions) {
+					var productOption = myDB.ProductOptions.FirstOrDefault(p => p.Id == option.Id);
+					if (productOption != null) {
+						var customerDesignSpec = new CustomerDesignSpec {
+							CustomerDesignId = customerDesign.Id,
+							ProductOptionId = productOption.Id
+						};
+						myDB.CustomerDesignSpecs.Add(customerDesignSpec);
+						myDB.SaveChanges();
+					}
+				}
+				return Json(new { Result = true }, JsonRequestBehavior.AllowGet);
+			}
+			return Json(new { Result = false }, JsonRequestBehavior.AllowGet);
+		}
+
+		public JsonResult IsRegistered() {
+			if(GetCurrentCustomerData() != null) {
+				return Json(new { Result = true, CustomerId = GetCurrentCustomerData().Id }, JsonRequestBehavior.AllowGet);
+			} else {
+				return Json(new { Result = false }, JsonRequestBehavior.AllowGet);
+			}
 		}
 
 		protected Customer GetCustomerByEmail(string emailAddress) {
@@ -204,11 +238,35 @@ namespace AquavisionConfigurator.Controllers {
 			return RedirectToAction("Index", "Home");
 		}
 		public ActionResult Details() {
-			if (AquavisionContext.Current.Session == null) {
-				return RedirectToAction("Index", "Home");
+			var currentCustomer = GetCurrentCustomerData();
+			if (currentCustomer != null) {
+				var customerDesigns = myDB.CustomerDesigns.Where(cd => cd.CustomerId == currentCustomer.Id).ToList();
+				return View(customerDesigns);
 			}
-			var buidcart = myDB.BuildCarts.Where(b => b.CustomerSessionGUID == AquavisionContext.Current.Session.GUID).ToList();
-			return View(buidcart);
+			return RedirectToAction("Login","Customer");
+			//if (AquavisionContext.Current.Session == null) {
+			//	return RedirectToAction("Index", "Home");
+			//}
+			//var buidcart = myDB.BuildCarts.Where(b => b.CustomerSessionGUID == AquavisionContext.Current.Session.GUID).ToList();
+			//return View(buidcart);
+		}
+
+		public ActionResult BuildDetails(int id) {
+			var currentCustomer = GetCurrentCustomerData();
+			if (currentCustomer != null) {
+				var customerDesign = myDB.CustomerDesigns.FirstOrDefault(cd => cd.Id == id);
+				if (customerDesign != null) {
+					return View(customerDesign);
+				}
+				TempData["Error"] = "Unable to fine the product data.";
+				return RedirectToAction("Details", "Customer");
+			}
+			return null;
+			//if (AquavisionContext.Current.Session == null) {
+			//	return RedirectToAction("Index", "Home");
+			//}
+			//var buidcart = myDB.BuildCarts.Where(b => b.CustomerSessionGUID == AquavisionContext.Current.Session.GUID).ToList();
+			//return View(buidcart);
 		}
 	}
 }

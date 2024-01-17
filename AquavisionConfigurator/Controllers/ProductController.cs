@@ -14,6 +14,8 @@ namespace AquavisionConfigurator.Controllers {
 			ViewBag.Category = myDB.Categories.ToList();
 			var products = myDB.Products.Where(p => !p.Deleted).ToList();
 			if(categoryId.HasValue) {
+				var category = myDB.Categories.FirstOrDefault(c => c.Id == categoryId);
+				ViewBag.SelectedCategory = category.Name;
 				products = products.Where(p => p.CategoryId.HasValue && p.CategoryId == categoryId).ToList();
 			}
 			return View(products);
@@ -31,7 +33,7 @@ namespace AquavisionConfigurator.Controllers {
 		//	return View();
 		//}
 
-		public ActionResult Customise(int productId) {
+		public ActionResult Customise(int productId, int? customerId) {
 			ViewBag.Products = myDB.Products.ToList();
 
 			var product = myDB.Products.FirstOrDefault(p => p.Id == productId);
@@ -141,6 +143,29 @@ namespace AquavisionConfigurator.Controllers {
 						}
 					}
 					myDB.SaveChanges();
+
+					//saving to customer design tables
+					//var customer = GetCurrentCustomerData();
+					//if (customer != null) {
+					//	var customerDesign = new CustomerDesign {
+					//		CustomerId = customer.Id,
+					//		ProductId = product.Id
+					//	};
+					//	myDB.CustomerDesigns.Add(customerDesign);
+					//	myDB.SaveChanges();
+					//	foreach (var option in productOptions) {
+					//		var productOption = myDB.ProductOptions.FirstOrDefault(p => p.Id == option.Id);
+					//		if(productOption != null) {
+					//			var customerDesignSpec = new CustomerDesignSpec {
+					//				CustomerDesignId = customerDesign.Id,
+					//				ProductOptionId = productOption.Id
+					//			};
+					//			myDB.CustomerDesignSpecs.Add(customerDesignSpec);
+					//			myDB.SaveChanges();
+					//		}
+					//	}
+					//}
+
 					partialViewResult = RenderPartialViewToString("Product/_BuildCart", buildCartItemList);
 				}
 			} catch{

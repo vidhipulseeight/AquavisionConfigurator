@@ -27,7 +27,6 @@ namespace Aquavision.Data.Models
     
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<CustomerDesign> CustomerDesigns { get; set; }
         public virtual DbSet<CustomerDesignSpec> CustomerDesignSpecs { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Product> Products { get; set; }
@@ -41,5 +40,6 @@ namespace Aquavision.Data.Models
         public virtual DbSet<CustomerSession> CustomerSessions { get; set; }
         public virtual DbSet<BuildCart> BuildCarts { get; set; }
         public virtual DbSet<BuildCartItem> BuildCartItems { get; set; }
+        public virtual DbSet<CustomerDesign> CustomerDesigns { get; set; }
     }
 }
