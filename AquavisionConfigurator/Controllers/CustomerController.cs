@@ -243,6 +243,24 @@ namespace AquavisionConfigurator.Controllers {
 				var customerDesigns = myDB.CustomerDesigns.Where(cd => cd.CustomerId == currentCustomer.Id).ToList();
 				return View(customerDesigns);
 			}
+			return RedirectToAction("Login","Customer");
+			//if (AquavisionContext.Current.Session == null) {
+			//	return RedirectToAction("Index", "Home");
+			//}
+			//var buidcart = myDB.BuildCarts.Where(b => b.CustomerSessionGUID == AquavisionContext.Current.Session.GUID).ToList();
+			//return View(buidcart);
+		}
+
+		public ActionResult BuildDetails(int id) {
+			var currentCustomer = GetCurrentCustomerData();
+			if (currentCustomer != null) {
+				var customerDesign = myDB.CustomerDesigns.FirstOrDefault(cd => cd.Id == id);
+				if (customerDesign != null) {
+					return View(customerDesign);
+				}
+				TempData["Error"] = "Unable to fine the product data.";
+				return RedirectToAction("Details", "Customer");
+			}
 			return null;
 			//if (AquavisionContext.Current.Session == null) {
 			//	return RedirectToAction("Index", "Home");

@@ -90,6 +90,7 @@
     <Compile Include="Models\Image.cs">
       <DependentUpon>AquavisionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomerDesignClass.cs" />
     <Compile Include="Models\ProductClass.cs" />
     <Compile Include="Models\ProductImageClass.cs" />
     <Compile Include="Models\ProductOptionGroupHelper.cs" />

@@ -1,0 +1,52 @@
+﻿@model Aquavision.Data.Models.CustomerDesign
+
+@* add to bundle or layout*@
+<link href="~/Content/css/custom-style.css" rel="stylesheet" />
+
+<div class="services_section">
+	<div class="container">
+		@*<p class="many_taital text-left"> <a style="color: black; font-size: 16px;" href="@Url.Action("List", "Product")">Products</a> >> Open Builds </p>*@
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th style="width:120px;">Product</th>
+					<th>Name</th>
+					<th>SKU</th>
+					<th>Price</th>
+					@*<th style="width:10px;"></th>*@
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						@if (Model.Product.Image != null) {
+							<img src="data:image/png;base64,@(Convert.ToBase64String(Model.Product.Image))">
+						} else {
+							<img src="~/Content/img/product-img/icon-1.png">
+						}
+					</td>
+					<td>@Model.Product.Name</td>
+					<td>@Model.Product.SKU</td>
+					<td>@Model.Product.Price.Value.ToString("0.00")</td>
+					@*<th><a class="btn btn-outline-b" title="View Customise"><i class="fa fa-eye"></i></a></th>*@
+				</tr>
+				@foreach (var item in Model.GetDesignSpecs()) {
+					<tr>
+						<td>
+							@if (item.ProductOption.Images != null) {
+								<img src="data:image/png;base64,@(Convert.ToBase64String(item.ProductOption.Images.First().ImageData))">
+							} else {
+								<img src="~/Content/img/product-img/icon-1.png">
+							}
+						</td>
+						<td>@item.ProductOption.Name</td>
+						<td>@item.ProductOption.SKU</td>
+						<td>@item.ProductOption.Price</td>
+						@*<th><a class="btn btn-outline-b" title="View Customise"><i class="fa fa-eye"></i></a></th>*@
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+
